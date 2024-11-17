@@ -1,0 +1,207 @@
+[gd_scene load_steps=13 format=3 uid="uid://trgipxvjeumi"]
+
+[ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
+[ext_resource type="LabelSettings" uid="uid://b6hf3k3ma7y6b" path="res://Resources/Label/Space.tres" id="1_y1is0"]
+[ext_resource type="PackedScene" uid="uid://2ultl0u51sub" path="res://Scenes/Hud/Background/Background.tscn" id="1_yhcss"]
+[ext_resource type="Script" path="res://Scenes/Hud/TreeObjects.cs" id="2_ojtbj"]
+[ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="2_qcj25"]
+[ext_resource type="Script" path="res://Scenes/Hud/Timeline/Timeline.cs" id="2_s3w18"]
+[ext_resource type="Script" path="res://Scenes/Hud/Timeline/VisualLine.cs" id="4_qdryq"]
+[ext_resource type="StyleBox" uid="uid://dln2s10dtlqk2" path="res://Resources/TimelinePoint/TimeLinePointtres.tres" id="5_vci5s"]
+[ext_resource type="Script" path="res://Scenes/Hud/Timeline/TimelinePoint.cs" id="6_6kii8"]
+
+[sub_resource type="Theme" id="Theme_x0qgw"]
+Tree/constants/icon_max_width = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi8uu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8e52"]
+bg_color = Color(1, 1, 1, 0)
+
+[node name="Hud" type="CanvasLayer"]
+layer = 2
+
+[node name="Backgound" type="CanvasLayer" parent="."]
+
+[node name="Background" parent="Backgound" instance=ExtResource("1_yhcss")]
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Up" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/Up"]
+layout_mode = 2
+theme_override_constants/margin_bottom = -20
+
+[node name="Timeline" type="Control" parent="MainContainer/Up/MarginContainer" node_paths=PackedStringArray("_scrollContainer", "_visualLine", "_timeLabel")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+script = ExtResource("2_s3w18")
+_scrollContainer = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/Line")
+_visualLine = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/Line/VisualLine")
+_timeLabel = NodePath("../../../MainContent/Center/Up/HBoxContainer/Time/Time")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/Up/MarginContainer/Timeline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line" type="MarginContainer" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer/Line"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer/Line/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Line" type="ScrollContainer" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer/Line/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VisualLine" type="ColorRect" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer/Line/PanelContainer/MarginContainer/Line" node_paths=PackedStringArray("_scrollContainer")]
+custom_minimum_size = Vector2(10000, 3)
+layout_mode = 2
+color = Color(1, 1, 1, 0.392157)
+script = ExtResource("4_qdryq")
+_scrollContainer = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="MainContainer/Up/MarginContainer/Timeline/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimelinePoint" type="PanelContainer" parent="MainContainer/Up/MarginContainer/Timeline"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -6.0
+offset_top = 20.0
+offset_right = 6.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("5_vci5s")
+script = ExtResource("6_6kii8")
+_visualOffset = -25.0
+
+[node name="MainContent" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Right" type="HBoxContainer" parent="MainContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 35
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Right/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="Tree" type="Tree" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_x0qgw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi8uu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_i8e52")
+columns = 2
+script = ExtResource("2_ojtbj")
+
+[node name="Center" type="VBoxContainer" parent="MainContainer/MainContent"]
+custom_minimum_size = Vector2(896, 0)
+layout_mode = 2
+
+[node name="Up" type="MarginContainer" parent="MainContainer/MainContent/Center"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainContent/Center/Up"]
+layout_mode = 2
+
+[node name="Time" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="Time" type="Label" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Time"]
+layout_mode = 2
+text = "00:01.261 (1261)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Space" type="Label" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+
+[node name="Button" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="Center" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Down" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+alignment = 1
+
+[node name="__Space" type="Label" parent="MainContainer/MainContent/Center/Down"]
+layout_mode = 2
+text = " "
+label_settings = ExtResource("1_y1is0")
+
+[node name="CollectionButtonPanel" type="PanelContainer" parent="MainContainer/MainContent/Center/Down"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="CollectionButton" type="HBoxContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="AddButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton" instance=ExtResource("1_5ahyf")]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="__Space_2" type="Label" parent="MainContainer/MainContent/Center/Down"]
+layout_mode = 2
+text = " "
+label_settings = ExtResource("1_y1is0")
+
+[node name="Left" type="HBoxContainer" parent="MainContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3

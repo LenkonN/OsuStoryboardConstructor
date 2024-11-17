@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw2xg6nfqfok2"]
+
+[ext_resource type="Texture2D" uid="uid://bx3jiw6hpg3ui" path="res://Sprites/Svg/Plus.svg" id="1_1abwk"]
+[ext_resource type="Script" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.cs" id="2_xmbas"]
+
+[node name="AddObjectMenuButton" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_1abwk")
+expand_mode = 1
+script = ExtResource("2_xmbas")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="OnClick"]

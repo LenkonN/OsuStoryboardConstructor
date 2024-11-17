@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfqcvknp83ywv"]
+
+[ext_resource type="Script" path="res://Scenes/Managers/Export/ExportManager.cs" id="1_5h1g8"]
+[ext_resource type="Script" path="res://Scenes/General/Main/Main.cs" id="1_x21sc"]
+[ext_resource type="PackedScene" uid="uid://c6hp4qpan4qm3" path="res://Scenes/General/Editor/Editor.tscn" id="2_84sad"]
+[ext_resource type="Script" path="res://Scenes/Managers/Export/Json/ExportJson.cs" id="2_okmcp"]
+[ext_resource type="Script" path="res://Scenes/Managers/Export/ToEditor/ExportToEditor.cs" id="3_wqti0"]
+[ext_resource type="Script" path="res://Scenes/Managers/Export/ToOsb/ExportToOsb.cs" id="4_c37hb"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_x21sc")
+_editorScene = ExtResource("2_84sad")
+
+[node name="ExportManager" type="Node" parent="." node_paths=PackedStringArray("Json", "ToEditor", "ToOsb")]
+script = ExtResource("1_5h1g8")
+Json = NodePath("ExportJson")
+ToEditor = NodePath("ExportToEditor")
+ToOsb = NodePath("ExportToOsb")
+
+[node name="ExportJson" type="Node" parent="ExportManager"]
+script = ExtResource("2_okmcp")
+
+[node name="ExportToEditor" type="Node" parent="ExportManager"]
+script = ExtResource("3_wqti0")
+
+[node name="ExportToOsb" type="Node" parent="ExportManager"]
+script = ExtResource("4_c37hb")

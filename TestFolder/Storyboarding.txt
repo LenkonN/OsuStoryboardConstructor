@@ -1,0 +1,79 @@
+@Project
+    [Data]
+        [Project]
+        (
+            Name == "ExampleStoryboard",
+            BPM == 135,
+            Offset == -63
+        )
+            
+        [Osu]
+        (
+            OsuFilePath == "example/meow.osu",
+            OsbFilePath == "example/meow.osb";
+        )
+
+@Storyboard
+    [Layer]
+        [Background]     
+            [+Group]
+            (
+                Name == "GroupExample",
+                Description == "Hellowo";
+            )
+
+                [Object]
+                (
+                    Name == "ObjectExample,
+                    Type == "Sprite",
+                    CountKey == 3;
+                )
+
+                    [Key1]
+                    (
+                        PositionX == 17,
+                        PositionY == 26,
+                        Rotate == 1.6,
+                        ScaleX == 52.26,
+                        ScaleY == 52.26б
+                        Time == 16325,
+                        Easing == true;
+                    )
+
+                    [Key2]
+                    (
+                        PositionX == 17,
+                        PositionY == 26,
+                        Rotate == 1.6,
+                        ScaleX == 52.26,
+                        ScaleY == 52.26б
+                        Time == 16325,
+                        Easing == true;
+                    )
+
+                    [Key3]
+                    (
+                        PositionX == 17,
+                        PositionY == 26,
+                        Rotate == 1.6,
+                        ScaleX == 52.26,
+                        ScaleY == 52.26б
+                        Time == 16325,
+                        Easing == true;
+                    )
+                    
+                [Object]
+                (
+                    Name == "ObjectExample,
+                    Type == "Sprite",
+                    CountKey == 3;
+                )
+
+                ...
+
+            [-Group]
+
+        [Fail]
+        [Pass]
+        [Foreground]
+        [Overlay]

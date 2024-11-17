@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6hp4qpan4qm3"]
+
+[ext_resource type="PackedScene" uid="uid://trgipxvjeumi" path="res://Scenes/Hud/Hud.tscn" id="1_ly5mv"]
+[ext_resource type="Script" path="res://Scenes/General/Editor/Editor.cs" id="1_rt8xu"]
+[ext_resource type="PackedScene" uid="uid://bl3r7v6ja5wx1" path="res://Scenes/Windows/ObjectCollection/ObjectCollectionWindow.tscn" id="2_03cfq"]
+[ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="2_yl61f"]
+
+[node name="Editor" type="Node2D"]
+script = ExtResource("1_rt8xu")
+_ObjectCollectionWindowScene = ExtResource("2_03cfq")
+
+[node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
+
+[node name="Storyboard" type="CanvasLayer" parent="."]
+
+[node name="StoryboardField" parent="Storyboard" instance=ExtResource("2_yl61f")]
+offset_left = -429.0
+offset_top = -221.0
+offset_right = 425.0
+offset_bottom = 259.0

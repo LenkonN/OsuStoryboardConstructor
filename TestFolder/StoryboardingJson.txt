@@ -1,0 +1,39 @@
+{
+    "project": [
+        {       
+            "editor": [
+                {
+                    "name": "ExampleStoryboard",
+                    "bpm": 135,
+                    "offset": -63
+                }
+            ],
+
+            "osu": [
+                {
+                    "osuFilePath": "example/meow.osu",
+                    "osbFilePath": "example/meow.osb";
+                }
+            ]             
+        }
+    ],
+
+    "storyboard": [
+        {
+            "layer": [
+                "background": [],
+
+                "fail": [],
+
+                "pass": [],
+
+                "foreground": [],
+
+                "overlay": [],
+            ]
+        }
+    ]
+}
+
+    
+
