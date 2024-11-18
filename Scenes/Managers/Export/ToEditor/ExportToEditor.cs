@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class ExportToEditor : Node
 {
-	public event Action<DataGroup> GroupImportEvent;
+	public event Action<DataObject> GroupImportEvent;
 
 	public override void _Ready()
 	{
@@ -39,9 +39,8 @@ public partial class ExportToEditor : Node
 
 		var storyboardData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
 
-		foreach (KeyValuePair<string, DataGroup> item in storyboardData.Storyboard.Group)
+		foreach (KeyValuePair<string, DataObject> item in storyboardData.Storyboard.Group)
 		{
-			Console.WriteLine(item.Key);
 			GroupImportEvent?.Invoke(item.Value);
 		}
     }

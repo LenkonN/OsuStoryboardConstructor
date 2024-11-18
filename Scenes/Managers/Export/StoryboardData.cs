@@ -15,7 +15,7 @@ public class StoryboardDataProject
 
 public class StoryboardDataSb
 {
-    public Dictionary<string, DataGroup> Group { get; set; }
+    public Dictionary<string, DataObject> Group { get; set; }
 }
 
 

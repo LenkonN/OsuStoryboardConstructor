@@ -9,7 +9,7 @@ public partial class ExportJson : Node
 {
 	public override void _Ready()
 	{
-        //CreateJsonFile();
+        CreateJsonFile();
     }
 
 	public override void _Process(double delta)
@@ -17,12 +17,12 @@ public partial class ExportJson : Node
 
 	}
 
-	public void CreateJsonFile()
+    public void CreateJsonFile()
 	{
 
-		Dictionary<string, DataGroup> groupStoryboard = GenerateStoryboardPart();
+		Dictionary<string, DataObject> groupStoryboard = GenerateStoryboardPart();
 
-		StoryboardData data = new StoryboardData()
+        StoryboardData data = new StoryboardData()
 		{
 			Project = new StoryboardDataProject()
 			{
@@ -57,43 +57,68 @@ public partial class ExportJson : Node
         }
 	}
 
-	public Dictionary<string, DataGroup> GenerateStoryboardPart()
+	public Dictionary<string, DataObject> GenerateStoryboardPart()
 	{
-		var group = new Dictionary<string, DataGroup>();
+		var group = new Dictionary<string, DataObject>();
 
         for (int i = 0; i <= 4; i++)
 		{
-            DataGroup data = new DataGroup();
-			LayerEnum name = LayerEnum.Background;
+            DataObject data = new DataObject();
+			LayerList name = LayerList.Background;
 
-			if (i == 0)
+            //----Debug
+
+            var preSubSubGroup1 = CreateGroup("Bruh", "Pipao");
+            var preSubSubGroup2 = CreateGroup("HelpMe", "Pipao2");
+
+            var subSubGroup = new Dictionary<string, DataObject>()
+            {
+                [preSubSubGroup1.Name] = preSubSubGroup1,
+                [preSubSubGroup2.Name] = preSubSubGroup2
+            };
+
+
+            var preSubGroup1 = CreateGroup("Test1", "Testing", subSubGroup);
+            var preSubGroup2 = CreateGroup("Test2", "Testing");
+
+            var subGroup = new Dictionary<string, DataObject>()
+            {
+                [preSubGroup1.Name] = preSubGroup1,
+                [preSubGroup2.Name] = preSubGroup2
+            };
+
+
+            //----
+
+            if (i == 0)
 			{
-				data = CreateGroup("Background", "Back layer of the Storyboard");
-				name = LayerEnum.Background;
+
+				data = CreateGroup("Background", "Back layer of the Storyboard", subGroup);
+				name = LayerList.Background;
 			}
 
             if (i == 1)
             {
                 data = CreateGroup("Fail", "Only shown if player missed");
-				name = LayerEnum.Fail;
+				name = LayerList.Fail;
             }
 
             if (i == 2)
             {
                 data = CreateGroup("Pass", "Only shown if player not missed");
-                name = LayerEnum.Pass;
+                name = LayerList.Pass;
             }
 
             if (i == 3)
             {
                 data = CreateGroup("Foreground", "Front layer of the Storyboard");
-				name = LayerEnum.Foreground;
+				name = LayerList.Foreground;
             }
 
             if (i == 4)
             {
                 data = CreateGroup("Overlay", "Front layer of the Storyboard, overlapping also the game elements");
-				name = LayerEnum.Overlay;
+				name = LayerList.Overlay;
             }
 
             group.Add(name.ToString(), data);
@@ -102,12 +127,13 @@ public partial class ExportJson : Node
         return group;
     }
 
-	public DataGroup CreateGroup(string nameGroup, string description)
+	public DataObject CreateGroup(string nameGroup, string description, Dictionary<string, DataObject> items = null)
 	{
-		DataGroup data = new DataGroup()
+		DataObject data = new DataObject()
 		{
-			NameGroup = nameGroup,
-			Description = description
+			Name = nameGroup,
+			Description = description,
+			Items = items
 		};
 
 		return data;

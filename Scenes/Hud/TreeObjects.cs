@@ -9,7 +9,7 @@ public partial class TreeObjects : Tree
 
     public override void _Ready()
 	{
-		ExportManager.Instance.ToEditor.GroupImportEvent += AddGroup;
+		ExportManager.Instance.ToEditor.GroupImportEvent += AddSystemGroup;
 		CreateTree();
 	}
 
@@ -27,19 +27,40 @@ public partial class TreeObjects : Tree
         _mainRoot.SetText((int)TreeObjectCollumn.Text, "Storyboard");
     }
 
-	private void AddGroup(DataGroup dataGroup)
+	private void AddSystemGroup(DataObject dataObject)
 	{
-		TreeItem group = CreateItem(_mainRoot);
+		AddGroup(dataObject, _mainRoot);
+	}
 
-		group.SetText((int)TreeObjectCollumn.Text, dataGroup.NameGroup);
-		group.SetTooltipText((int)TreeObjectCollumn.Text, dataGroup.Description);
+	private void AddGroup(DataObject dataObject, TreeItem parent)
+	{
+		TreeItem group = CreateItem(parent);
 
-		var metadata = new Array<ObjectsTypeList>(); //Will rewritten as unique struct in future
-		group.SetMetadata((int)TreeObjectCollumn.Text, metadata);
+		group.SetText((int)TreeObjectCollumn.Text, dataObject.Name);
+		group.SetTooltipText((int)TreeObjectCollumn.Text, dataObject.Description);
+
+		GroupType systemLayerName = DataObjectOperation.CheckAndReturnName(dataObject.Name);
+
+		var metadata = new DataObjectTreeMetadata()
+		{
+			ObjectType = ObjectsTypeList.Group,
+			DataObject = dataObject,
+			GroupType = systemLayerName,
+		};
+
+        group.SetMetadata((int)TreeObjectCollumn.Text, metadata);
 
 		group.SetEditable((int)TreeObjectCollumn.Text, false);
         group.SetEditable((int)TreeObjectCollumn.Icon, false);
 
+		if (dataObject.Items != null)
+		{
+			foreach (var item in dataObject.Items)
+			{
+				if (item.Value.ObjectsType == ObjectsTypeList.Group)
+					AddGroup(item.Value, group);
+			}
+		}
     }
 
 	private void Test()

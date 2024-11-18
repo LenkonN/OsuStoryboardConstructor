@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public enum LayerEnum
+public enum LayerList
 {
     Background, Fail, Pass, Foreground, Overlay
 }
@@ -14,5 +14,10 @@ public enum TreeObjectCollumn
 public enum GroupType
 {
     Background, Fail, Pass, Foreground, Overlay, UserCustom
+}
+
+public enum GroupOperationName
+{
+    CheckAndReturnSystemLayerName, CheckSystemLayer
 }
 

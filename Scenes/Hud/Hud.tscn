@@ -95,13 +95,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -6.0
-offset_top = 20.0
+offset_top = 22.0
 offset_right = 6.0
-offset_bottom = 32.0
+offset_bottom = 34.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("5_vci5s")
 script = ExtResource("6_6kii8")
-_visualOffset = -25.0
+_visualOffset = -23.0
 
 [node name="MainContent" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
@@ -125,9 +125,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="Tree" type="Tree" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Tree" type="Tree" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource("Theme_x0qgw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_fi8uu")
 theme_override_styles/focus = SubResource("StyleBoxFlat_i8e52")
