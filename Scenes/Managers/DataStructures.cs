@@ -27,6 +27,14 @@ public struct DataObject
 
 }
 
+public struct PreParamObject
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public Dictionary<string, PreParamObject> PreParamObjects { get; set; }
+    public TreeItem.TreeCellMode Mode { get; set; }
+}
+
 public static class DataObjectOperation
 {
     public static GroupType CheckAndReturnName(string layerName)

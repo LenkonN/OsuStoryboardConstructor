@@ -26,11 +26,3 @@ public enum GroupOperationName
     CheckAndReturnSystemLayerName, CheckSystemLayer
 }
 
-public static class JsonParameterObjectName
-{
-    public static string
-        GroupObject,
-        SpriteObject,
-        ParticleSystemObject;
-}
-

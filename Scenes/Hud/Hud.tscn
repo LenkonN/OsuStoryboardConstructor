@@ -247,7 +247,7 @@ theme_override_styles/panel = ExtResource("2_qcj25")
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="ParametresTree" type="Tree" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer"]
+[node name="ParametresTree" type="Tree" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer" node_paths=PackedStringArray("_treeObjects")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -256,3 +256,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fi8uu")
 theme_override_styles/focus = SubResource("StyleBoxFlat_i8e52")
 columns = 2
 script = ExtResource("11_vyvvu")
+_treeObjects = NodePath("../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
+
+[connection signal="item_selected" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]

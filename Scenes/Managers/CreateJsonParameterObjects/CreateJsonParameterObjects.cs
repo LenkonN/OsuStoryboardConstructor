@@ -8,33 +8,17 @@ using System.IO;
 /// <summary>
 /// Not used for program operation (only in editor). It is necessary for convenient and fast autogeneration of json files for parameter fields
 /// </summary>
-[Tool]
 public partial class CreateJsonParameterObjects : Node
 {
-	[Export] private bool _exportButton
-	{
-		get
-		{
-			return false;
-		}
-
-		set 
-		{
-			GenerateJson();
-		}
-	}
 	private enum _object { none, group, srpite}
 	[Export] private _object _needGenerate;
 
-	private struct PreParamObject
-	{
-		public string Name { get; set; }
-        public string Description { get; set; }
-        public Dictionary<string, PreParamObject> PreParamObjects { get; set; }
-        public TreeItem.TreeCellMode Mode { get; set; }
-	}
+    public override void _Ready()
+    {
+		GenerateJson();
+    }
 
-	private void GenerateJson()
+    private void GenerateJson()
 	{
 		if (_needGenerate is _object.none)
 			return;
@@ -44,11 +28,12 @@ public partial class CreateJsonParameterObjects : Node
 
 	}
 
-	private void CreateJsonFile(Dictionary<string, PreParamObject> newObject, string fileName)
+	private void CreateJsonFile(Dictionary<string, PreParamObject> newObject, ObjectsTypeList fileName)
 	{
         string json = JsonSerializer.Serialize(newObject);
+		Console.WriteLine(fileName);
 
-		using (FileStream fs = File.Create($"{System.Environment.CurrentDirectory}/JsonParamObjects/{fileName}.json"))
+		using (FileStream fs = File.Create($"{System.Environment.CurrentDirectory}/JsonParamObjects/{fileName}Object.json"))
         {
             byte[] info = new UTF8Encoding(true).GetBytes(json);
             fs.Write(info, 0, info.Length);
@@ -77,7 +62,7 @@ public partial class CreateJsonParameterObjects : Node
             }
         };
 
-		CreateJsonFile(newObject, JsonParameterObjectName.GroupObject);
+		CreateJsonFile(newObject, ObjectsTypeList.Group);
     }
 
 	

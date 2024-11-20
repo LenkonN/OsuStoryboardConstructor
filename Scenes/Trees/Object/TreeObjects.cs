@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 
 public partial class TreeObjects : Tree
 {
+	public event Action<DataObjectTreeMetadata> SelectedItemEvent;
+
 	private TreeItem _mainRoot;
 
     public override void _Ready()
@@ -19,6 +21,14 @@ public partial class TreeObjects : Tree
 
 	}
 
+	private void OnSelectItem()
+	{
+		TreeItem selectedItem = this.GetSelected();
+        DataObjectTreeMetadata metadata = selectedItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+
+        SelectedItemEvent?.Invoke(metadata);
+	}
+	 
 
 	private void CreateTree()
 	{
@@ -33,9 +43,6 @@ public partial class TreeObjects : Tree
         Array<TreeItem> objects = _mainRoot.GetChildren();
 		foreach (var item in objects)
 			_mainRoot.RemoveChild(item);
-		
-		
-
 	}
 
 	private void AddSystemGroup(DataObject dataObject)
