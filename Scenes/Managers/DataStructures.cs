@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static Godot.HttpRequest;
 
 public struct DataEditor
 {
@@ -16,11 +17,12 @@ public struct DataOsu
     public string OsbFilePath { get; set; }
 }
 
+
 public struct DataObject
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public ObjectsTypeList ObjectsType { get; set; }
+    public ObjectsTypeList ObjectType { get; set; }
     public Dictionary<string, DataObject> Items { get; set; } //Group or storyboard object
 
 }

@@ -6,10 +6,12 @@ using System.Collections.Generic;
 public partial class ExportToEditor : Node
 {
 	public event Action<DataObject> GroupImportEvent;
+	public event Action StartImportJsonEvent;
 
 	public override void _Ready()
 	{
 		TestStartExport();
+        GetParent<ExportManager>().Json.ProjectUpdatedEvent += ExportFullFile;
 	}
 
 	public override void _Process(double delta)
@@ -33,13 +35,25 @@ public partial class ExportToEditor : Node
 
 	public void ExportFullFile()
 	{
-		string jsonPath = "res://Project.json";
+		StartImportJsonEvent();
 
-		string jsonContent = FileAccess.Open(jsonPath, FileAccess.ModeFlags.Read).GetAsText();
+        Editor.Instance.StoryboardObjectList.Clear();
 
-		var storyboardData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
+        string jsonPath = "res://Project.json";
 
-		foreach (KeyValuePair<string, DataObject> item in storyboardData.Storyboard.Group)
+		string jsonContent = "";
+
+
+		using (var file = FileAccess.Open(jsonPath, FileAccess.ModeFlags.Read))
+		{
+			jsonContent = file.GetAsText();
+        }
+
+		StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
+        storyboardData.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
+
+
+		foreach (KeyValuePair<string, DataObject> item in storyboardData.StoryboardStructureData.Storyboard.Group)
 		{
 			GroupImportEvent?.Invoke(item.Value);
 		}

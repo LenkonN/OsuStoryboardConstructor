@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://trgipxvjeumi"]
+[gd_scene load_steps=15 format=3 uid="uid://trgipxvjeumi"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
 [ext_resource type="LabelSettings" uid="uid://b6hf3k3ma7y6b" path="res://Resources/Label/Space.tres" id="1_y1is0"]
 [ext_resource type="PackedScene" uid="uid://2ultl0u51sub" path="res://Scenes/Hud/Background/Background.tscn" id="1_yhcss"]
-[ext_resource type="Script" path="res://Scenes/Hud/TreeObjects.cs" id="2_ojtbj"]
+[ext_resource type="Script" path="res://Scenes/Trees/Object/TreeObjects.cs" id="2_ojtbj"]
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="2_qcj25"]
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/Timeline.cs" id="2_s3w18"]
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/VisualLine.cs" id="4_qdryq"]
 [ext_resource type="StyleBox" uid="uid://dln2s10dtlqk2" path="res://Resources/TimelinePoint/TimeLinePointtres.tres" id="5_vci5s"]
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/TimelinePoint.cs" id="6_6kii8"]
+[ext_resource type="PackedScene" uid="uid://cg8m3laghnwcu" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.tscn" id="10_q3vvp"]
+[ext_resource type="Script" path="res://Scenes/Trees/Parametres/TreeParametres.cs" id="11_vyvvu"]
 
 [sub_resource type="Theme" id="Theme_x0qgw"]
 Tree/constants/icon_max_width = 32
@@ -197,9 +199,28 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="AddButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton" instance=ExtResource("1_5ahyf")]
-custom_minimum_size = Vector2(64, 0)
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AddButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer" instance=ExtResource("1_5ahyf")]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MarginContainer_2" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AddGroupMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_2" node_paths=PackedStringArray("_storyboardTree") instance=ExtResource("10_q3vvp")]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+_storyboardTree = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
 [node name="__Space_2" type="Label" parent="MainContainer/MainContent/Center/Down"]
 layout_mode = 2
@@ -209,3 +230,29 @@ label_settings = ExtResource("1_y1is0")
 [node name="Left" type="HBoxContainer" parent="MainContainer/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Left"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 35
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Left/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="ParametresTree" type="Tree" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_x0qgw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi8uu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_i8e52")
+columns = 2
+script = ExtResource("11_vyvvu")

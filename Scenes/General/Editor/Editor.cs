@@ -1,9 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Editor : Node2D
 {
     [Export] private PackedScene _ObjectCollectionWindowScene;
+
+	[Export] public StoryboardObjectStructureManager StoryboardObjectStructureManager;
+
+    public List<DataObject> StoryboardObjectList = new List<DataObject>();
 
 	public static Editor Instance { get; set; }
 
@@ -11,6 +16,11 @@ public partial class Editor : Node2D
 	{
 		Instance = this;
 	}
+
+	private void CreateProject()
+	{
+
+    }
 
 	public override void _Process(double delta)
 	{

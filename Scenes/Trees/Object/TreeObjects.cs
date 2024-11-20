@@ -10,6 +10,7 @@ public partial class TreeObjects : Tree
     public override void _Ready()
 	{
 		ExportManager.Instance.ToEditor.GroupImportEvent += AddSystemGroup;
+		ExportManager.Instance.ToEditor.StartImportJsonEvent += ClearTree;
 		CreateTree();
 	}
 
@@ -27,23 +28,34 @@ public partial class TreeObjects : Tree
         _mainRoot.SetText((int)TreeObjectCollumn.Text, "Storyboard");
     }
 
+	private void ClearTree()
+	{
+        Array<TreeItem> objects = _mainRoot.GetChildren();
+		foreach (var item in objects)
+			_mainRoot.RemoveChild(item);
+		
+		
+
+	}
+
 	private void AddSystemGroup(DataObject dataObject)
 	{
-		AddGroup(dataObject, _mainRoot);
+        AddGroup(dataObject, _mainRoot);
 	}
 
 	private void AddGroup(DataObject dataObject, TreeItem parent)
 	{
+        Editor.Instance.StoryboardObjectList.Add(dataObject);
+
 		TreeItem group = CreateItem(parent);
 
-		group.SetText((int)TreeObjectCollumn.Text, dataObject.Name);
+        group.SetText((int)TreeObjectCollumn.Text, dataObject.Name);
 		group.SetTooltipText((int)TreeObjectCollumn.Text, dataObject.Description);
 
 		GroupType systemLayerName = DataObjectOperation.CheckAndReturnName(dataObject.Name);
 
 		var metadata = new DataObjectTreeMetadata()
 		{
-			ObjectType = ObjectsTypeList.Group,
 			DataObject = dataObject,
 			GroupType = systemLayerName,
 		};
@@ -57,7 +69,7 @@ public partial class TreeObjects : Tree
 		{
 			foreach (var item in dataObject.Items)
 			{
-				if (item.Value.ObjectsType == ObjectsTypeList.Group)
+				if (item.Value.ObjectType == ObjectsTypeList.Group)
 					AddGroup(item.Value, group);
 			}
 		}

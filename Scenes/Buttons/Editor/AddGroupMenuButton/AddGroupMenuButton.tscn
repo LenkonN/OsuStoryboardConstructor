@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg8m3laghnwcu"]
+
+[ext_resource type="Texture2D" uid="uid://bjtmv2huw12c0" path="res://Sprites/Svg/Folder.svg" id="1_buxaj"]
+[ext_resource type="Script" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.cs" id="2_uirj4"]
+
+[node name="AddGroupMenuButton" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_buxaj")
+expand_mode = 1
+script = ExtResource("2_uirj4")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="OnClick"]
