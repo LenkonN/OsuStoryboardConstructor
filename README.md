@@ -2,7 +2,7 @@
 
 **Status: In active development**
 
-## To-do list:
+## To-do list
 *(In order of priority)*
 
 **In proccess:**
