@@ -65,31 +65,31 @@ public partial class StoryboardObjectStructureManager : Node
             if (i == 0)
             {
 
-                data = CreateGroup("Background", "Back layer of the Storyboard");
+                data = CreateGroup("Background", "Back layer of the Storyboard", uidSpecific: 0);
                 name = LayerList.Background;
             }
 
             if (i == 1)
             {
-                data = CreateGroup("Fail", "Only shown if player missed");
+                data = CreateGroup("Fail", "Only shown if player missed", uidSpecific: 1);
                 name = LayerList.Fail;
             }
 
             if (i == 2)
             {
-                data = CreateGroup("Pass", "Only shown if player not missed");
+                data = CreateGroup("Pass", "Only shown if player not missed", uidSpecific:2);
                 name = LayerList.Pass;
             }
 
             if (i == 3)
             {
-                data = CreateGroup("Foreground", "Front layer of the Storyboard");
+                data = CreateGroup("Foreground", "Front layer of the Storyboard", uidSpecific: 3);
                 name = LayerList.Foreground;
             }
 
             if (i == 4)
             {
-                data = CreateGroup("Overlay", "Front layer of the Storyboard, overlapping also the game elements");
+                data = CreateGroup("Overlay", "Front layer of the Storyboard, overlapping also the game elements", uidSpecific: 4);
                 name = LayerList.Overlay;
             }
 
@@ -99,29 +99,59 @@ public partial class StoryboardObjectStructureManager : Node
         return group;
     }
 
-    public void AddItem(string parentName, DataObject dataObject)
+    public void UpdateItem(DataObject dataObject, Dictionary<string, string> newValues)
     {
-        DataObject? parentData = FindObject(parentName, StoryboardStructureData.Storyboard.Group);
+        DataObject dataInStructre = FindObject(dataObject.UID, StoryboardStructureData.Storyboard.Group);
+        DataObject newData = null;
+        
+        if (dataObject.ObjectType is ObjectsTypeList.Group)
+        {
+            newData = DataChanged.GroupData.ChangeData(dataObject, newValues);
+        }
+        
+        if (dataInStructre == null || newData == null)
+            return;
+        
+        dataInStructre = newData;
+        
+        ProjectChangedEvent?.Invoke();
+    }
+
+    public void AddItem(ulong uid, DataObject dataObject)
+    {
+        DataObject parentData = FindObject(uid, StoryboardStructureData.Storyboard.Group);
 
         if (parentData == null)
             return;
 
-        parentData?.Items.Add(dataObject.Name, dataObject);
+        parentData?.Items.Add(dataObject.UID.ToString(), dataObject);
         ProjectChangedEvent?.Invoke();
     }
 
-    private DataObject? FindObject(string target, Dictionary<string, DataObject> group)
+    public void RemoveItem(ulong uid, DataObject dataObject)
+    {
+        DataObject parentData = FindObject(uid, StoryboardStructureData.Storyboard.Group);
+
+        if (parentData == null)
+            return;
+
+        parentData?.Items.Remove(dataObject.UID.ToString());
+        ProjectChangedEvent?.Invoke();
+
+    }
+
+    private DataObject FindObject(ulong targetUid, Dictionary<string, DataObject> group)
     {
         foreach (KeyValuePair<string, DataObject> data in group)
         {
             DataObject dataObject = data.Value;
 
-            if ( dataObject.Name == target )
+            if ( dataObject.UID == targetUid)
                 return dataObject;
 
             if (dataObject.ObjectType is ObjectsTypeList.Group)
             {
-                DataObject? subData = FindObject(target, dataObject.Items);
+                DataObject subData = FindObject(targetUid, dataObject.Items);
                 if (subData != null)
                     return subData;
             }
@@ -132,14 +162,18 @@ public partial class StoryboardObjectStructureManager : Node
 
         return null;
     }
-
-    public DataObject CreateGroup(string nameGroup, string description, Dictionary<string, DataObject> items = null)
+    
+    public DataObject CreateGroup(string nameGroup, string description, Dictionary<string, DataObject> items = null, ulong? uidSpecific = null)
     {
         if (items == null)
             items = new Dictionary<string, DataObject>();
 
+        if (uidSpecific == null)
+            uidSpecific = GenerateUID();
+
         DataObject data = new DataObject()
         {
+            UID = (ulong)uidSpecific,
             Name = nameGroup,
             ObjectType = ObjectsTypeList.Group,
             Description = description,
@@ -147,5 +181,22 @@ public partial class StoryboardObjectStructureManager : Node
         };
 
         return data;
+    }
+
+    public ulong GenerateUID()
+    {
+        List<ulong> alreadyUsedUID = new List<ulong>();
+
+        foreach (var item in Editor.Instance.StoryboardObjectList)
+            alreadyUsedUID.Add(item.UID);
+
+        ulong? uid = null;
+
+        while (uid == null || alreadyUsedUID.Contains((ulong)uid))
+        {
+            uid = GD.Randi();
+        }
+
+        return (ulong)uid;
     }
 }

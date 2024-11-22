@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Editor : Node2D
 {
@@ -16,11 +17,6 @@ public partial class Editor : Node2D
 	{
 		Instance = this;
 	}
-
-	private void CreateProject()
-	{
-
-    }
 
 	public override void _Process(double delta)
 	{

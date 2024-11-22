@@ -18,11 +18,16 @@ public enum TreeParameterCollumn
 
 public enum GroupType
 {
-    Background, Fail, Pass, Foreground, Overlay, UserCustom
+    Background, Fail, Pass, Foreground, Overlay, UserCustom, Storyboard
 }
 
 public enum GroupOperationName
 {
     CheckAndReturnSystemLayerName, CheckSystemLayer
+}
+
+public enum ParamMetadataUse
+{ 
+    Group, Parameter
 }
 

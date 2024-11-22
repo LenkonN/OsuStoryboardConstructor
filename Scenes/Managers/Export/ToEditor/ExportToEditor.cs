@@ -7,6 +7,7 @@ public partial class ExportToEditor : Node
 {
 	public event Action<DataObject> GroupImportEvent;
 	public event Action StartImportJsonEvent;
+	public event Action FinishedImportJsonEvent;
 
 	public override void _Ready()
 	{
@@ -57,5 +58,7 @@ public partial class ExportToEditor : Node
 		{
 			GroupImportEvent?.Invoke(item.Value);
 		}
+
+		FinishedImportJsonEvent?.Invoke();
     }
 }

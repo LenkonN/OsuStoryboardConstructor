@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://trgipxvjeumi"]
+[gd_scene load_steps=17 format=3 uid="uid://trgipxvjeumi"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
+[ext_resource type="Script" path="res://Scenes/Hud/Hud.cs" id="1_pv4ps"]
 [ext_resource type="LabelSettings" uid="uid://b6hf3k3ma7y6b" path="res://Resources/Label/Space.tres" id="1_y1is0"]
 [ext_resource type="PackedScene" uid="uid://2ultl0u51sub" path="res://Scenes/Hud/Background/Background.tscn" id="1_yhcss"]
 [ext_resource type="Script" path="res://Scenes/Trees/Object/TreeObjects.cs" id="2_ojtbj"]
@@ -10,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://dln2s10dtlqk2" path="res://Resources/TimelinePoint/TimeLinePointtres.tres" id="5_vci5s"]
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/TimelinePoint.cs" id="6_6kii8"]
 [ext_resource type="PackedScene" uid="uid://cg8m3laghnwcu" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.tscn" id="10_q3vvp"]
+[ext_resource type="PackedScene" uid="uid://cigvdoitm7abh" path="res://Scenes/Buttons/Editor/DeleteObjectMenuButton/DeleteObjectMenuButton.tscn" id="11_c6dtl"]
 [ext_resource type="Script" path="res://Scenes/Trees/Parametres/TreeParametres.cs" id="11_vyvvu"]
 
 [sub_resource type="Theme" id="Theme_x0qgw"]
@@ -23,6 +25,7 @@ bg_color = Color(1, 1, 1, 0)
 
 [node name="Hud" type="CanvasLayer"]
 layer = 2
+script = ExtResource("1_pv4ps")
 
 [node name="Backgound" type="CanvasLayer" parent="."]
 
@@ -222,6 +225,18 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 _storyboardTree = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
+[node name="MarginContainer_3" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DeleteObjectMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_3" node_paths=PackedStringArray("_treeObjects") instance=ExtResource("11_c6dtl")]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+_treeObjects = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
+
 [node name="__Space_2" type="Label" parent="MainContainer/MainContent/Center/Down"]
 layout_mode = 2
 text = " "
@@ -259,3 +274,4 @@ script = ExtResource("11_vyvvu")
 _treeObjects = NodePath("../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
 [connection signal="item_selected" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]
+[connection signal="item_edited" from="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" to="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" method="OnItemEdit"]

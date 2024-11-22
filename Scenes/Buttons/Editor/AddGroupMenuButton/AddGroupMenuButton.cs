@@ -28,8 +28,8 @@ public partial class AddGroupMenuButton : TextureRect
 
 		if (metadata.DataObject.ObjectType is ObjectsTypeList.Group)
 		{
-			DataObject newGroup = Editor.Instance.StoryboardObjectStructureManager.CreateGroup((Editor.Instance.StoryboardObjectList.Count + 1).ToString(), "helpMe");
-            Editor.Instance.StoryboardObjectStructureManager.AddItem(metadata.DataObject.Name, newGroup);
+			DataObject newGroup = Editor.Instance.StoryboardObjectStructureManager.CreateGroup("New group", "");
+            Editor.Instance.StoryboardObjectStructureManager.AddItem(metadata.DataObject.UID, newGroup);
 
 
         }

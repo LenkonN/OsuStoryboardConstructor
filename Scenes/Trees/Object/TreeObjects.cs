@@ -2,18 +2,22 @@ using Godot;
 using System;
 using Godot.Collections;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 public partial class TreeObjects : Tree
 {
 	public event Action<DataObjectTreeMetadata> SelectedItemEvent;
 
+	public ulong? LastSelectedItemUid;
 	private TreeItem _mainRoot;
+	
 
     public override void _Ready()
 	{
 		ExportManager.Instance.ToEditor.GroupImportEvent += AddSystemGroup;
 		ExportManager.Instance.ToEditor.StartImportJsonEvent += ClearTree;
-		CreateTree();
+		ExportManager.Instance.ToEditor.FinishedImportJsonEvent += ReselectLastObject;
+        CreateTree();
 	}
 
 	public override void _Process(double delta)
@@ -26,11 +30,51 @@ public partial class TreeObjects : Tree
 		TreeItem selectedItem = this.GetSelected();
         DataObjectTreeMetadata metadata = selectedItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
 
+		if (metadata != null)
+			LastSelectedItemUid = metadata.DataObject.UID;
+		else if (metadata == null)
+			LastSelectedItemUid = null;
+
         SelectedItemEvent?.Invoke(metadata);
 	}
-	 
 
-	private void CreateTree()
+	public void ReselectLastObject()
+	{
+		var allItems = GetAllItems();
+
+		foreach (var item in allItems)
+		{
+            DataObjectTreeMetadata metadata = item.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+
+			if(metadata == null)
+				continue;
+
+			if (LastSelectedItemUid == metadata.DataObject.UID)
+				item.Select((int)TreeObjectCollumn.Text);
+        }
+	}
+    public List<TreeItem> GetAllItems()
+    {
+        List<TreeItem> items = new List<TreeItem>();
+
+        CollectItems(_mainRoot, items);
+
+        return items;
+    }
+
+    private void CollectItems(TreeItem item, List<TreeItem> items)
+    {
+        items.Add(item);
+
+        TreeItem child = item.GetFirstChild();
+        while (child != null)
+        {
+            CollectItems(child, items);
+            child = child.GetNext();
+        }
+    }
+
+    private void CreateTree()
 	{
 		Columns = 2;
 		

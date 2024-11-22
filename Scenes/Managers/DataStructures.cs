@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using static Godot.HttpRequest;
 
-public struct DataEditor
+public class DataEditor
 {
     public string NameProject { get; set; }
     public float BPM { get; set; }
@@ -11,15 +11,17 @@ public struct DataEditor
     public string ProjectPath { get; set; }
 }
 
-public struct DataOsu
+public class DataOsu
 {
     public string OsuFilePath { get; set; }
     public string OsbFilePath { get; set; }
 }
 
 
-public struct DataObject
+public class DataObject
 {
+
+    public ulong UID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public ObjectsTypeList ObjectType { get; set; }
@@ -54,18 +56,16 @@ public static class DataObjectOperation
         else if (layerName == "Overlay")
             return GroupType.Overlay;
 
+        else if (layerName == "Storyboard")
+            return GroupType.Storyboard;
+
         else
             return GroupType.UserCustom;
     }
 
-    public static bool CheckSystemName(string layerName)
+    public static bool CheckSystemUid(ulong uid)
     {
-        if (layerName == "Background" ||
-            layerName == "Fail" ||
-            layerName == "Pass" ||
-            layerName == "Foreground" ||
-            layerName == "Overlay"
-            )
+        if (uid <= 4)
             return true;
 
         else 
@@ -75,7 +75,6 @@ public static class DataObjectOperation
 
 public partial class DataObjectTreeMetadata : GodotObject
 {
-    public ObjectsTypeList ObjectType { get; set; }
     public DataObject DataObject { get; set; }
     public GroupType GroupType { get; set; }
 }
