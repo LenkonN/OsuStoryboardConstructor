@@ -17,6 +17,7 @@
 - Create sprite object and particle system object.
 
 **In ideas:**
+- Сreate documentation on the use of the program
 - Create text object with text-to-image conversion system.
 - System of visual customization of editor.
 - Add localization for several languages (currently there are people for: Russian, Spanish)
