@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datachangeditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datachangeditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\trees\\object\\treeobjects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\trees\\object\\treeobjects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\storyboardobjectstructuremanager\\storyboardobjectstructuremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\storyboardobjectstructuremanager\\storyboardobjectstructuremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\trees\\parametres\\treeparametres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\trees\\parametres\\treeparametres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\buttons\\editor\\deleteobjectmenubutton\\deleteobjectmenubutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\buttons\\editor\\deleteobjectmenubutton\\deleteobjectmenubutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\export\\toeditor\\exporttoeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\export\\toeditor\\exporttoeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\general\\editor\\editor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\general\\editor\\editor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\buttons\\editor\\addgroupmenubutton\\addgroupmenubutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,16 +27,32 @@
       "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\export\\json\\exportjson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\trees\\parametres\\treeparametres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\trees\\parametres\\treeparametres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datachangeditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datachangeditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\export\\storyboarddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\export\\storyboarddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\general\\editor\\editor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\general\\editor\\editor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datastaticstring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datastaticstring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\dataenumerators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\dataenumerators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\export\\toeditor\\exporttoeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\export\\toeditor\\exporttoeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\trees\\object\\treeobjects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\trees\\object\\treeobjects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\dataenumerators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\dataenumerators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\hud\\hud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,50 +66,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
+              "Title": "StoryboardData.cs",
+              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\StoryboardData.cs",
+              "RelativeDocumentMoniker": "Scenes\\Managers\\Export\\StoryboardData.cs",
+              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\StoryboardData.cs",
+              "RelativeToolTip": "Scenes\\Managers\\Export\\StoryboardData.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T18:52:34.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "DeleteObjectMenuButton.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Buttons\\Editor\\DeleteObjectMenuButton\\DeleteObjectMenuButton.cs",
               "RelativeDocumentMoniker": "Scenes\\Buttons\\Editor\\DeleteObjectMenuButton\\DeleteObjectMenuButton.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Buttons\\Editor\\DeleteObjectMenuButton\\DeleteObjectMenuButton.cs",
               "RelativeToolTip": "Scenes\\Buttons\\Editor\\DeleteObjectMenuButton\\DeleteObjectMenuButton.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAjwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAjwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-22T20:10:05.884Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Editor.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\General\\Editor\\Editor.cs",
               "RelativeDocumentMoniker": "Scenes\\General\\Editor\\Editor.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\General\\Editor\\Editor.cs",
               "RelativeToolTip": "Scenes\\General\\Editor\\Editor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswBwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-22T19:26:10.128Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "ExportToEditor.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\ToEditor\\ExportToEditor.cs",
               "RelativeDocumentMoniker": "Scenes\\Managers\\Export\\ToEditor\\ExportToEditor.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\ToEditor\\ExportToEditor.cs",
               "RelativeToolTip": "Scenes\\Managers\\Export\\ToEditor\\ExportToEditor.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAuwCYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAUwDsAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T21:02:05.755Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Hud.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Hud\\Hud.cs",
               "RelativeDocumentMoniker": "Scenes\\Hud\\Hud.cs",
@@ -113,25 +130,24 @@
               "RelativeToolTip": "Scenes\\Hud\\Hud.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T20:59:29.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-21T20:59:29.337Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 0,
               "Title": "TreeObjects.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Trees\\Object\\TreeObjects.cs",
               "RelativeDocumentMoniker": "Scenes\\Trees\\Object\\TreeObjects.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Trees\\Object\\TreeObjects.cs",
               "RelativeToolTip": "Scenes\\Trees\\Object\\TreeObjects.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwDAAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAhwJUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T20:54:10.002Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "DataStaticString.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataStaticString.cs",
               "RelativeDocumentMoniker": "Scenes\\Managers\\DataStaticString.cs",
@@ -144,7 +160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "DataEnumerators.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataEnumerators.cs",
               "RelativeDocumentMoniker": "Scenes\\Managers\\DataEnumerators.cs",
@@ -152,8 +168,7 @@
               "RelativeToolTip": "Scenes\\Managers\\DataEnumerators.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T20:12:17.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-21T20:12:17.998Z"
             },
             {
               "$type": "Document",
@@ -163,46 +178,46 @@
               "RelativeDocumentMoniker": "Scenes\\Managers\\DataStructures.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataStructures.cs",
               "RelativeToolTip": "Scenes\\Managers\\DataStructures.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAADwv0MAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAADwv0EAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T19:42:17.092Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "AddGroupMenuButton.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Buttons\\Editor\\AddGroupMenuButton\\AddGroupMenuButton.cs",
               "RelativeDocumentMoniker": "Scenes\\Buttons\\Editor\\AddGroupMenuButton\\AddGroupMenuButton.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Buttons\\Editor\\AddGroupMenuButton\\AddGroupMenuButton.cs",
               "RelativeToolTip": "Scenes\\Buttons\\Editor\\AddGroupMenuButton\\AddGroupMenuButton.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T19:35:51.154Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "ExportJson.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\Json\\ExportJson.cs",
               "RelativeDocumentMoniker": "Scenes\\Managers\\Export\\Json\\ExportJson.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\Export\\Json\\ExportJson.cs",
               "RelativeToolTip": "Scenes\\Managers\\Export\\Json\\ExportJson.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T19:33:03.933Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "TreeParametres.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Trees\\Parametres\\TreeParametres.cs",
               "RelativeDocumentMoniker": "Scenes\\Trees\\Parametres\\TreeParametres.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Trees\\Parametres\\TreeParametres.cs",
               "RelativeToolTip": "Scenes\\Trees\\Parametres\\TreeParametres.cs",
-              "ViewState": "AgIAAKcAAAAAAAAAAAAswCcAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAkwCcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T19:01:49.248Z",
               "EditorCaption": ""
@@ -215,20 +230,20 @@
               "RelativeDocumentMoniker": "Scenes\\Managers\\StoryboardObjectStructureManager\\StoryboardObjectStructureManager.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\StoryboardObjectStructureManager\\StoryboardObjectStructureManager.cs",
               "RelativeToolTip": "Scenes\\Managers\\StoryboardObjectStructureManager\\StoryboardObjectStructureManager.cs",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAhwG0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAewLQAAACRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T18:59:48.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "DataChangedItem.cs",
               "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataChangedItem.cs",
               "RelativeDocumentMoniker": "Scenes\\Managers\\DataChangedItem.cs",
               "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataChangedItem.cs",
               "RelativeToolTip": "Scenes\\Managers\\DataChangedItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T18:53:54.044Z",
               "EditorCaption": ""

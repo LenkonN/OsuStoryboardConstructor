@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text.RegularExpressions;
 
 public partial class StoryboardObjectStructureManager : Node
@@ -53,9 +55,9 @@ public partial class StoryboardObjectStructureManager : Node
         ProjectChangedEvent?.Invoke();
     }
 
-    public Dictionary<string, DataObject> CreateSystemLayers()
+    public List<KeyValuePair<string, DataObject>> CreateSystemLayers()
     {
-        var group = new Dictionary<string, DataObject>();
+        var group = new List<KeyValuePair<string, DataObject>>();
 
         for (int i = 0; i <= 4; i++)
         {
@@ -93,7 +95,7 @@ public partial class StoryboardObjectStructureManager : Node
                 name = LayerList.Overlay;
             }
 
-            group.Add(name.ToString(), data);
+            group.Add(new KeyValuePair<string, DataObject>(name.ToString(), data));
         }
 
         return group;
@@ -124,7 +126,7 @@ public partial class StoryboardObjectStructureManager : Node
         if (parentData == null)
             return;
 
-        parentData?.Items.Add(dataObject.UID.ToString(), dataObject);
+        parentData?.Items.Add(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
         ProjectChangedEvent?.Invoke();
     }
 
@@ -135,12 +137,25 @@ public partial class StoryboardObjectStructureManager : Node
         if (parentData == null)
             return;
 
-        parentData?.Items.Remove(dataObject.UID.ToString());
+        parentData?.Items.Remove(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
         ProjectChangedEvent?.Invoke();
 
     }
 
-    private DataObject FindObject(ulong targetUid, Dictionary<string, DataObject> group)
+    public void MoveItem(DataObject draggedObject, DataObject parentDraggedObject, DataObject parentTargetObject, int targetPosition)
+    {
+        
+        parentDraggedObject.Items.Remove(new KeyValuePair<string, DataObject>(draggedObject.UID.ToString(), draggedObject));
+
+        if(parentTargetObject.Items.Count == 0)
+            parentTargetObject.Items.Add(new KeyValuePair<string, DataObject>(draggedObject.UID.ToString(), draggedObject));
+        else
+            parentTargetObject.Items.Insert(targetPosition, new KeyValuePair<string, DataObject>(draggedObject.UID.ToString(), draggedObject));
+
+        ProjectChangedEvent?.Invoke();
+    }
+
+    private DataObject FindObject(ulong targetUid, List<KeyValuePair<string, DataObject>> group)
     {
         foreach (KeyValuePair<string, DataObject> data in group)
         {
@@ -163,10 +178,10 @@ public partial class StoryboardObjectStructureManager : Node
         return null;
     }
     
-    public DataObject CreateGroup(string nameGroup, string description, Dictionary<string, DataObject> items = null, ulong? uidSpecific = null)
+    public DataObject CreateGroup(string nameGroup, string description, List<KeyValuePair<string, DataObject>> items = null, ulong? uidSpecific = null)
     {
         if (items == null)
-            items = new Dictionary<string, DataObject>();
+            items = new List<KeyValuePair<string, DataObject>>();
 
         if (uidSpecific == null)
             uidSpecific = GenerateUID();

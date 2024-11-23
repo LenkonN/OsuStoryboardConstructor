@@ -25,7 +25,7 @@ public class DataObject
     public string Name { get; set; }
     public string Description { get; set; }
     public ObjectsTypeList ObjectType { get; set; }
-    public Dictionary<string, DataObject> Items { get; set; } //Group or storyboard object
+    public List<KeyValuePair<string, DataObject>> Items { get; set; } //Group or storyboard object
 
 }
 

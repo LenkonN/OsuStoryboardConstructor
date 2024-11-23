@@ -141,6 +141,7 @@ theme = SubResource("Theme_x0qgw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_fi8uu")
 theme_override_styles/focus = SubResource("StyleBoxFlat_i8e52")
 columns = 2
+select_mode = 1
 script = ExtResource("2_ojtbj")
 
 [node name="Center" type="VBoxContainer" parent="MainContainer/MainContent"]
@@ -273,5 +274,6 @@ columns = 2
 script = ExtResource("11_vyvvu")
 _treeObjects = NodePath("../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
+[connection signal="gui_input" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemDrag"]
 [connection signal="item_selected" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]
 [connection signal="item_edited" from="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" to="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" method="OnItemEdit"]

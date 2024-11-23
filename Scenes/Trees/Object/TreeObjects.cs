@@ -3,12 +3,14 @@ using System;
 using Godot.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class TreeObjects : Tree
 {
 	public event Action<DataObjectTreeMetadata> SelectedItemEvent;
 
 	public ulong? LastSelectedItemUid;
+	public TreeItem LastSelectedItem;
 	private TreeItem _mainRoot;
 	
 
@@ -17,23 +19,32 @@ public partial class TreeObjects : Tree
 		ExportManager.Instance.ToEditor.GroupImportEvent += AddSystemGroup;
 		ExportManager.Instance.ToEditor.StartImportJsonEvent += ClearTree;
 		ExportManager.Instance.ToEditor.FinishedImportJsonEvent += ReselectLastObject;
+		
         CreateTree();
+
+		this.DropModeFlags = (int)DropModeFlagsEnum.OnItem | (int)DropModeFlagsEnum.Inbetween;
 	}
 
 	public override void _Process(double delta)
-	{
+	{			
 
-	}
+    }
 
 	private void OnSelectItem()
 	{
 		TreeItem selectedItem = this.GetSelected();
         DataObjectTreeMetadata metadata = selectedItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
-
+		
 		if (metadata != null)
+		{
 			LastSelectedItemUid = metadata.DataObject.UID;
+			LastSelectedItem = selectedItem;
+        }
 		else if (metadata == null)
+		{
 			LastSelectedItemUid = null;
+			LastSelectedItem = null;
+		}
 
         SelectedItemEvent?.Invoke(metadata);
 	}
@@ -126,42 +137,87 @@ public partial class TreeObjects : Tree
 		}
     }
 
-	private void Test()
-	{
-        Columns = 2;
-
-		Texture2D texture2D = GD.Load<Texture2D>("res://icon.svg");
-
-        TreeItem root = CreateItem();
-		root.SetText(0, "Main Root");
-
-		TreeItem group1 = CreateItem(root);
-		group1.SetText(0, "UI Elements");
-		group1.SetIcon(1, texture2D);
-
-		TreeItem objectTest = CreateItem(group1);
-		objectTest.SetText(0, "Object1");
-		objectTest.SetCellMode(1, TreeItem.TreeCellMode.String);
-		objectTest.SetEditable(1, true);
-
-        TreeItem objectTest2 = CreateItem(group1);
-        objectTest2.SetText(0, "Object2");
-        objectTest2.SetCellMode(1, TreeItem.TreeCellMode.String);
-        objectTest2.SetEditable(1, true);
-
-        TreeItem objectTest3 = CreateItem(group1);
-        objectTest3.SetText(0, "Object3");
-        objectTest3.SetCellMode(1, TreeItem.TreeCellMode.String);
-        objectTest3.SetEditable(1, true);
+    public override Variant _GetDragData(Vector2 position)
+    {
+		Label dragPreview = new Label();
+		dragPreview.Text = LastSelectedItem.GetText((int)TreeObjectCollumn.Text);
 
 
+        SetDragPreview(dragPreview);
 
-        TreeItem group2 = CreateItem(root);
-        group2.SetText(0, "Game");
-
-        TreeItem objectTest4 = CreateItem(group2);
-        objectTest4.SetText(0, "Object4");
-
-
+		return LastSelectedItem;
     }
+
+    public override bool _CanDropData(Vector2 position, Variant data)
+    {
+		if (data.As<TreeItem>() is TreeItem draggedItem)
+		{
+			TreeItem targetItem = this.GetItemAtPosition(position);
+
+			if (targetItem != null && draggedItem != targetItem)
+			{
+				return true;
+			}
+		}
+        return false;
+    }
+
+	public override void _DropData(Vector2 position, Variant data)
+	{
+        if (data.As<TreeItem>() is TreeItem draggedItem)
+		{
+			TreeItem targetItem = this.GetItemAtPosition(position);
+
+			if (targetItem != null && targetItem != draggedItem)
+			{
+				TreeItem parentTargetItem = targetItem.GetParent();
+				TreeItem parentDraggedItem = draggedItem.GetParent();
+
+                if (draggedItem == _mainRoot || targetItem == _mainRoot || parentDraggedItem == _mainRoot)
+					return;
+
+				if (parentTargetItem == _mainRoot || Input.IsActionPressed("SubActive"))
+					parentTargetItem = targetItem;
+
+				TreeItem OperationAvailabilityCheck = draggedItem;
+				while (OperationAvailabilityCheck != null)
+				{
+                    int childCount = OperationAvailabilityCheck.GetChildCount();
+
+					if (childCount != 0)
+					{
+                        Array<TreeItem> ItemArrayCheck = OperationAvailabilityCheck.GetChildren();
+						foreach (TreeItem Item in ItemArrayCheck)
+						{
+							OperationAvailabilityCheck = Item;
+
+							if (OperationAvailabilityCheck == targetItem)
+								return;
+						}
+					}
+					else
+					{
+						break;
+					}
+				}
+
+                DataObjectTreeMetadata draggedMeta = draggedItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+                DataObjectTreeMetadata targedMeta = targetItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+                DataObjectTreeMetadata parentTargetMeta = parentTargetItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+				DataObjectTreeMetadata parentDraggedMeta = parentDraggedItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+
+                DataObject draggedObject = draggedMeta.DataObject;
+                DataObject targedObject = targedMeta.DataObject;
+                DataObject parentTargetObject = parentTargetMeta.DataObject;
+				DataObject parentDraggedObject = parentDraggedMeta.DataObject;
+
+				if (DataObjectOperation.CheckSystemUid(targedObject.UID) && parentTargetObject.Items.Count != 0 && !Input.IsActionPressed("SubActive"))
+					return;
+
+                int targetPosition = targetItem.GetIndex();
+
+				Editor.Instance.StoryboardObjectStructureManager.MoveItem(draggedObject, parentDraggedObject, parentTargetObject, targetPosition);
+			}
+        }
+	}
 }
