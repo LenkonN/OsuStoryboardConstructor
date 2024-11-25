@@ -4,9 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
+/// <summary>
+/// All logic of interaction with objects inside project
+/// </summary>
 public partial class StoryboardObjectStructureManager : Node
 {
+    [Export] private bool _createProjectEditorDebug;
+
     public event Action ProjectChangedEvent;
 
     public StoryboardData StoryboardStructureData = new StoryboardData();
@@ -14,6 +20,9 @@ public partial class StoryboardObjectStructureManager : Node
     public override void _Ready()
     {
         ProjectChangedEvent += RequestReloadProject;
+
+        if (_createProjectEditorDebug)
+            CreateProject();
     }
 
     public override void _Process(double delta)
@@ -21,7 +30,10 @@ public partial class StoryboardObjectStructureManager : Node
         
     }
 
-
+    /// <summary>
+    /// Called every time the object state changes, except for graphical elements (e.g. collapsed item). 
+    /// Graphical elements do not trigger project update, i.e. they will be saved only if someone else triggers this event
+    /// </summary>
     public void RequestReloadProject()
     {
         ExportManager.Instance.Json.CreateJsonFile(StoryboardStructureData);
@@ -155,7 +167,7 @@ public partial class StoryboardObjectStructureManager : Node
         ProjectChangedEvent?.Invoke();
     }
 
-    private DataObject FindObject(ulong targetUid, List<KeyValuePair<string, DataObject>> group)
+    public DataObject FindObject(ulong targetUid, List<KeyValuePair<string, DataObject>> group)
     {
         foreach (KeyValuePair<string, DataObject> data in group)
         {
@@ -192,7 +204,11 @@ public partial class StoryboardObjectStructureManager : Node
             Name = nameGroup,
             ObjectType = ObjectsTypeList.Group,
             Description = description,
-            Items = items
+            Items = items,
+            Attributes = new DataAttributes.Group()
+            {
+                Collapse = false
+            }
         };
 
         return data;

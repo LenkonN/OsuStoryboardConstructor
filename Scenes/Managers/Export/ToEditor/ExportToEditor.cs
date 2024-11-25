@@ -9,11 +9,14 @@ public partial class ExportToEditor : Node
 	public event Action StartImportJsonEvent;
 	public event Action FinishedImportJsonEvent;
 
+    private List<DataObject> _buffAllObjects = new List<DataObject>();
+
 	public override void _Ready()
 	{
-		TestStartExport();
         GetParent<ExportManager>().Json.ProjectUpdatedEvent += ExportFullFile;
-	}
+		TestStartExport();
+
+    }
 
 	public override void _Process(double delta)
 	{
@@ -36,7 +39,7 @@ public partial class ExportToEditor : Node
 
 	public void ExportFullFile()
 	{
-		StartImportJsonEvent();
+		StartImportJsonEvent.Invoke();
 
         Editor.Instance.StoryboardObjectList.Clear();
 
@@ -53,12 +56,54 @@ public partial class ExportToEditor : Node
 		StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
         storyboardData.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
 
-
+		//Collect all objects in buffer
 		foreach (KeyValuePair<string, DataObject> item in storyboardData.StoryboardStructureData.Storyboard.Group)
 		{
-			GroupImportEvent?.Invoke(item.Value);
-		}
+            CollectAllObjects(item.Value);
+        }
 
-		FinishedImportJsonEvent?.Invoke();
+		//Deserialize all objects
+		foreach (var item in _buffAllObjects)
+		{
+            DataObject objectWithDeserializeAttribute = DeserializeAllAttributes(item);
+        }
+
+        //Send all object from buff to main object list
+        Editor.Instance.StoryboardObjectList = _buffAllObjects;
+
+        //Create all tree object
+        for (int i = 0; i < 5; i++)
+        {
+            DataObject dataObject = Editor.Instance.StoryboardObjectStructureManager.FindObject((ulong)i, storyboardData.StoryboardStructureData.Storyboard.Group);
+            GroupImportEvent?.Invoke(dataObject);
+        }
+
+        FinishedImportJsonEvent?.Invoke();
     }
+
+	private void CollectAllObjects(DataObject dataObject)
+	{
+        _buffAllObjects.Add(dataObject);
+
+        if (dataObject.Items != null)
+        {
+            foreach (var item in dataObject.Items)
+            {
+                if (item.Value.ObjectType == ObjectsTypeList.Group)
+                    CollectAllObjects(item.Value);
+            }
+        }
+    }
+
+	private DataObject DeserializeAllAttributes(DataObject dataObject)
+	{
+		JsonElement jsonAttribute = (JsonElement)dataObject.Attributes;
+
+		if (dataObject.ObjectType is ObjectsTypeList.Group)
+		    dataObject.Attributes = jsonAttribute.Deserialize<DataAttributes.Group>();
+
+		return dataObject;
+        
+    }
+
 }

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://08x66r6rkxt8"]
+
+[ext_resource type="Script" path="res://Scenes/Managers/SystemMessageManager/SystemMessageLabel.cs" id="1_lj8wq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yni8k"]
+
+[node name="Label" type="Label" node_paths=PackedStringArray("_killTimer")]
+modulate = Color(1, 1, 1, 0.784314)
+label_settings = SubResource("LabelSettings_yni8k")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("1_lj8wq")
+_killTimer = NodePath("KillTimer")
+
+[node name="KillTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="KillTimer" to="." method="OnTimeout"]

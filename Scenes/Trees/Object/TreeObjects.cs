@@ -49,7 +49,19 @@ public partial class TreeObjects : Tree
         SelectedItemEvent?.Invoke(metadata);
 	}
 
-	public void ReselectLastObject()
+	private void OnItemCollapsed(TreeItem item)
+	{
+        DataObjectTreeMetadata metadata = item.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+		
+		if (metadata == null)
+			return;
+
+        DataAttributes.Group Attributes = (DataAttributes.Group)metadata.DataObject.Attributes;
+
+        Attributes.Collapse = item.Collapsed;
+    }
+
+    public void ReselectLastObject()
 	{
 		var allItems = GetAllItems();
 
@@ -64,7 +76,8 @@ public partial class TreeObjects : Tree
 				item.Select((int)TreeObjectCollumn.Text);
         }
 	}
-    public List<TreeItem> GetAllItems()
+   
+	public List<TreeItem> GetAllItems()
     {
         List<TreeItem> items = new List<TreeItem>();
 
@@ -107,7 +120,6 @@ public partial class TreeObjects : Tree
 
 	private void AddGroup(DataObject dataObject, TreeItem parent)
 	{
-        Editor.Instance.StoryboardObjectList.Add(dataObject);
 
 		TreeItem group = CreateItem(parent);
 
@@ -127,6 +139,9 @@ public partial class TreeObjects : Tree
 		group.SetEditable((int)TreeObjectCollumn.Text, false);
         group.SetEditable((int)TreeObjectCollumn.Icon, false);
 
+		group.Collapsed = ((DataAttributes.Group)dataObject.Attributes).Collapse;
+		
+		
 		if (dataObject.Items != null)
 		{
 			foreach (var item in dataObject.Items)
@@ -179,19 +194,19 @@ public partial class TreeObjects : Tree
 				if (parentTargetItem == _mainRoot || Input.IsActionPressed("SubActive"))
 					parentTargetItem = targetItem;
 
-				TreeItem OperationAvailabilityCheck = draggedItem;
-				while (OperationAvailabilityCheck != null)
+				TreeItem operationAvailabilityCheck = draggedItem;
+				while (operationAvailabilityCheck != null)
 				{
-                    int childCount = OperationAvailabilityCheck.GetChildCount();
+                    int childCount = operationAvailabilityCheck.GetChildCount();
 
 					if (childCount != 0)
 					{
-                        Array<TreeItem> ItemArrayCheck = OperationAvailabilityCheck.GetChildren();
-						foreach (TreeItem Item in ItemArrayCheck)
+                        Array<TreeItem> itemArrayCheck = operationAvailabilityCheck.GetChildren();
+						foreach (TreeItem item in itemArrayCheck)
 						{
-							OperationAvailabilityCheck = Item;
+							operationAvailabilityCheck = item;
 
-							if (OperationAvailabilityCheck == targetItem)
+							if (operationAvailabilityCheck == targetItem)
 								return;
 						}
 					}

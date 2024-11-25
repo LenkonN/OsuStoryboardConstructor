@@ -1,18 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6hp4qpan4qm3"]
+[gd_scene load_steps=12 format=3 uid="uid://c6hp4qpan4qm3"]
 
 [ext_resource type="PackedScene" uid="uid://trgipxvjeumi" path="res://Scenes/Hud/Hud.tscn" id="1_ly5mv"]
 [ext_resource type="Script" path="res://Scenes/General/Editor/Editor.cs" id="1_rt8xu"]
 [ext_resource type="PackedScene" uid="uid://bl3r7v6ja5wx1" path="res://Scenes/Windows/ObjectCollection/ObjectCollectionWindow.tscn" id="2_03cfq"]
 [ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="2_yl61f"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardObjectStructureManager/StoryboardObjectStructureManager.cs" id="3_78dob"]
+[ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="3_y3mhj"]
+[ext_resource type="Script" path="res://Scenes/Managers/NewStoryboardObjectManager/NewStoryboardObjectManager.cs" id="4_b4f6p"]
+[ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
+[ext_resource type="Script" path="res://Scenes/StoryboardAnimation/StoryboardAnimation.cs" id="7_vudn0"]
 
-[node name="Editor" type="Node2D" node_paths=PackedStringArray("StoryboardObjectStructureManager")]
+[sub_resource type="Animation" id="Animation_vxdlv"]
+resource_name = "Storyboard"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vaf3m"]
+_data = {
+"Storyboard": SubResource("Animation_vxdlv")
+}
+
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("StoryboardPlayer", "StoryboardObjectStructureManager", "NewStoryboardObjectManager", "StoryboardCanvasLayer")]
 script = ExtResource("1_rt8xu")
+StoryboardPlayer = NodePath("StoryboardAnimation")
 _ObjectCollectionWindowScene = ExtResource("2_03cfq")
 StoryboardObjectStructureManager = NodePath("StoryboardObjectStructureManager")
+NewStoryboardObjectManager = NodePath("NewStoryboardObjectManager")
+StoryboardCanvasLayer = NodePath("Storyboard")
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
 script = ExtResource("3_78dob")
+
+[node name="NewStoryboardObjectManager" type="Node" parent="." node_paths=PackedStringArray("_spawnPos")]
+script = ExtResource("4_b4f6p")
+_spawnPos = NodePath("NewObjectSpawnPos")
+_spriteObjectScene = ExtResource("5_a7q3b")
+
+[node name="NewObjectSpawnPos" type="Marker2D" parent="NewStoryboardObjectManager"]
+position = Vector2(657, 432)
 
 [node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
 
@@ -23,3 +46,14 @@ offset_left = -429.0
 offset_top = -221.0
 offset_right = 425.0
 offset_bottom = 259.0
+
+[node name="SystemMessage" parent="." instance=ExtResource("3_y3mhj")]
+layer = 5
+
+[node name="StoryboardAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vaf3m")
+}
+script = ExtResource("7_vudn0")
+
+[connection signal="tree_exiting" from="." to="." method="OnTreeExit"]

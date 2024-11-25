@@ -23,9 +23,11 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8e52"]
 bg_color = Color(1, 1, 1, 0)
 
-[node name="Hud" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("TreeObjects", "TreeParametres")]
 layer = 2
 script = ExtResource("1_pv4ps")
+TreeObjects = NodePath("MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
+TreeParametres = NodePath("MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree")
 
 [node name="Backgound" type="CanvasLayer" parent="."]
 
@@ -275,5 +277,6 @@ script = ExtResource("11_vyvvu")
 _treeObjects = NodePath("../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
 [connection signal="gui_input" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemDrag"]
+[connection signal="item_collapsed" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemCollapsed"]
 [connection signal="item_selected" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]
 [connection signal="item_edited" from="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" to="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" method="OnItemEdit"]

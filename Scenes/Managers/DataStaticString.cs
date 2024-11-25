@@ -10,3 +10,12 @@ public static class StaticNamesParam
              Description = "Description";
     }
 }
+
+public static class StaticNamesAttribute
+{
+    public static class Group
+    {
+        public static readonly string
+            Collapse = "Collapse";
+    }
+}

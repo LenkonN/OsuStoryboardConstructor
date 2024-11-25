@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://drj7ionjx21s8"]
+[gd_scene load_steps=3 format=3 uid="uid://drj7ionjx21s8"]
 
 [ext_resource type="Texture2D" uid="uid://c5h70d1c00lrd" path="res://Sprites/Svg/Rhomb.svg" id="1_er23c"]
+[ext_resource type="Script" path="res://Scenes/Buttons/ObjectCollectionWindow/SpriteObjectStoryboardIcon/SpriteObjectStoryboardIcon.cs" id="2_sp0y3"]
 
 [node name="SpriteObjectStoryboardIcon" type="TextureRect"]
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("1_er23c")
 expand_mode = 1
+script = ExtResource("2_sp0y3")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -16,3 +18,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[connection signal="pressed" from="Button" to="." method="OnButton"]

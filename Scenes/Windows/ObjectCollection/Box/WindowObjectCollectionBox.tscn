@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckxr8nepkf1a"]
+
+[ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_kxlfw"]
+[ext_resource type="Script" path="res://Scenes/Windows/ObjectCollection/Box/WindowObjectCollectionBox.cs" id="1_u5ap7"]
+[ext_resource type="PackedScene" uid="uid://drj7ionjx21s8" path="res://Scenes/Buttons/ObjectCollectionWindow/SpriteObjectStoryboardIcon/SpriteObjectStoryboardIcon.tscn" id="2_jwxvj"]
+[ext_resource type="StyleBox" uid="uid://bfkxpgoot7xdw" path="res://Resources/Panels/ButtonWithLabel.tres" id="3_hqu6h"]
+[ext_resource type="LabelSettings" uid="uid://b6hf3k3ma7y6b" path="res://Resources/Label/Space.tres" id="4_e1c8x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hc3co"]
+font_size = 24
+
+[node name="WindowObjectCollectionBox" type="MarginContainer" node_paths=PackedStringArray("ObjectNameLabel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+script = ExtResource("1_u5ap7")
+ObjectNameLabel = NodePath("MainContainer/PanelContainer/MarginContainer/DescriptionContainer/ObjectName")
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_kxlfw")
+
+[node name="IconScrollContainer" type="ScrollContainer" parent="MainContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginContainer/PanelContainer/IconScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="GridContainer" parent="MainContainer/MarginContainer/PanelContainer/IconScrollContainer/MarginContainer"]
+layout_mode = 2
+columns = 5
+
+[node name="SpriteObjectStoryboardIcon" parent="MainContainer/MarginContainer/PanelContainer/IconScrollContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("objectBox") instance=ExtResource("2_jwxvj")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+objectBox = NodePath("../../../../../../..")
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_kxlfw")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="MainContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextButton" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Create"
+label_settings = SubResource("LabelSettings_hc3co")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer/TextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_hqu6h")
+
+[node name="Button" type="Button" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer/TextButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="__Space" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+layout_mode = 2
+label_settings = ExtResource("4_e1c8x")
+
+[node name="ObjectName" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+layout_mode = 2
+text = "OBJECT NAME"
+horizontal_alignment = 1
+
+[node name="Example" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+layout_mode = 2
+text = "Example text"
+horizontal_alignment = 1
+
+[node name="Example_2" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+layout_mode = 2
+text = "About storyboard object"
+horizontal_alignment = 1
+
+[node name="Example_3" type="Label" parent="MainContainer/PanelContainer/MarginContainer/DescriptionContainer"]
+layout_mode = 2
+text = "^.^"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MainContainer/PanelContainer/MarginContainer/DescriptionContainer/TextButton/Button" to="." method="OnButton"]

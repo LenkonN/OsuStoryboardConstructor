@@ -14,11 +14,6 @@ public enum ObjectsTypeList
     Sprite, 
 
     /// <summary>
-    /// Default object with animation
-    /// </summary>
-    AnimationSprite,
-
-    /// <summary>
     /// Particle logic and spawn management system. 
     /// </summary>
     ParticleSystem

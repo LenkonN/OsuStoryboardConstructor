@@ -25,12 +25,10 @@ public partial class DeleteObjectMenuButton : TextureRect
         if (metadata == null)
             return;
 
-        Console.WriteLine(metadata.DataObject.UID);
 
         if (DataObjectOperation.CheckSystemUid(metadata.DataObject.UID))
 			return;
 
-        Console.WriteLine(metadata.DataObject.UID);
 
         TreeItem parentItem = selectedItem.GetParent();
 		DataObjectTreeMetadata metadataParent = parentItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();

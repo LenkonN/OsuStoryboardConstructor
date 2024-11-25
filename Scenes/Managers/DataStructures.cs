@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using static Godot.HttpRequest;
+using System.Text.Json;
 
 public class DataEditor
 {
@@ -17,7 +17,6 @@ public class DataOsu
     public string OsbFilePath { get; set; }
 }
 
-
 public class DataObject
 {
 
@@ -26,6 +25,7 @@ public class DataObject
     public string Description { get; set; }
     public ObjectsTypeList ObjectType { get; set; }
     public List<KeyValuePair<string, DataObject>> Items { get; set; } //Group or storyboard object
+    public object Attributes { get; set; } //Any parameters or data peculiar to unique type objects. 
 
 }
 
@@ -35,6 +35,23 @@ public struct PreParamObject
     public string Description { get; set; }
     public Dictionary<string, PreParamObject> PreParamObjects { get; set; }
     public TreeItem.TreeCellMode Mode { get; set; }
+}
+
+public class DataAttributes
+{
+    public class Group
+    {
+        public bool Collapse { get; set; }
+    }
+
+    public class Sprite
+    {
+        public Vector2 Position { get; set; }
+        public float Rotate { get; set; }
+        public Vector2 Scale { get; set; }
+        public string ImagePath { get; set; }
+    }
+
 }
 
 public static class DataObjectOperation

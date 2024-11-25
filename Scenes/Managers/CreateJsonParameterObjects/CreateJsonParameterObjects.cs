@@ -31,7 +31,6 @@ public partial class CreateJsonParameterObjects : Node
 	private void CreateJsonFile(Dictionary<string, PreParamObject> newObject, ObjectsTypeList fileName)
 	{
         string json = JsonSerializer.Serialize(newObject);
-		Console.WriteLine(fileName);
 
 		using (FileStream fs = File.Create($"{System.Environment.CurrentDirectory}/JsonParamObjects/{fileName}Object.json"))
         {

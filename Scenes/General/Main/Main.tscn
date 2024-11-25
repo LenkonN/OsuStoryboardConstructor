@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfqcvknp83ywv"]
+[gd_scene load_steps=10 format=3 uid="uid://bfqcvknp83ywv"]
 
 [ext_resource type="Script" path="res://Scenes/Managers/Export/ExportManager.cs" id="1_5h1g8"]
 [ext_resource type="Script" path="res://Scenes/General/Main/Main.cs" id="1_x21sc"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://Scenes/Managers/Export/Json/ExportJson.cs" id="2_okmcp"]
 [ext_resource type="Script" path="res://Scenes/Managers/Export/ToEditor/ExportToEditor.cs" id="3_wqti0"]
 [ext_resource type="Script" path="res://Scenes/Managers/Export/ToOsb/ExportToOsb.cs" id="4_c37hb"]
+[ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="7_22h2a"]
+[ext_resource type="PackedScene" uid="uid://08x66r6rkxt8" path="res://Scenes/Managers/SystemMessageManager/SystemMessageLabel.tscn" id="8_ajtpy"]
+[ext_resource type="Script" path="res://Scenes/General/Main/UpdateMessage.cs" id="8_euo33"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_x21sc")
@@ -25,3 +28,11 @@ script = ExtResource("3_wqti0")
 
 [node name="ExportToOsb" type="Node" parent="ExportManager"]
 script = ExtResource("4_c37hb")
+
+[node name="SystemMessageManager" parent="." node_paths=PackedStringArray("_updateMessage") instance=ExtResource("7_22h2a")]
+layer = 3
+_labelMessageScene = ExtResource("8_ajtpy")
+_updateMessage = NodePath("UpdateMessage")
+
+[node name="UpdateMessage" type="Node" parent="SystemMessageManager"]
+script = ExtResource("8_euo33")

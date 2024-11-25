@@ -7,7 +7,19 @@ using System;
 /// </summary>
 public abstract partial class ObjectStoryboard : AnimatedSprite2D
 {
-	protected Vector2 _positionStoryboard;
+	protected Vector2 _positionStoryboard
+	{
+		get
+		{
+			return _position;
+		}
+
+		set
+		{
+			_position = value;
+			this.GlobalPosition = _position;
+		}
+	}
 	protected float _rotateStoryboard 
 	{
 		get 
@@ -16,15 +28,30 @@ public abstract partial class ObjectStoryboard : AnimatedSprite2D
 		}
 		set
 		{
-			this.GlobalRotation = value;
 			_rotate = value;
+            this.GlobalRotation = _rotate;
+        }
+	}
+	protected Vector2 _scaleStoryboard
+	{
+		get
+		{
+			return _scale;
+		}
+
+		set
+		{
+			_scale = value;
+			this.GlobalScale = _scale;
 		}
 	}
-	private float _rotate;
-	protected float _scaleStoryboard;
 	protected ObjectsTypeList _objectType;
 
-	public override void _Ready()
+	private Vector2 _position;
+    private float _rotate;
+	private Vector2 _scale;
+
+    public override void _Ready()
 	{
 
 	}
@@ -32,5 +59,10 @@ public abstract partial class ObjectStoryboard : AnimatedSprite2D
 	public override void _Process(double delta)
 	{
 
+	}
+
+	protected void ChangePosToOsuFormat()
+	{
+		//to-do
 	}
 }
