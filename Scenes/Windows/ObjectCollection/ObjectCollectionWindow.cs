@@ -30,7 +30,7 @@ public partial class ObjectCollectionWindow : Window
 
 	public void OnCreateButton()
 	{
-		Editor.Instance.NewStoryboardObjectManager.OnButtonNewObject(lastSelectedItem);
+		Editor.Instance.StoryboardNodeObjectManager.OnButtonNewObject(lastSelectedItem);
 	}
 
 	private void OnClose()

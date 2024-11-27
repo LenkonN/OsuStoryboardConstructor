@@ -7,13 +7,17 @@ public partial class Editor : Node2D
 {
 	[Export] public AnimationPlayer StoryboardPlayer;
 
-    [Export] private PackedScene _ObjectCollectionWindowScene;
+	[Export] private PackedScene _ObjectCollectionWindowScene;
 
 	[Export] public StoryboardObjectStructureManager StoryboardObjectStructureManager;
-	[Export] public NewStoryboardObjectManager NewStoryboardObjectManager;
+	[Export] public StoryboardNodeObjectManager StoryboardNodeObjectManager;
 	[Export] public CanvasLayer StoryboardCanvasLayer;
+	[Export] public Hud Hud;
 
-    public List<DataObject> StoryboardObjectList = new List<DataObject>();
+	public List<DataObject> StoryboardObjectList = new List<DataObject>();
+	public List<ObjectNodeStoryboard> StoryboardNodeList = new List<ObjectNodeStoryboard>();
+
+	public bool IsFirstLoad { get; private set; } = true;
 
 	public static Editor Instance { get; set; }
 
@@ -25,6 +29,11 @@ public partial class Editor : Node2D
 	public override void _Process(double delta)
 	{
 		
+	}
+
+	public void LockFlagFirstUpdate()
+	{
+		IsFirstLoad = false;
 	}
 
 	public void CreateObjectCollectionWindow()

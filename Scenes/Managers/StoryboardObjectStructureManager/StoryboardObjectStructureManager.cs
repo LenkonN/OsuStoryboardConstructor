@@ -133,6 +133,7 @@ public partial class StoryboardObjectStructureManager : Node
 
     public void AddItem(ulong uid, DataObject dataObject)
     {
+
         DataObject parentData = FindObject(uid, StoryboardStructureData.Storyboard.Group);
 
         if (parentData == null)
@@ -149,9 +150,9 @@ public partial class StoryboardObjectStructureManager : Node
         if (parentData == null)
             return;
 
+
         parentData?.Items.Remove(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
         ProjectChangedEvent?.Invoke();
-
     }
 
     public void MoveItem(DataObject draggedObject, DataObject parentDraggedObject, DataObject parentTargetObject, int targetPosition)

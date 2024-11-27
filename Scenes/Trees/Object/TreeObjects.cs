@@ -120,7 +120,6 @@ public partial class TreeObjects : Tree
 
 	private void AddGroup(DataObject dataObject, TreeItem parent)
 	{
-
 		TreeItem group = CreateItem(parent);
 
         group.SetText((int)TreeObjectCollumn.Text, dataObject.Name);
@@ -139,15 +138,15 @@ public partial class TreeObjects : Tree
 		group.SetEditable((int)TreeObjectCollumn.Text, false);
         group.SetEditable((int)TreeObjectCollumn.Icon, false);
 
-		group.Collapsed = ((DataAttributes.Group)dataObject.Attributes).Collapse;
+		if(dataObject.ObjectType is ObjectsTypeList.Group)
+			group.Collapsed = ((DataAttributes.Group)dataObject.Attributes).Collapse;
 		
 		
 		if (dataObject.Items != null)
 		{
 			foreach (var item in dataObject.Items)
 			{
-				if (item.Value.ObjectType == ObjectsTypeList.Group)
-					AddGroup(item.Value, group);
+				AddGroup(item.Value, group);
 			}
 		}
     }
@@ -183,7 +182,7 @@ public partial class TreeObjects : Tree
 		{
 			TreeItem targetItem = this.GetItemAtPosition(position);
 
-			if (targetItem != null && targetItem != draggedItem)
+            if (targetItem != null && targetItem != draggedItem)
 			{
 				TreeItem parentTargetItem = targetItem.GetParent();
 				TreeItem parentDraggedItem = draggedItem.GetParent();
@@ -194,7 +193,10 @@ public partial class TreeObjects : Tree
 				if (parentTargetItem == _mainRoot || Input.IsActionPressed("SubActive"))
 					parentTargetItem = targetItem;
 
-				TreeItem operationAvailabilityCheck = draggedItem;
+                if (!DataObjectOperation.AvaibleCheck.CheckPossibleOperationInObject(parentTargetItem))
+                    return;
+
+                TreeItem operationAvailabilityCheck = draggedItem;
 				while (operationAvailabilityCheck != null)
 				{
                     int childCount = operationAvailabilityCheck.GetChildCount();

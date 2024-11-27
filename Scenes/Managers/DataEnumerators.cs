@@ -31,3 +31,8 @@ public enum ParamMetadataUse
     Group, Parameter
 }
 
+public enum Vector2Json
+{
+    X, Y
+}
+

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="2_yl61f"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardObjectStructureManager/StoryboardObjectStructureManager.cs" id="3_78dob"]
 [ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="3_y3mhj"]
-[ext_resource type="Script" path="res://Scenes/Managers/NewStoryboardObjectManager/NewStoryboardObjectManager.cs" id="4_b4f6p"]
+[ext_resource type="Script" path="res://Scenes/Managers/StoryboardNodeObjectManager/StoryboardNodeObjectManager.cs" id="4_b4f6p"]
 [ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
 [ext_resource type="Script" path="res://Scenes/StoryboardAnimation/StoryboardAnimation.cs" id="7_vudn0"]
 
@@ -18,23 +18,24 @@ _data = {
 "Storyboard": SubResource("Animation_vxdlv")
 }
 
-[node name="Editor" type="Node2D" node_paths=PackedStringArray("StoryboardPlayer", "StoryboardObjectStructureManager", "NewStoryboardObjectManager", "StoryboardCanvasLayer")]
+[node name="Editor" type="Node2D" node_paths=PackedStringArray("StoryboardPlayer", "StoryboardObjectStructureManager", "StoryboardNodeObjectManager", "StoryboardCanvasLayer", "Hud")]
 script = ExtResource("1_rt8xu")
 StoryboardPlayer = NodePath("StoryboardAnimation")
 _ObjectCollectionWindowScene = ExtResource("2_03cfq")
 StoryboardObjectStructureManager = NodePath("StoryboardObjectStructureManager")
-NewStoryboardObjectManager = NodePath("NewStoryboardObjectManager")
+StoryboardNodeObjectManager = NodePath("StoryboardNodeObjectManager")
 StoryboardCanvasLayer = NodePath("Storyboard")
+Hud = NodePath("Hud")
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
 script = ExtResource("3_78dob")
 
-[node name="NewStoryboardObjectManager" type="Node" parent="." node_paths=PackedStringArray("_spawnPos")]
+[node name="StoryboardNodeObjectManager" type="Node" parent="." node_paths=PackedStringArray("_spawnPos")]
 script = ExtResource("4_b4f6p")
 _spawnPos = NodePath("NewObjectSpawnPos")
 _spriteObjectScene = ExtResource("5_a7q3b")
 
-[node name="NewObjectSpawnPos" type="Marker2D" parent="NewStoryboardObjectManager"]
+[node name="NewObjectSpawnPos" type="Marker2D" parent="StoryboardNodeObjectManager"]
 position = Vector2(657, 432)
 
 [node name="Hud" parent="." instance=ExtResource("1_ly5mv")]

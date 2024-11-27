@@ -89,8 +89,7 @@ public partial class ExportToEditor : Node
         {
             foreach (var item in dataObject.Items)
             {
-                if (item.Value.ObjectType == ObjectsTypeList.Group)
-                    CollectAllObjects(item.Value);
+                CollectAllObjects(item.Value);
             }
         }
     }
@@ -101,6 +100,9 @@ public partial class ExportToEditor : Node
 
 		if (dataObject.ObjectType is ObjectsTypeList.Group)
 		    dataObject.Attributes = jsonAttribute.Deserialize<DataAttributes.Group>();
+
+        if (dataObject.ObjectType is ObjectsTypeList.Sprite)
+            dataObject.Attributes = jsonAttribute.Deserialize<DataAttributes.Sprite>();
 
 		return dataObject;
         

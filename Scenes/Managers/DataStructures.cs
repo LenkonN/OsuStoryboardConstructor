@@ -19,7 +19,6 @@ public class DataOsu
 
 public class DataObject
 {
-
     public ulong UID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
@@ -46,9 +45,9 @@ public class DataAttributes
 
     public class Sprite
     {
-        public Vector2 Position { get; set; }
+        public float[] Position { get; set; } //X;Y
         public float Rotate { get; set; }
-        public Vector2 Scale { get; set; }
+        public float[] Scale { get; set; } //X;Y
         public string ImagePath { get; set; }
     }
 
@@ -82,11 +81,58 @@ public static class DataObjectOperation
 
     public static bool CheckSystemUid(ulong uid)
     {
+
         if (uid <= 4)
             return true;
 
         else 
             return false;
+
+
+    }
+
+    public static class AvaibleCheck
+    {
+        public static bool CheckPossibleOperationInObject(DataObject dataObject)
+        {
+            return CheckPossibleOperationInObjectLogic(dataObject);
+        }
+
+        public static bool CheckPossibleOperationInObject(TreeItem item)
+        {
+            DataObjectTreeMetadata metadata = item.GetMetadata((int)TreeParameterCollumn.Text).As<DataObjectTreeMetadata>();
+            DataObject dataObject = metadata.DataObject;
+            return CheckPossibleOperationInObjectLogic(dataObject);
+        }
+
+        private static bool CheckPossibleOperationInObjectLogic(DataObject dataObject)
+        {
+            if (dataObject.ObjectType is ObjectsTypeList.Group)
+                return true;
+
+            if (dataObject.ObjectType is ObjectsTypeList.Sprite)
+                return false;
+
+            if (dataObject.ObjectType is ObjectsTypeList.ParticleSystem)
+                return false;
+
+            return false;
+        }
+
+        public static bool CheckIsNodeObject(DataObject dataObject)
+        {
+            if (dataObject.ObjectType is ObjectsTypeList.Group)
+                return false;
+
+            if (dataObject.ObjectType is ObjectsTypeList.Sprite)
+                return true;
+
+            if (dataObject.ObjectType is ObjectsTypeList.ParticleSystem)
+                return false;
+
+            return false;
+        }
+
     }
 }
 

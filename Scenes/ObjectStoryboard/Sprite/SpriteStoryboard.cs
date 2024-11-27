@@ -2,9 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class SpriteStoryboard : ObjectStoryboard
+public partial class SpriteStoryboard : ObjectNodeStoryboard
 {
-	private DataObject _dataObject;
 	public override void _Ready()
 	{
 
@@ -15,14 +14,9 @@ public partial class SpriteStoryboard : ObjectStoryboard
 
 	}
 
-	public void LoadDataObject(DataObject dataObject)
-	{
-		_dataObject = dataObject;
-	}
-
 	public DataObject CreateDataObject(Vector2 pos, float rotate, Vector2 scale)
 	{
-		_dataObject = new DataObject()
+		DataObject = new DataObject()
 		{
 			UID = Editor.Instance.StoryboardObjectStructureManager.GenerateUID(),
 			Name = "New sprite",
@@ -31,22 +25,13 @@ public partial class SpriteStoryboard : ObjectStoryboard
 			Items = new List<KeyValuePair<string, DataObject>>(),
 			Attributes = new DataAttributes.Sprite()
 			{
-				Position = pos,
+				Position = new float[2] { pos.X, pos.Y},
 				Rotate = rotate,
-				Scale = scale,
+				Scale = new float[2] { scale.X, scale.Y },
 				ImagePath = ""
 			}
 		};
 
-		return _dataObject;
+        return DataObject;
 	}
-
-	public void SetObjectValues()
-	{
-		Console.WriteLine(((DataAttributes.Sprite)_dataObject.Attributes).Position);
-
-		_positionStoryboard = ((DataAttributes.Sprite)_dataObject.Attributes).Position;
-		_rotateStoryboard = ((DataAttributes.Sprite)_dataObject.Attributes).Rotate;
-        _scaleStoryboard = ((DataAttributes.Sprite)_dataObject.Attributes).Scale;
-    }
 }
