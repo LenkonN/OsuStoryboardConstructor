@@ -81,8 +81,6 @@ public partial class StoryboardNodeObjectManager : Node
         if (!Editor.Instance.IsFirstLoad)
 			return;
 
-		Editor.Instance.LockFlagFirstUpdate();
-
         foreach (DataObject dataLoadObject in Editor.Instance.StoryboardObjectList)
 		{
 			if (dataLoadObject.ObjectType is ObjectsTypeList.Sprite)
@@ -90,7 +88,9 @@ public partial class StoryboardNodeObjectManager : Node
                 CreateNewSprite(true, dataLoadObject);
 			}
 		}
-	}
+
+        Editor.Instance.LockFlagFirstUpdate();
+    }
 
 	public void CreateNewSprite(bool isLoadData, DataObject dataLoadObject = null)
 	{

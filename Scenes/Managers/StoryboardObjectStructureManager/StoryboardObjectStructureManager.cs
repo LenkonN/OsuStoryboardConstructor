@@ -117,12 +117,17 @@ public partial class StoryboardObjectStructureManager : Node
     {
         DataObject dataInStructre = FindObject(dataObject.UID, StoryboardStructureData.Storyboard.Group);
         DataObject newData = null;
-        
+
         if (dataObject.ObjectType is ObjectsTypeList.Group)
         {
             newData = DataChanged.GroupData.ChangeData(dataObject, newValues);
         }
-        
+
+        else if (dataObject.ObjectType is ObjectsTypeList.Sprite)
+        { 
+            newData = DataChanged.SpriteData.ChangeData(dataObject, newValues);
+        }
+
         if (dataInStructre == null || newData == null)
             return;
         
@@ -149,7 +154,6 @@ public partial class StoryboardObjectStructureManager : Node
 
         if (parentData == null)
             return;
-
 
         parentData?.Items.Remove(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
         ProjectChangedEvent?.Invoke();
@@ -185,12 +189,12 @@ public partial class StoryboardObjectStructureManager : Node
             }
 
             else
-                return null;        
+                continue;    
         }
 
         return null;
     }
-    
+
     public DataObject CreateGroup(string nameGroup, string description, List<KeyValuePair<string, DataObject>> items = null, ulong? uidSpecific = null)
     {
         if (items == null)

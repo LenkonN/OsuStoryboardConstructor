@@ -8,7 +8,7 @@ using System;
 public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 {
     public DataObject DataObject {  get; protected set; }
-    protected Vector2 _positionStoryboard
+    public Vector2 PositionStoryboard
 	{
 		get
 		{
@@ -22,7 +22,7 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
             this.GlobalPosition = _position;
 		}
 	}
-	protected float _rotateStoryboard 
+    public float RotateStoryboard 
 	{
 		get 
 		{
@@ -31,11 +31,11 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 		set
 		{
 			_rotate = value;
-			((DataAttributes.Sprite)DataObject.Attributes).Rotate = value;
-            this.GlobalRotation = _rotate;
+			((DataAttributes.Sprite)DataObject.Attributes).Rotate = _rotate;
+            this.GlobalRotation = _rotate * (2 * Mathf.Pi);
         }
 	}
-	protected Vector2 _scaleStoryboard
+    public Vector2 ScaleStoryboard
 	{
 		get
 		{
@@ -68,14 +68,14 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
     {
         DataObject = dataObject;
 
-		_positionStoryboard = new Vector2(
+		PositionStoryboard = new Vector2(
 			((DataAttributes.Sprite)dataObject.Attributes).Position[(int)Vector2Json.X],
 			((DataAttributes.Sprite)dataObject.Attributes).Position[(int)Vector2Json.Y]
 			);
 
-		_rotateStoryboard = ((DataAttributes.Sprite)dataObject.Attributes).Rotate;
+		RotateStoryboard = ((DataAttributes.Sprite)dataObject.Attributes).Rotate;
 
-		_scaleStoryboard = new Vector2(
+		ScaleStoryboard = new Vector2(
             ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.X],
             ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.Y]
             );

@@ -29,6 +29,7 @@ public partial class DeleteObjectMenuButton : TextureRect
         if (DataObjectOperation.CheckSystemUid(metadata.DataObject.UID))
 			return;
 
+		_treeObjects.ReselectAfterDelete(selectedItem);
 
         TreeItem parentItem = selectedItem.GetParent();
 		DataObjectTreeMetadata metadataParent = parentItem.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();

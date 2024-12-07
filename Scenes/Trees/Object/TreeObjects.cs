@@ -30,6 +30,16 @@ public partial class TreeObjects : Tree
 
     }
 
+	public void ReselectAfterDelete(TreeItem targetDeleteItem)
+	{
+		TreeItem prevItem = targetDeleteItem.GetPrev();
+
+		if (prevItem == null)
+			prevItem = targetDeleteItem.GetParent();
+
+		prevItem.Select((int)TreeObjectCollumn.Text);
+	}
+
 	private void OnSelectItem()
 	{
 		TreeItem selectedItem = this.GetSelected();
@@ -60,6 +70,22 @@ public partial class TreeObjects : Tree
 
         Attributes.Collapse = item.Collapsed;
     }
+
+	public void SelectObjectByDataObject(DataObject dataObject)
+	{
+		var allItems = GetAllItems();
+
+		foreach (var item in allItems)
+		{
+			DataObjectTreeMetadata metadata = item.GetMetadata((int)TreeObjectCollumn.Text).As<DataObjectTreeMetadata>();
+
+            if (metadata == null)
+                continue;
+
+			if (dataObject.UID == metadata.DataObject.UID)
+				item.Select((int)TreeObjectCollumn.Text);
+        }
+	}
 
     public void ReselectLastObject()
 	{

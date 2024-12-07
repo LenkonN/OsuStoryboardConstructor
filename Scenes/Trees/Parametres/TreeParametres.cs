@@ -63,6 +63,12 @@ public partial class TreeParametres : Tree
             CreateGroupParameters(dataObject);
         }
 
+        else if (dataObject.ObjectType is ObjectsTypeList.Sprite)
+        {
+            _lastSelectedTitle = ObjectsTypeList.Sprite;
+            CreateSpriteParameters(dataObject);
+        }
+
         else
         {
             _lastSelectedTitle = null;
@@ -108,6 +114,7 @@ public partial class TreeParametres : Tree
 
         var allItems = GetAllItems();
         int index = 0;
+
         foreach (TreeItem item in allItems)
         {
             ParamMetadataUse metadataParamUse = (ParamMetadataUse)item.GetMetadata((int)TreeParameterCollumn.Value).As<int>();
@@ -118,18 +125,85 @@ public partial class TreeParametres : Tree
 
             if (metadata.DataObject.ObjectType is ObjectsTypeList.Group)
             {
-                if (index == 1)
-                    newValues.Add(StaticNamesParam.GroupParam.Name, item.GetText((int)TreeParameterCollumn.Value));
+                if (index == 1) //Name
+                    newValues.Add(StaticNamesParam.Name, item.GetText((int)TreeParameterCollumn.Value));
 
-                if (index == 2)
-                    newValues.Add(StaticNamesParam.GroupParam.Description, item.GetText((int)TreeParameterCollumn.Value));
+                if (index == 2) //Description
+                    newValues.Add(StaticNamesParam.Description, item.GetText((int)TreeParameterCollumn.Value));
+            }
+
+            else if (metadata.DataObject.ObjectType is ObjectsTypeList.Sprite)
+            {
+                if (index == 1) //Name
+                    newValues.Add(StaticNamesParam.Name, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 2) //Description
+                    newValues.Add(StaticNamesParam.Description, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 3) // PositionX
+                    newValues.Add(StaticNamesAttribute.Sprite.PositionX, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 4) // PositionY
+                    newValues.Add(StaticNamesAttribute.Sprite.PositionY, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 5) // Rotate
+                    newValues.Add(StaticNamesAttribute.Sprite.Rotate, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 6) // ScaleX
+                    newValues.Add(StaticNamesAttribute.Sprite.ScaleX, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 7) // ScaleY
+                    newValues.Add(StaticNamesAttribute.Sprite.ScaleY, item.GetText((int)TreeParameterCollumn.Value));
+
+                if (index == 8) //Path
+                    newValues.Add(StaticNamesAttribute.Sprite.ImagePath, item.GetText((int)TreeParameterCollumn.Value));
             }
         }
 
         Editor.Instance.StoryboardObjectStructureManager.UpdateItem(metadata.DataObject, newValues);
     }
 
-    private void CreateGroup(string name, string description, TreeItem parent, DataObject dataObject)
+    public void OnSpriteEditorMove(SpriteStoryboard spriteStoryboard)
+    {
+        TreeItem selectedObject = _treeObjects.GetSelected();
+        DataObjectTreeMetadata metadata = selectedObject.GetMetadata((int)TreeParameterCollumn.Text).As<DataObjectTreeMetadata>();
+
+        var allItems = GetAllItems();
+        int index = 0;
+
+        foreach (TreeItem item in allItems)
+        {
+            ParamMetadataUse metadataParamUse = (ParamMetadataUse)item.GetMetadata((int)TreeParameterCollumn.Value).As<int>();
+            if (metadataParamUse is ParamMetadataUse.Group)
+                continue;
+
+            index++;
+            Console.WriteLine(item.GetText(0));
+
+            if (metadata.DataObject.ObjectType is ObjectsTypeList.Sprite)
+            {
+                if (index == 3) //PositionX
+                    item.SetText((int)TreeParameterCollumn.Value, spriteStoryboard.PositionStoryboard.X.ToString());
+
+                if (index == 4) //PositionY
+                    item.SetText((int)TreeParameterCollumn.Value, spriteStoryboard.PositionStoryboard.Y.ToString());
+
+                if (index == 5) // Rotate
+                    item.SetText((int)TreeParameterCollumn.Value, spriteStoryboard.RotateStoryboard.ToString());
+
+                if (index == 6) // ScaleX
+                    item.SetText((int)TreeParameterCollumn.Value, spriteStoryboard.ScaleStoryboard.X.ToString());
+
+                if (index == 7) // ScaleY
+                    item.SetText((int)TreeParameterCollumn.Value, spriteStoryboard.ScaleStoryboard.Y.ToString());
+
+            }
+        }
+
+        OnItemEdit();
+    }
+
+    private TreeItem CreateGroup(string name, string description, TreeItem parent)
     {
         TreeItem group = CreateItem(parent);
 
@@ -140,6 +214,8 @@ public partial class TreeParametres : Tree
         group.SetEditable((int)TreeParameterCollumn.Value, false);
 
         group.SetMetadata((int)TreeParameterCollumn.Value, (int)ParamMetadataUse.Group);
+
+        return group;
     }
     
     private TreeItem CreateParameter(string name, string description, TreeItem parent, TreeCellMode cellMode)
@@ -148,6 +224,7 @@ public partial class TreeParametres : Tree
 
         item.SetText((int)TreeParameterCollumn.Text, name);
         item.SetTooltipText((int)TreeParameterCollumn.Text, description);
+
 
         item.SetCellMode((int)TreeParameterCollumn.Value, cellMode);
 
@@ -181,11 +258,83 @@ public partial class TreeParametres : Tree
         {
             TreeItem item = CreateParameter(param.Value.Name, param.Value.Description, null, param.Value.Mode);
 
-            if (param.Key == StaticNamesParam.GroupParam.Name)
+            if (param.Key == StaticNamesParam.Name)
                 item.SetText((int)TreeParameterCollumn.Value, dataObject.Name);
 
-            else if (param.Key == StaticNamesParam.GroupParam.Description)
+            else if (param.Key == StaticNamesParam.Description)
                 item.SetText((int)TreeParameterCollumn.Value, dataObject.Description);
+        }
+    }
+
+    private void CreateSpriteParameters(DataObject dataObject)
+    {
+        Dictionary<string, PreParamObject> paramObject = LoadJsonObject(ObjectsTypeList.Sprite);
+
+        foreach (var param in paramObject)
+        {
+            if (param.Key == StaticNamesParam.Name)
+            {
+                TreeItem item = CreateParameter(param.Value.Name, param.Value.Description, null, param.Value.Mode);
+                item.SetText((int)TreeParameterCollumn.Value, dataObject.Name);
+            }
+
+            else if (param.Key == StaticNamesParam.Description)
+            {
+                TreeItem item = CreateParameter(param.Value.Name, param.Value.Description, null, param.Value.Mode);
+                item.SetText((int)TreeParameterCollumn.Value, dataObject.Description);
+            }
+
+            else if (param.Key == StaticNamesAttribute.Sprite.TransformGroup)
+            {
+                TreeItem group = CreateGroup(param.Value.Name, param.Value.Description, null);
+
+                foreach (var paramTransform in param.Value.PreParamObjects)
+                {
+                    if (paramTransform.Key == StaticNamesAttribute.Sprite.PositionX)
+                    {
+                        TreeItem item = CreateParameter(paramTransform.Value.Name, paramTransform.Value.Description, group, paramTransform.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).Position[(int)Vector2Json.X].ToString());
+                    }
+
+                    else if (paramTransform.Key == StaticNamesAttribute.Sprite.PositionY)
+                    {
+                        TreeItem item = CreateParameter(paramTransform.Value.Name, paramTransform.Value.Description, group, paramTransform.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).Position[(int)Vector2Json.Y].ToString());
+                    }
+
+                    else if (paramTransform.Key == StaticNamesAttribute.Sprite.Rotate)
+                    {
+                        TreeItem item = CreateParameter(paramTransform.Value.Name, paramTransform.Value.Description, group, paramTransform.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).Rotate.ToString());
+                    }
+
+                    else if (paramTransform.Key == StaticNamesAttribute.Sprite.ScaleX)
+                    {
+                        TreeItem item = CreateParameter(paramTransform.Value.Name, paramTransform.Value.Description, group, paramTransform.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.X].ToString());
+                    }
+
+                    else if (paramTransform.Key == StaticNamesAttribute.Sprite.ScaleY)
+                    {
+                        TreeItem item = CreateParameter(paramTransform.Value.Name, paramTransform.Value.Description, group, paramTransform.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.Y].ToString());
+                    }
+                }
+            }
+
+            else if (param.Key == StaticNamesAttribute.Sprite.ImageGroup)
+            {
+                TreeItem group = CreateGroup(param.Value.Name, param.Value.Description, null);
+
+                foreach (var paramImage in param.Value.PreParamObjects)
+                {
+                    if (paramImage.Key == StaticNamesAttribute.Sprite.ImagePath)
+                    {
+                        TreeItem item = CreateParameter(paramImage.Value.Name, paramImage.Value.Description, group, paramImage.Value.Mode);
+                        item.SetText((int)TreeParameterCollumn.Value, ((DataAttributes.Sprite)dataObject.Attributes).ImagePath);
+                    }
+                }
+            }
         }
     }
 }

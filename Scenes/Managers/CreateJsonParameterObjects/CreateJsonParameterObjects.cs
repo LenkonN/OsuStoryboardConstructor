@@ -26,6 +26,10 @@ public partial class CreateJsonParameterObjects : Node
 		else if (_needGenerate is _object.group)
 			GenerateGroupObject();
 
+		else if (_needGenerate is _object.srpite)
+			GenerateSpriteObject();
+
+
 	}
 
 	private void CreateJsonFile(Dictionary<string, PreParamObject> newObject, ObjectsTypeList fileName)
@@ -41,10 +45,9 @@ public partial class CreateJsonParameterObjects : Node
 
 	private void GenerateGroupObject()
 	{
-
 		var newObject = new Dictionary<string, PreParamObject>()
 		{
-			["Name"] = new PreParamObject()
+			[StaticNamesParam.Name] = new PreParamObject()
 			{
 				Name = "Name",
 				Description = "Group name",
@@ -52,7 +55,7 @@ public partial class CreateJsonParameterObjects : Node
 				Mode = TreeItem.TreeCellMode.String
 			},
 
-			["Description"] = new PreParamObject()
+			[StaticNamesParam.Description] = new PreParamObject()
             {
                 Name = "Description",
                 Description = "Group description",
@@ -62,6 +65,97 @@ public partial class CreateJsonParameterObjects : Node
         };
 
 		CreateJsonFile(newObject, ObjectsTypeList.Group);
+    }
+
+	private void GenerateSpriteObject()
+	{
+        var newObject = new Dictionary<string, PreParamObject>()
+        {
+            [StaticNamesParam.Name] = new PreParamObject()
+            {
+                Name = StaticNamesParam.Name,
+                Description = "Group name",
+                PreParamObjects = null,
+                Mode = TreeItem.TreeCellMode.String
+            },
+
+            [StaticNamesParam.Description] = new PreParamObject()
+            {
+                Name = StaticNamesParam.Description,
+                Description = "Group description",
+                PreParamObjects = null,
+                Mode = TreeItem.TreeCellMode.String
+            },
+
+            [StaticNamesAttribute.Sprite.TransformGroup] = new PreParamObject()
+            {
+                Name = StaticNamesAttribute.Sprite.TransformGroup,
+                Description = "Transforms the position, scale and rotation of sprite",
+                //Mode = null
+                PreParamObjects = new Dictionary<string, PreParamObject>()
+                {
+                    [StaticNamesAttribute.Sprite.PositionX] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.PositionX,
+                        Description = "X coordinate of sprite position",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    },
+
+                    [StaticNamesAttribute.Sprite.PositionY] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.PositionY,
+                        Description = "Y coordinate of sprite position",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    },
+
+                    [StaticNamesAttribute.Sprite.Rotate] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.Rotate,
+                        Description = "Number of sprite rotations",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    },
+
+                    [StaticNamesAttribute.Sprite.ScaleX] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.ScaleX,
+                        Description = "Scaling of object by X coordinate",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    },
+
+                    [StaticNamesAttribute.Sprite.ScaleY] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.ScaleY,
+                        Description = "Scaling of object by Y coordinate",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    }
+                }
+            },
+
+            [StaticNamesAttribute.Sprite.ImageGroup] = new PreParamObject()
+            {
+                Name = StaticNamesAttribute.Sprite.ImageGroup,
+                Description = "Sprite image settings",
+                //Mode = null
+                PreParamObjects = new Dictionary<string, PreParamObject>()
+                {
+                    [StaticNamesAttribute.Sprite.ImagePath] = new PreParamObject()
+                    {
+                        Name = StaticNamesAttribute.Sprite.ImagePath,
+                        Description = "Path to the image file relative to the project file",
+                        PreParamObjects = null,
+                        Mode = TreeItem.TreeCellMode.String
+                    }
+                }
+            }
+        };
+
+        CreateJsonFile(newObject, ObjectsTypeList.Sprite);
+
     }
 
 	
