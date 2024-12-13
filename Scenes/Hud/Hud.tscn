@@ -39,9 +39,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Up" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContainer/Up"]
 layout_mode = 2
@@ -113,15 +115,18 @@ _visualOffset = -23.0
 [node name="MainContent" type="HBoxContainer" parent="MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="Right" type="HBoxContainer" parent="MainContainer/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Right"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 15
@@ -130,6 +135,7 @@ theme_override_constants/margin_bottom = 35
 [node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Right/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer"]
@@ -149,10 +155,12 @@ script = ExtResource("2_ojtbj")
 [node name="Center" type="VBoxContainer" parent="MainContainer/MainContent"]
 custom_minimum_size = Vector2(896, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Up" type="MarginContainer" parent="MainContainer/MainContent/Center"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
@@ -160,6 +168,7 @@ theme_override_constants/margin_bottom = 15
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainContent/Center/Up"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Time" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
 layout_mode = 2
@@ -184,10 +193,12 @@ theme_override_styles/panel = ExtResource("2_qcj25")
 [node name="Center" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Down" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="__Space" type="Label" parent="MainContainer/MainContent/Center/Down"]
@@ -198,15 +209,18 @@ label_settings = ExtResource("1_y1is0")
 [node name="CollectionButtonPanel" type="PanelContainer" parent="MainContainer/MainContent/Center/Down"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
 [node name="CollectionButton" type="HBoxContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -215,9 +229,11 @@ theme_override_constants/margin_bottom = 10
 [node name="AddButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer" instance=ExtResource("1_5ahyf")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+mouse_filter = 0
 
 [node name="MarginContainer_2" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -226,10 +242,12 @@ theme_override_constants/margin_bottom = 10
 [node name="AddGroupMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_2" node_paths=PackedStringArray("_storyboardTree") instance=ExtResource("10_q3vvp")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+mouse_filter = 0
 _storyboardTree = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
 [node name="MarginContainer_3" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -238,6 +256,7 @@ theme_override_constants/margin_bottom = 10
 [node name="DeleteObjectMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_3" node_paths=PackedStringArray("_treeObjects") instance=ExtResource("11_c6dtl")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+mouse_filter = 0
 _treeObjects = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
 [node name="__Space_2" type="Label" parent="MainContainer/MainContent/Center/Down"]
@@ -248,10 +267,12 @@ label_settings = ExtResource("1_y1is0")
 [node name="Left" type="HBoxContainer" parent="MainContainer/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 15
@@ -260,6 +281,7 @@ theme_override_constants/margin_bottom = 35
 [node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Left/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer"]

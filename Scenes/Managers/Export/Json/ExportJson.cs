@@ -36,10 +36,13 @@ public partial class ExportJson : Node
     {
         string json = JsonSerializer.Serialize(data);
 
-        using (FileStream fs = File.Create(System.Environment.CurrentDirectory + "/Project.json"))
+        Console.WriteLine("---------------");
+        Console.WriteLine("Export: " + json);
+
+        using (FileStream fs = File.Create("Project.json"))
         {
             byte[] info = new UTF8Encoding(true).GetBytes(json);
             fs.Write(info, 0, info.Length);
-        }
+        };
     }
 }

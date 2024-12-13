@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://trgipxvjeumi" path="res://Scenes/Hud/Hud.tscn" id="1_ly5mv"]
 [ext_resource type="Script" path="res://Scenes/General/Editor/Editor.cs" id="1_rt8xu"]
 [ext_resource type="PackedScene" uid="uid://bl3r7v6ja5wx1" path="res://Scenes/Windows/ObjectCollection/ObjectCollectionWindow.tscn" id="2_03cfq"]
-[ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="2_yl61f"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardObjectStructureManager/StoryboardObjectStructureManager.cs" id="3_78dob"]
 [ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="3_y3mhj"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardNodeObjectManager/StoryboardNodeObjectManager.cs" id="4_b4f6p"]
 [ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
 [ext_resource type="Script" path="res://Scenes/StoryboardAnimation/StoryboardAnimation.cs" id="7_vudn0"]
+[ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="9_s3qvu"]
 
 [sub_resource type="Animation" id="Animation_vxdlv"]
 resource_name = "Storyboard"
@@ -24,7 +24,7 @@ StoryboardPlayer = NodePath("StoryboardAnimation")
 _ObjectCollectionWindowScene = ExtResource("2_03cfq")
 StoryboardObjectStructureManager = NodePath("StoryboardObjectStructureManager")
 StoryboardNodeObjectManager = NodePath("StoryboardNodeObjectManager")
-StoryboardCanvasLayer = NodePath("Storyboard")
+StoryboardCanvasLayer = NodePath("Storyboard/SubViewportContainer/SubViewport")
 Hud = NodePath("Hud")
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
@@ -38,15 +38,41 @@ _spriteObjectScene = ExtResource("5_a7q3b")
 [node name="NewObjectSpawnPos" type="Marker2D" parent="StoryboardNodeObjectManager"]
 position = Vector2(657, 432)
 
-[node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
-
 [node name="Storyboard" type="CanvasLayer" parent="."]
+layer = 3
 
-[node name="StoryboardField" parent="Storyboard" instance=ExtResource("2_yl61f")]
-offset_left = -429.0
-offset_top = -221.0
-offset_right = 425.0
-offset_bottom = 259.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Storyboard"]
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -400.0
+offset_right = 640.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Storyboard/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(1280, 800)
+size_2d_override = Vector2i(1280, 800)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Storyboard/SubViewportContainer/SubViewport"]
+anchor_mode = 0
+
+[node name="StoryboardField" parent="Storyboard/SubViewportContainer/SubViewport" instance=ExtResource("9_s3qvu")]
+offset_top = -210.0
+offset_bottom = 270.0
+
+[node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
+layer = 3
 
 [node name="SystemMessage" parent="." instance=ExtResource("3_y3mhj")]
 layer = 5

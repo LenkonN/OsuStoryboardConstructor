@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 /// <summary>
@@ -7,21 +8,23 @@ using System;
 /// </summary>
 public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 {
-    public DataObject DataObject {  get; protected set; }
+    public DataObject DataObject { get; protected set; }
     public Vector2 PositionStoryboard
 	{
 		get
 		{
 			return _position;
-		}
+        }
 
 		set
 		{
-			_position = value;
-			((DataAttributes.Sprite)DataObject.Attributes).Position = new float[2] { value.X, value.Y};
+            _position = value;
+            ((DataAttributes.Sprite)DataObject.Attributes).Position = new float[2] { value.X, value.Y };
             this.GlobalPosition = _position;
-		}
-	}
+
+        }
+    }
+
     public float RotateStoryboard 
 	{
 		get 
@@ -32,7 +35,7 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 		{
 			_rotate = value;
 			((DataAttributes.Sprite)DataObject.Attributes).Rotate = _rotate;
-            this.GlobalRotation = _rotate * (2 * Mathf.Pi);
+            this.Rotation = _rotate * (2 * Mathf.Pi);
         }
 	}
     public Vector2 ScaleStoryboard
@@ -46,7 +49,7 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 		{
 			_scale = value;
 			((DataAttributes.Sprite)DataObject.Attributes).Scale = new float[2] { value.X, value.Y };
-            this.GlobalScale = _scale;
+            this.Scale = _scale;
 		}
 	}
 
@@ -64,7 +67,7 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 
 	}
 
-    public void LoadDataObject(DataObject dataObject)
+    public virtual void LoadDataObject(DataObject dataObject)
     {
         DataObject = dataObject;
 

@@ -178,7 +178,6 @@ public partial class TreeParametres : Tree
                 continue;
 
             index++;
-            Console.WriteLine(item.GetText(0));
 
             if (metadata.DataObject.ObjectType is ObjectsTypeList.Sprite)
             {

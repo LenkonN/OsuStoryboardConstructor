@@ -44,16 +44,18 @@ public partial class ExportToEditor : Node
         Editor.Instance.StoryboardObjectList.Clear();
 
         string jsonPath = "res://Project.json";
-
 		string jsonContent = "";
 
 
-		using (var file = FileAccess.Open(jsonPath, FileAccess.ModeFlags.Read))
-		{
-			jsonContent = file.GetAsText();
+        using (var file = FileAccess.Open(jsonPath, FileAccess.ModeFlags.Read))
+        {
+        	jsonContent = file.GetAsText();
         }
 
-		StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
+        Console.WriteLine("---------------" );
+        Console.WriteLine("Load: " + jsonContent);
+
+        StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
         storyboardData.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
 
 		//Collect all objects in buffer

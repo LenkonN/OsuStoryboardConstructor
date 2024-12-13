@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://v1qj72qthe0p"]
+[gd_scene load_steps=6 format=3 uid="uid://v1qj72qthe0p"]
 
 [ext_resource type="Texture2D" uid="uid://csgscafrup7q" path="res://icon.svg" id="1_yyxea"]
 [ext_resource type="Script" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.cs" id="2_vk7qj"]
+[ext_resource type="StyleBox" uid="uid://cqjitsgs8e6g7" path="res://Resources/NodeObjects/Select/Select.tres" id="3_cr1wm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m78yo"]
 animations = [{
@@ -17,9 +18,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxm46"]
 size = Vector2(129, 129)
 
-[node name="SpriteStoryboard" type="AnimatedSprite2D"]
+[node name="SpriteStoryboard" type="AnimatedSprite2D" node_paths=PackedStringArray("_panel", "_blockTimer")]
 sprite_frames = SubResource("SpriteFrames_m78yo")
 script = ExtResource("2_vk7qj")
+_panel = NodePath("Panel")
+_blockTimer = NodePath("MoveBlockTimer")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -27,6 +30,20 @@ script = ExtResource("2_vk7qj")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dxm46")
 
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_cr1wm")
+
+[node name="MoveBlockTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="input_event" from="Area2D" to="." method="OnSelected"]
-[connection signal="mouse_entered" from="Area2D" to="." method="OnMouseEntered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="OnMouseExit"]
+[connection signal="mouse_shape_entered" from="Area2D" to="." method="OnMouseEntered"]
+[connection signal="mouse_shape_exited" from="Area2D" to="." method="OnMouseExited"]
+[connection signal="timeout" from="MoveBlockTimer" to="." method="MoveBlockTimeout"]

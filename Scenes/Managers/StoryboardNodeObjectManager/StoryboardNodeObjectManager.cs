@@ -6,7 +6,8 @@ using System.Runtime.InteropServices.ComTypes;
 
 public partial class StoryboardNodeObjectManager : Node
 {
-	//public event Action<DataObject> UpdateDataNodeEvent;
+	public event Action<ObjectNodeStoryboard> SelectNodeObjectEvent;
+	public ObjectNodeStoryboard LastSelectedObjectNode;
 
 	[Export] private Marker2D _spawnPos;
 	[Export] private PackedScene _spriteObjectScene;
@@ -25,6 +26,14 @@ public partial class StoryboardNodeObjectManager : Node
 	{
 
 	}
+
+	public void OnSelectObject(ObjectNodeStoryboard objectNode)
+	{
+		SelectNodeObjectEvent?.Invoke(objectNode);
+		LastSelectedObjectNode = objectNode;
+        Editor.Instance.Hud.TreeObjects.SelectObjectByDataObject(objectNode.DataObject);
+
+    }
 
 	public void UpdateAllDataObjects()
 	{

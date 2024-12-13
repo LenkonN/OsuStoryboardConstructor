@@ -6,14 +6,22 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 {
 	private bool _mouseHover;
 	private bool _isDrag;
+	private bool _isSelected;
+
+	private bool _isMoveBlock;
+
+	[Export] private Panel _panel;
+	[Export] private Timer _blockTimer;
 
 	public override void _Ready()
 	{
 		GetViewport().PhysicsObjectPickingSort = true;
         GetViewport().PhysicsObjectPickingFirstOnly = true;
+        Editor.Instance.StoryboardNodeObjectManager.SelectNodeObjectEvent += OnAnySelectObject;
+		
     }
 
-	public override void _Process(double delta)
+    public override void _Process(double delta)
 	{
 		OnDrag();
 		OnDrop();
@@ -40,18 +48,42 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
         return DataObject;
 	}
 
-	private void OnSelected(Node viewport, InputEvent inputEvent, int shapeIdx)
+	private void OnAnySelectObject(ObjectNodeStoryboard objectNode)
 	{
-		if (inputEvent.IsActionPressed("Select"))
-		{
-			Editor.Instance.Hud.TreeObjects.SelectObjectByDataObject(DataObject);
-		}
+		if (objectNode != this)
+			_isSelected = false;
 
+		HighlightBorderToggle();
+	}
+
+	private void HighlightBorderToggle()
+	{
+		if (_isSelected)
+			_panel.Visible = true;
+
+		else if (!_isSelected)
+			_panel.Visible = false;
+    }
+
+    private void OnSelected(Viewport viewport, InputEvent inputEvent, int shapeIdx)
+	{
+        if (inputEvent.IsActionPressed("Select"))
+		{
+			_isSelected = true;
+            BlockMove();
+            Editor.Instance.StoryboardNodeObjectManager.OnSelectObject(this);
+		}
+    }
+
+	private void BlockMove()
+	{
+        _isMoveBlock = true;
+		_blockTimer.Start();
     }
 
 	private void OnDrag()
 	{
-        if (Input.IsActionPressed("Select") && _mouseHover)
+        if (Input.IsActionPressed("Select") && _mouseHover && _isSelected && !_isMoveBlock)
         {
             this.GlobalPosition = GetGlobalMousePosition();
 			_isDrag = true;
@@ -60,21 +92,26 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 
 	private void OnDrop()
 	{
-		if (Input.IsActionJustReleased("Select") && _isDrag)
+        if (Input.IsActionJustReleased("Select") && _isDrag)
 		{
-			_isDrag = false;
-			this.PositionStoryboard = GetGlobalMousePosition();
+            _isDrag = false;
+			this.PositionStoryboard = this.GlobalPosition;
 			Editor.Instance.Hud.TreeParametres.OnSpriteEditorMove(this);
         }
 	}
 
-	private void OnMouseExit()
+	private void OnMouseExited(int idx)
 	{
 		_mouseHover = false;
-	}
+    }
 
-	private void OnMouseEntered()
+	private void OnMouseEntered(int idx)
 	{
 		_mouseHover = true;
+    }
+
+	private void MoveBlockTimeout()
+	{
+		_isMoveBlock = false;
 	}
 }

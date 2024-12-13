@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfqcvknp83ywv"]
+[gd_scene load_steps=11 format=3 uid="uid://bfqcvknp83ywv"]
 
 [ext_resource type="Script" path="res://Scenes/Managers/Export/ExportManager.cs" id="1_5h1g8"]
 [ext_resource type="Script" path="res://Scenes/General/Main/Main.cs" id="1_x21sc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="7_22h2a"]
 [ext_resource type="PackedScene" uid="uid://08x66r6rkxt8" path="res://Scenes/Managers/SystemMessageManager/SystemMessageLabel.tscn" id="8_ajtpy"]
 [ext_resource type="Script" path="res://Scenes/General/Main/UpdateMessage.cs" id="8_euo33"]
+[ext_resource type="Script" path="res://Scenes/Display/Display.cs" id="10_wcyde"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_x21sc")
@@ -36,3 +37,6 @@ _updateMessage = NodePath("UpdateMessage")
 
 [node name="UpdateMessage" type="Node" parent="SystemMessageManager"]
 script = ExtResource("8_euo33")
+
+[node name="Display" type="Node" parent="."]
+script = ExtResource("10_wcyde")

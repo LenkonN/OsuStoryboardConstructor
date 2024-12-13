@@ -11,7 +11,7 @@ public partial class Editor : Node2D
 
 	[Export] public StoryboardObjectStructureManager StoryboardObjectStructureManager;
 	[Export] public StoryboardNodeObjectManager StoryboardNodeObjectManager;
-	[Export] public CanvasLayer StoryboardCanvasLayer;
+	[Export] public Node StoryboardCanvasLayer;
 	[Export] public Hud Hud;
 
 	public List<DataObject> StoryboardObjectList = new List<DataObject>();
