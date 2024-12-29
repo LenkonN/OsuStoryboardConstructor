@@ -61,9 +61,14 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 
 	private void OnAnySelectObject(ObjectNodeStoryboard objectNode)
 	{
-        if (objectNode != this)
+		if (objectNode != this)
 		{
 			_isSelected = false;
+		}
+
+		else
+		{
+			_isSelected = true;
 		}
 
 		HighlightBorderToggle();

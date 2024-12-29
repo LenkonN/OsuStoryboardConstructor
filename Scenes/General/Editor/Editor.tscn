@@ -79,6 +79,7 @@ anchor_mode = 0
 [node name="StoryboardField" parent="Storyboard/SubViewportContainer/SubViewport" instance=ExtResource("9_s3qvu")]
 offset_top = -210.0
 offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
 
 [node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
 layer = 3

@@ -53,6 +53,11 @@ public partial class Environment : Node
     /// </summary>
     public string FolderJsonParamObjectPath { get; set; }
 
+    /// <summary>
+    /// Full path to the Image Library folder;
+    /// </summary>
+    public string FolderImageLibrary { get; set; }
+
 
 
 	public override void _Ready()
@@ -82,6 +87,7 @@ public partial class Environment : Node
         FileOsuName = null; //test value
         FileOsuName = null; //test value
 
-        FolderJsonParamObjectPath = $"{System.Environment.CurrentDirectory}/JsonParamObject";
+        FolderJsonParamObjectPath = $"{System.Environment.CurrentDirectory}/ProgramData/JsonParamObjects";
+        FolderImageLibrary = $"{System.Environment.CurrentDirectory}/ProgramData/ImageLibrary";
     }
 }

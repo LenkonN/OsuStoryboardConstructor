@@ -8,6 +8,9 @@ using System;
 /// </summary>
 public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 {
+	[Export] private CollisionShape2D _collision;
+	[Export] private Panel _panelBorder;
+
     public DataObject DataObject { get; protected set; }
     public Vector2 PositionStoryboard
 	{
@@ -53,6 +56,8 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
 		}
 	}
 
+	public string ImagePath { get; set; }
+	
 	private Vector2 _position;
     private float _rotate;
 	private Vector2 _scale;
@@ -82,7 +87,48 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
             ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.X],
             ((DataAttributes.Sprite)dataObject.Attributes).Scale[(int)Vector2Json.Y]
             );
+
+		ImagePath = ((DataAttributes.Sprite)dataObject.Attributes).ImagePath;
+
+		LoadImage();
     }
+
+	private void LoadImage()
+	{
+		if (this.SpriteFrames.GetFrameCount("Based") != 0)
+		{
+			for (int i = 0; i < this.SpriteFrames.GetFrameCount("Based"); i++)
+			{
+				this.SpriteFrames.RemoveFrame("Based", i);
+			}
+		}
+
+		Image image = new Image();
+		Error error;
+
+		if (FileAccess.FileExists(ImagePath))
+		{
+			error = image.Load(ImagePath);
+		}
+
+		else
+		{
+			error = image.Load($"{Environment.Instance.FolderImageLibrary}/Program/Not_found.png");
+		}
+
+		if (error == Error.Ok)
+		{
+			ImageTexture texture = ImageTexture.CreateFromImage(image);
+			this.SpriteFrames.AddFrame("Based", texture);
+			Vector2 imageSize = new Vector2(image.GetSize().X, image.GetSize().Y);
+
+            RectangleShape2D rectangleShape = _collision.Shape as RectangleShape2D;
+			rectangleShape.Size = imageSize;
+
+			_panelBorder.Size = imageSize;
+			_panelBorder.Position = -(imageSize / 2);
+        }
+	}
 
 	public virtual void QueueFreeObject()
 	{

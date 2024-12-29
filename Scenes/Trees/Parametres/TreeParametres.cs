@@ -74,6 +74,8 @@ public partial class TreeParametres : Tree
             _lastSelectedTitle = null;
         }
 
+
+
     }
 
     private void ClearTree()
@@ -237,7 +239,7 @@ public partial class TreeParametres : Tree
     {
         string jsonContent = "";
 
-        using (var file = FileAccess.Open($"res://JsonParamObjects/{typeObject.ToString()}Object.json", FileAccess.ModeFlags.Read))
+        using (var file = FileAccess.Open($"{Environment.Instance.FolderJsonParamObjectPath}/{typeObject.ToString()}Object.json", FileAccess.ModeFlags.Read))
         {
             jsonContent = file.GetAsText();
         };

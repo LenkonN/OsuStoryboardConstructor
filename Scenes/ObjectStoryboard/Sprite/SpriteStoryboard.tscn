@@ -11,31 +11,38 @@ animations = [{
 "texture": ExtResource("1_yyxea")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Based",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxm46"]
-size = Vector2(129, 129)
+size = Vector2(128, 128)
 
-[node name="SpriteStoryboard" type="AnimatedSprite2D" node_paths=PackedStringArray("_panel", "_blockTimer")]
+[node name="SpriteStoryboard" type="AnimatedSprite2D" node_paths=PackedStringArray("_panel", "_blockTimer", "_collision", "_panelBorder")]
 sprite_frames = SubResource("SpriteFrames_m78yo")
+animation = &"Based"
 script = ExtResource("2_vk7qj")
 _panel = NodePath("Panel")
 _blockTimer = NodePath("SelectBlockTimer")
+_collision = NodePath("Area2D/CollisionShape2D")
+_panelBorder = NodePath("Panel")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dxm46")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("3_cr1wm")
 
