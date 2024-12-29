@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://trgipxvjeumi"]
+[gd_scene load_steps=18 format=3 uid="uid://trgipxvjeumi"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
 [ext_resource type="Script" path="res://Scenes/Hud/Hud.cs" id="1_pv4ps"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/VisualLine.cs" id="4_qdryq"]
 [ext_resource type="StyleBox" uid="uid://dln2s10dtlqk2" path="res://Resources/TimelinePoint/TimeLinePointtres.tres" id="5_vci5s"]
 [ext_resource type="Script" path="res://Scenes/Hud/Timeline/TimelinePoint.cs" id="6_6kii8"]
+[ext_resource type="PackedScene" uid="uid://8yh0uuhaq3t" path="res://Scenes/Buttons/Editor/ControlChangeButton/ControlChangeButton.tscn" id="9_qspof"]
 [ext_resource type="PackedScene" uid="uid://cg8m3laghnwcu" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.tscn" id="10_q3vvp"]
 [ext_resource type="PackedScene" uid="uid://cigvdoitm7abh" path="res://Scenes/Buttons/Editor/DeleteObjectMenuButton/DeleteObjectMenuButton.tscn" id="11_c6dtl"]
 [ext_resource type="Script" path="res://Scenes/Trees/Parametres/TreeParametres.cs" id="11_vyvvu"]
@@ -185,10 +186,26 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(124, 0)
 layout_mode = 2
 
-[node name="Button" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+[node name="Buttons" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_qcj25")
+
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="Move" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+layout_mode = 2
+_buttonType = 1
+
+[node name="Rotate" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+layout_mode = 2
+_buttonType = 2
+
+[node name="Scale" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+layout_mode = 2
+_buttonType = 3
 
 [node name="Center" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
 layout_mode = 2

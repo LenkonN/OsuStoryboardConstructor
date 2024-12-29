@@ -22,7 +22,7 @@ size = Vector2(129, 129)
 sprite_frames = SubResource("SpriteFrames_m78yo")
 script = ExtResource("2_vk7qj")
 _panel = NodePath("Panel")
-_blockTimer = NodePath("MoveBlockTimer")
+_blockTimer = NodePath("SelectBlockTimer")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -39,11 +39,11 @@ offset_bottom = 64.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("3_cr1wm")
 
-[node name="MoveBlockTimer" type="Timer" parent="."]
+[node name="SelectBlockTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
 [connection signal="input_event" from="Area2D" to="." method="OnSelected"]
 [connection signal="mouse_shape_entered" from="Area2D" to="." method="OnMouseEntered"]
 [connection signal="mouse_shape_exited" from="Area2D" to="." method="OnMouseExited"]
-[connection signal="timeout" from="MoveBlockTimer" to="." method="MoveBlockTimeout"]
+[connection signal="timeout" from="SelectBlockTimer" to="." method="SelectBlockTimeout"]

@@ -36,9 +36,6 @@ public partial class ExportJson : Node
     {
         string json = JsonSerializer.Serialize(data);
 
-        Console.WriteLine("---------------");
-        Console.WriteLine("Export: " + json);
-
         using (FileStream fs = File.Create("Project.json"))
         {
             byte[] info = new UTF8Encoding(true).GetBytes(json);

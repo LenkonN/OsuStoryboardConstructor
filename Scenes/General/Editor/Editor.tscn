@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6hp4qpan4qm3"]
+[gd_scene load_steps=13 format=3 uid="uid://c6hp4qpan4qm3"]
 
 [ext_resource type="PackedScene" uid="uid://trgipxvjeumi" path="res://Scenes/Hud/Hud.tscn" id="1_ly5mv"]
 [ext_resource type="Script" path="res://Scenes/General/Editor/Editor.cs" id="1_rt8xu"]
 [ext_resource type="PackedScene" uid="uid://bl3r7v6ja5wx1" path="res://Scenes/Windows/ObjectCollection/ObjectCollectionWindow.tscn" id="2_03cfq"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardObjectStructureManager/StoryboardObjectStructureManager.cs" id="3_78dob"]
+[ext_resource type="Script" path="res://Scenes/Managers/UserControlManager/UserControlManager.cs" id="3_vlayq"]
 [ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="3_y3mhj"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardNodeObjectManager/StoryboardNodeObjectManager.cs" id="4_b4f6p"]
 [ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
@@ -26,6 +27,10 @@ StoryboardObjectStructureManager = NodePath("StoryboardObjectStructureManager")
 StoryboardNodeObjectManager = NodePath("StoryboardNodeObjectManager")
 StoryboardCanvasLayer = NodePath("Storyboard/SubViewportContainer/SubViewport")
 Hud = NodePath("Hud")
+
+[node name="UserControlManager" type="Node" parent="."]
+script = ExtResource("3_vlayq")
+RotateSensivity = 0.001
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
 script = ExtResource("3_78dob")

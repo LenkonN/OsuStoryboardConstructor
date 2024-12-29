@@ -163,7 +163,7 @@ public partial class TreeParametres : Tree
         Editor.Instance.StoryboardObjectStructureManager.UpdateItem(metadata.DataObject, newValues);
     }
 
-    public void OnSpriteEditorMove(SpriteStoryboard spriteStoryboard)
+    public void OnSpriteEditorInteraction(SpriteStoryboard spriteStoryboard)
     {
         TreeItem selectedObject = _treeObjects.GetSelected();
         DataObjectTreeMetadata metadata = selectedObject.GetMetadata((int)TreeParameterCollumn.Text).As<DataObjectTreeMetadata>();

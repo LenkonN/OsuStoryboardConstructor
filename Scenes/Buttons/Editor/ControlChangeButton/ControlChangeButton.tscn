@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://8yh0uuhaq3t"]
+
+[ext_resource type="Texture2D" uid="uid://c5h70d1c00lrd" path="res://Sprites/Svg/Rhomb.svg" id="1_npehl"]
+[ext_resource type="Script" path="res://Scenes/Buttons/Editor/ControlChangeButton/ControlChangeButton.cs" id="2_mqq27"]
+
+[sub_resource type="Animation" id="Animation_rq562"]
+resource_name = "False"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jqbp3"]
+resource_name = "True"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grjw3"]
+_data = {
+"False": SubResource("Animation_rq562"),
+"True": SubResource("Animation_jqbp3")
+}
+
+[node name="ControlChangeButton" type="TextureRect" node_paths=PackedStringArray("_animation", "_button")]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("1_npehl")
+expand_mode = 1
+script = ExtResource("2_mqq27")
+_animation = NodePath("AnimationPlayer")
+_button = NodePath("Button")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_grjw3")
+}
+autoplay = "False"
+
+[connection signal="pressed" from="Button" to="." method="OnButton"]

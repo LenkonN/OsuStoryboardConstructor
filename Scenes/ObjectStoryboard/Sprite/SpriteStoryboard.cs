@@ -4,11 +4,17 @@ using System.Collections.Generic;
 
 public partial class SpriteStoryboard : ObjectNodeStoryboard
 {
-	private bool _mouseHover;
+	private bool _isMouseHover;
 	private bool _isDrag;
 	private bool _isSelected;
+	private bool _isSelectBlock;
 
-	private bool _isMoveBlock;
+	private UserControl? _buffUserControl = null;
+	private Vector2 _startInteractionPoint;
+
+	private Vector2 _buffOldPosition;
+	private float _buffOldRotation;
+	private Vector2 _buffOldScale;
 
 	[Export] private Panel _panel;
 	[Export] private Timer _blockTimer;
@@ -18,6 +24,7 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 		GetViewport().PhysicsObjectPickingSort = true;
         GetViewport().PhysicsObjectPickingFirstOnly = true;
         Editor.Instance.StoryboardNodeObjectManager.SelectNodeObjectEvent += OnAnySelectObject;
+		UserControlManager.Instance.UserControlChangeEvent += OnDrop;
 		
     }
 
@@ -77,41 +84,72 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 
 	private void BlockMove()
 	{
-        _isMoveBlock = true;
+        _isSelectBlock = true;
 		_blockTimer.Start();
     }
 
 	private void OnDrag()
 	{
-        if (Input.IsActionPressed("Select") && _mouseHover && _isSelected && !_isMoveBlock)
-        {
-            this.GlobalPosition = GetGlobalMousePosition();
-			_isDrag = true;
+		if (Input.IsActionPressed("Select") && _isSelected && !_isSelectBlock )
+		{
+
+			if (!_isDrag)
+			{
+				_startInteractionPoint = GetGlobalMousePosition();
+
+                _buffOldPosition = this.PositionStoryboard;
+                _buffOldRotation = this.RotateStoryboard;
+				_buffOldScale = this.ScaleStoryboard;
+            }
+
+
+
+            _isDrag = true;
+            _buffUserControl = UserControlManager.Instance.UserControl;
+
+			if (UserControlManager.Instance.UserControl is UserControl.Move && _isMouseHover)
+			{
+				this.PositionStoryboard = GetGlobalMousePosition();
+			}
+
+			else if (UserControlManager.Instance.UserControl is UserControl.Rotate)
+			{
+				Vector2 different = _startInteractionPoint - GetGlobalMousePosition();
+				float differentInt = different.X + different.Y;
+				this.RotateStoryboard = differentInt * UserControlManager.Instance.RotateSensivity + _buffOldRotation;
+			}
+
+			else if (UserControlManager.Instance.UserControl is UserControl.Scale)
+			{
+                Vector2 different = _startInteractionPoint - GetGlobalMousePosition();
+				this.ScaleStoryboard = different * UserControlManager.Instance.ScaleSensivity + _buffOldScale;	
+            }
         }
     }
 
-	private void OnDrop()
+	private void OnDrop(UserControl userControl = UserControl.None)
 	{
-        if (Input.IsActionJustReleased("Select") && _isDrag)
+		if (Input.IsActionJustReleased("Select") && _isDrag)
 		{
+            Editor.Instance.Hud.TreeParametres.OnSpriteEditorInteraction(this);
             _isDrag = false;
-			this.PositionStoryboard = this.GlobalPosition;
-			Editor.Instance.Hud.TreeParametres.OnSpriteEditorMove(this);
+           _buffUserControl = null;
         }
+			
 	}
 
 	private void OnMouseExited(int idx)
 	{
-		_mouseHover = false;
+		_isMouseHover = false;
     }
 
 	private void OnMouseEntered(int idx)
 	{
-		_mouseHover = true;
+		_isMouseHover = true;
     }
 
-	private void MoveBlockTimeout()
+	private void SelectBlockTimeout()
 	{
-		_isMoveBlock = false;
+		_isSelectBlock = false;
 	}
 }

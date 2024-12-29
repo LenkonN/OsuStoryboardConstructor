@@ -52,9 +52,6 @@ public partial class ExportToEditor : Node
         	jsonContent = file.GetAsText();
         }
 
-        Console.WriteLine("---------------" );
-        Console.WriteLine("Load: " + jsonContent);
-
         StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
         storyboardData.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
 

@@ -6,6 +6,11 @@ public enum LayerList
     Background, Fail, Pass, Foreground, Overlay
 }
 
+public enum UserControl
+{
+    None, Move, Rotate, Scale
+}
+
 public enum TreeObjectCollumn
 {
     Text, Icon
