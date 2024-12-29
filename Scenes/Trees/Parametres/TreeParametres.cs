@@ -198,8 +198,6 @@ public partial class TreeParametres : Tree
 
             }
         }
-
-        OnItemEdit();
     }
 
     private TreeItem CreateGroup(string name, string description, TreeItem parent)

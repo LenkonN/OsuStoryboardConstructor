@@ -13,8 +13,9 @@ public class DataEditor
 
 public class DataOsu
 {
-    public string OsuFilePath { get; set; }
-    public string OsbFilePath { get; set; }
+    public string MappsetPath { get; set; }
+    public string OsuFileName { get; set; }
+    public string OsbFileName { get; set; }
 }
 
 public class DataObject

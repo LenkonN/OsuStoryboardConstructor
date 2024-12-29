@@ -17,7 +17,7 @@ public partial class Display : Node
 
 	public override void _Process(double delta)
 	{
-		CalculateScaleWindow();
+		//CalculateScaleWindow();
 	}
 
     private void CalculateScaleWindow()

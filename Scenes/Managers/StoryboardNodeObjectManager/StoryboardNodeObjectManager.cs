@@ -50,6 +50,17 @@ public partial class StoryboardNodeObjectManager : Node
 		DeleteUnusedNodeObject();
 	}
 
+	public ObjectNodeStoryboard FindNodeObjectByMetadata(DataObjectTreeMetadata metadata)
+	{
+		foreach (ObjectNodeStoryboard objectNode in Editor.Instance.StoryboardNodeList)
+		{
+			if(objectNode.DataObject == metadata.DataObject)
+				return objectNode;
+		}
+
+		return null;
+	}
+
 	private void DeleteUnusedNodeObject()
 	{
 		for (int i = Editor.Instance.StoryboardNodeList.Count - 1; i >= 0; i--)
@@ -57,7 +68,7 @@ public partial class StoryboardNodeObjectManager : Node
 			if (!_existOldNodeList.Contains(Editor.Instance.StoryboardNodeList[i]))
 			{
 				ObjectNodeStoryboard nodeToDeleteReq = Editor.Instance.StoryboardNodeList[i];
-                nodeToDeleteReq.QueueFree();
+				nodeToDeleteReq.QueueFreeObject();
                 Editor.Instance.StoryboardNodeList.Remove(nodeToDeleteReq);
             }
 		}

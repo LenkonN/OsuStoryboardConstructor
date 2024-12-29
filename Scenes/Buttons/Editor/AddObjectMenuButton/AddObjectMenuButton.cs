@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Menu button in editor. Open window with all storyboard objects to be create.
+/// </summary>
 public partial class AddObjectMenuButton : TextureRect
 {
 
@@ -14,7 +17,10 @@ public partial class AddObjectMenuButton : TextureRect
 
 	}
 
-	private void OnClick()
+    /// <summary>
+    /// Event on click button. Called open window.
+    /// </summary>
+    private void OnClick()
 	{
 		Editor.Instance.CreateObjectCollectionWindow();
 	}

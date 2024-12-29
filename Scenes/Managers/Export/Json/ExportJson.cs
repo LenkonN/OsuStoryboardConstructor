@@ -36,7 +36,12 @@ public partial class ExportJson : Node
     {
         string json = JsonSerializer.Serialize(data);
 
-        using (FileStream fs = File.Create("Project.json"))
+        if (!Directory.Exists($"{Environment.Instance.FolderProjectFullPath}"))
+        {
+            Directory.CreateDirectory(Environment.Instance.FolderProjectFullPath);
+        }
+
+        using (FileStream fs = File.Create($"{Environment.Instance.FolderProjectFullPath}/{Environment.Instance.FileDataProjectName}"))
         {
             byte[] info = new UTF8Encoding(true).GetBytes(json);
             fs.Write(info, 0, info.Length);

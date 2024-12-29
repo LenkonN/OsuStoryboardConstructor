@@ -23,9 +23,13 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 	{
 		GetViewport().PhysicsObjectPickingSort = true;
         GetViewport().PhysicsObjectPickingFirstOnly = true;
+
         Editor.Instance.StoryboardNodeObjectManager.SelectNodeObjectEvent += OnAnySelectObject;
-		UserControlManager.Instance.UserControlChangeEvent += OnDrop;
-		
+		Editor.Instance.Hud.TreeObjects.SelectedItemEvent += OnAnySelectObject;
+
+        UserControlManager.Instance.UserControlChangeEvent += OnDrop;
+
+
     }
 
     public override void _Process(double delta)
@@ -57,13 +61,22 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 
 	private void OnAnySelectObject(ObjectNodeStoryboard objectNode)
 	{
-		if (objectNode != this)
+        if (objectNode != this)
+		{
 			_isSelected = false;
+		}
 
 		HighlightBorderToggle();
 	}
 
-	private void HighlightBorderToggle()
+	private void OnAnySelectObject(DataObjectTreeMetadata metadata)
+	{
+        ObjectNodeStoryboard objectNode = Editor.Instance.StoryboardNodeObjectManager.FindNodeObjectByMetadata(metadata);
+		OnAnySelectObject(objectNode);
+    }
+
+
+    private void HighlightBorderToggle()
 	{
 		if (_isSelected)
 			_panel.Visible = true;
@@ -138,7 +151,15 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 			
 	}
 
-	private void OnMouseExited(int idx)
+    public override void QueueFreeObject()
+    {
+        Editor.Instance.StoryboardNodeObjectManager.SelectNodeObjectEvent -= OnAnySelectObject;
+        Editor.Instance.Hud.TreeObjects.SelectedItemEvent -= OnAnySelectObject;
+        UserControlManager.Instance.UserControlChangeEvent -= OnDrop;
+
+        base.QueueFreeObject();
+    }
+    private void OnMouseExited(int idx)
 	{
 		_isMouseHover = false;
     }

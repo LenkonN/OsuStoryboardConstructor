@@ -13,16 +13,10 @@ public partial class StoryboardObjectStructureManager : Node
 {
     [Export] private bool _createProjectEditorDebug;
 
-    public event Action ProjectChangedEvent;
-
-    public StoryboardData StoryboardStructureData = new StoryboardData();
-
     public override void _Ready()
     {
-        ProjectChangedEvent += RequestReloadProject;
-
         if (_createProjectEditorDebug)
-            CreateProject();
+            ProjectBuilder.Instance.CreateProject("DevProject", "MapsetPath");
     }
 
     public override void _Process(double delta)
@@ -31,91 +25,13 @@ public partial class StoryboardObjectStructureManager : Node
     }
 
     /// <summary>
-    /// Called every time the object state changes, except for graphical elements (e.g. collapsed item). 
-    /// Graphical elements do not trigger project update, i.e. they will be saved only if someone else triggers this event
+    /// Changes the object data.
     /// </summary>
-    public void RequestReloadProject()
-    {
-        ExportManager.Instance.Json.CreateJsonFile(StoryboardStructureData);
-    }
-
-    public void CreateProject()
-    {
-        StoryboardStructureData.Project = new StoryboardDataProject()
-        {
-            Editor = new DataEditor
-            {
-                NameProject = "Test", //test value
-                BPM = 120, //test value
-                Offset = -63, //test value
-                ProjectPath = System.Environment.CurrentDirectory
-
-            },
-
-            Osu = new DataOsu
-            {
-                OsuFilePath = "aboba/meow.osu", //test value
-                OsbFilePath = "aboba/wow.osb" //test value
-            }
-        };
-
-        StoryboardStructureData.Storyboard = new StoryboardDataSb()
-        {
-            Group = CreateSystemLayers()
-        };
-
-        ProjectChangedEvent?.Invoke();
-    }
-
-    public List<KeyValuePair<string, DataObject>> CreateSystemLayers()
-    {
-        var group = new List<KeyValuePair<string, DataObject>>();
-
-        for (int i = 0; i <= 4; i++)
-        {
-            DataObject data = new DataObject();
-            LayerList name = LayerList.Background;
-
-            if (i == 0)
-            {
-
-                data = CreateGroup("Background", "Back layer of the Storyboard", uidSpecific: 0);
-                name = LayerList.Background;
-            }
-
-            if (i == 1)
-            {
-                data = CreateGroup("Fail", "Only shown if player missed", uidSpecific: 1);
-                name = LayerList.Fail;
-            }
-
-            if (i == 2)
-            {
-                data = CreateGroup("Pass", "Only shown if player not missed", uidSpecific:2);
-                name = LayerList.Pass;
-            }
-
-            if (i == 3)
-            {
-                data = CreateGroup("Foreground", "Front layer of the Storyboard", uidSpecific: 3);
-                name = LayerList.Foreground;
-            }
-
-            if (i == 4)
-            {
-                data = CreateGroup("Overlay", "Front layer of the Storyboard, overlapping also the game elements", uidSpecific: 4);
-                name = LayerList.Overlay;
-            }
-
-            group.Add(new KeyValuePair<string, DataObject>(name.ToString(), data));
-        }
-
-        return group;
-    }
-
+    /// <param name="dataObject">Object, what needs to be changed.</param>
+    /// <param name="newValues">New data.</param>
     public void UpdateItem(DataObject dataObject, Dictionary<string, string> newValues)
     {
-        DataObject dataInStructre = FindObject(dataObject.UID, StoryboardStructureData.Storyboard.Group);
+        DataObject dataInStructre = FindObject(dataObject.UID, ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group);
         DataObject newData = null;
 
         if (dataObject.ObjectType is ObjectsTypeList.Group)
@@ -132,33 +48,49 @@ public partial class StoryboardObjectStructureManager : Node
             return;
         
         dataInStructre = newData;
-        
-        ProjectChangedEvent?.Invoke();
+
+        ProjectBuilder.Instance.RequestUpdateProjectEvent();
     }
 
+    /// <summary>
+    /// Add a new object into another object (by id).
+    /// </summary>
+    /// <param name="uid">Object parent id.</param>
+    /// <param name="dataObject">New object.</param>
     public void AddItem(ulong uid, DataObject dataObject)
     {
-
-        DataObject parentData = FindObject(uid, StoryboardStructureData.Storyboard.Group);
+        DataObject parentData = FindObject(uid, ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group);
 
         if (parentData == null)
             return;
 
         parentData?.Items.Add(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
-        ProjectChangedEvent?.Invoke();
+        ProjectBuilder.Instance.RequestUpdateProjectEvent();
     }
 
+    /// <summary>
+    /// Delete object from another object (by id)
+    /// </summary>
+    /// <param name="uid">Object parent id.</param>
+    /// <param name="dataObject">Object data.</param>
     public void RemoveItem(ulong uid, DataObject dataObject)
     {
-        DataObject parentData = FindObject(uid, StoryboardStructureData.Storyboard.Group);
+        DataObject parentData = FindObject(uid, ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group);
 
         if (parentData == null)
             return;
 
         parentData?.Items.Remove(new KeyValuePair<string, DataObject>(dataObject.UID.ToString(), dataObject));
-        ProjectChangedEvent?.Invoke();
+        ProjectBuilder.Instance.RequestUpdateProjectEvent();
     }
 
+    /// <summary>
+    /// Changes the parent and order of the object in project structure.
+    /// </summary>
+    /// <param name="draggedObject">The object to be moved.</param>
+    /// <param name="parentDraggedObject">The parent of the object to be moved.</param>
+    /// <param name="parentTargetObject">Parent of object to which should be moved the object to be relocated.</param>
+    /// <param name="targetPosition">Object to which should be moved the object to be relocated.</param>
     public void MoveItem(DataObject draggedObject, DataObject parentDraggedObject, DataObject parentTargetObject, int targetPosition)
     {
         
@@ -169,9 +101,15 @@ public partial class StoryboardObjectStructureManager : Node
         else
             parentTargetObject.Items.Insert(targetPosition, new KeyValuePair<string, DataObject>(draggedObject.UID.ToString(), draggedObject));
 
-        ProjectChangedEvent?.Invoke();
+        ProjectBuilder.Instance.RequestUpdateProjectEvent();
     }
 
+    /// <summary>
+    /// Searches for an object inside the group by id.
+    /// </summary>
+    /// <param name="targetUid">the id of the object need to find.</param>
+    /// <param name="group">Group in which the object will be searched.</param>
+    /// <returns>Returns the found object.</returns>
     public DataObject FindObject(ulong targetUid, List<KeyValuePair<string, DataObject>> group)
     {
         foreach (KeyValuePair<string, DataObject> data in group)
@@ -195,6 +133,14 @@ public partial class StoryboardObjectStructureManager : Node
         return null;
     }
 
+    /// <summary>
+    /// Creating a new group.
+    /// </summary>
+    /// <param name="nameGroup">Group name.</param>
+    /// <param name="description">Group description.</param>
+    /// <param name="items">Other objects inside this group.</param>
+    /// <param name="uidSpecific">Pre-specified uid.</param>
+    /// <returns>New group created.</returns>
     public DataObject CreateGroup(string nameGroup, string description, List<KeyValuePair<string, DataObject>> items = null, ulong? uidSpecific = null)
     {
         if (items == null)
@@ -219,6 +165,10 @@ public partial class StoryboardObjectStructureManager : Node
         return data;
     }
 
+    /// <summary>
+    /// Generates a new unique id.
+    /// </summary>
+    /// <returns>Unique id</returns>
     public ulong GenerateUID()
     {
         List<ulong> alreadyUsedUID = new List<ulong>();

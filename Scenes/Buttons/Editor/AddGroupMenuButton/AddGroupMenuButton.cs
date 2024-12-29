@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Menu button in editor for create new group object.
+/// </summary>
 public partial class AddGroupMenuButton : TextureRect
 {
 
@@ -16,6 +19,9 @@ public partial class AddGroupMenuButton : TextureRect
 
 	}
 
+	/// <summary>
+	/// Event on click button. Called create group item.
+	/// </summary>
 	private void OnClick()
 	{
 		TreeItem selectedItem = _storyboardTree.GetSelected();
@@ -30,8 +36,6 @@ public partial class AddGroupMenuButton : TextureRect
 		{
 			DataObject newGroup = Editor.Instance.StoryboardObjectStructureManager.CreateGroup("New group", "");
             Editor.Instance.StoryboardObjectStructureManager.AddItem(metadata.DataObject.UID, newGroup);
-
-
         }
 	}
 }

@@ -26,7 +26,7 @@ public partial class SystemMessageManager : CanvasLayer
 	{
 		if (_contentBox.GetChildCount() == 0)
 			this.Visible = false;
-
+		
 		else
 			this.Visible = true;
 	}

@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Menu button in editor. Delete selected object.
+/// </summary>
 public partial class DeleteObjectMenuButton : TextureRect
 {
 	[Export] private TreeObjects _treeObjects;
@@ -15,7 +18,10 @@ public partial class DeleteObjectMenuButton : TextureRect
 
 	}
 
-	private void OnButton()
+    /// <summary>
+    /// Event on click button. Calls multiple operations regarding the deletion of an object.
+    /// </summary>
+    private void OnButton()
 	{
 		TreeItem selectedItem = _treeObjects.GetSelected();
 		if (selectedItem == null)

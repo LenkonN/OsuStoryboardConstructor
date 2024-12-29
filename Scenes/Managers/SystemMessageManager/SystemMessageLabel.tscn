@@ -6,6 +6,7 @@
 
 [node name="Label" type="Label" node_paths=PackedStringArray("_killTimer")]
 modulate = Color(1, 1, 1, 0.784314)
+text = "[Message]"
 label_settings = SubResource("LabelSettings_yni8k")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -43,6 +43,6 @@ public partial class Editor : Node2D
 
 	private void OnTreeExit()
 	{
-		ExportManager.Instance.Json.SaveJsonFileWithoutEvents(StoryboardObjectStructureManager.StoryboardStructureData);
+		ExportManager.Instance.Json.SaveJsonFileWithoutEvents(ProjectBuilder.Instance.StoryboardStructureData);
 	}
 }

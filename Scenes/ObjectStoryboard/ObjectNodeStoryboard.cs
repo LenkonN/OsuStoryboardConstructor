@@ -84,6 +84,11 @@ public abstract partial class ObjectNodeStoryboard : AnimatedSprite2D
             );
     }
 
+	public virtual void QueueFreeObject()
+	{
+		QueueFree();
+	}
+
     protected void ChangePosToOsuFormat()
 	{
 		//to-do

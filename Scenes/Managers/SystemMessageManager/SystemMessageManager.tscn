@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://qt0s42cr5x5p"]
+[gd_scene load_steps=3 format=3 uid="uid://qt0s42cr5x5p"]
 
 [ext_resource type="Script" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.cs" id="1_3ndi8"]
+[ext_resource type="PackedScene" uid="uid://08x66r6rkxt8" path="res://Scenes/Managers/SystemMessageManager/SystemMessageLabel.tscn" id="2_yhd3a"]
 
 [node name="SystemMessage" type="CanvasLayer" node_paths=PackedStringArray("_contentBox")]
 script = ExtResource("1_3ndi8")
+_labelMessageScene = ExtResource("2_yhd3a")
 _contentBox = NodePath("MarginContainer/PanelContainer/MarginContainer/ScrollContainer/ContentBox")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bl3r7v6ja5wx1" path="res://Scenes/Windows/ObjectCollection/ObjectCollectionWindow.tscn" id="2_03cfq"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardObjectStructureManager/StoryboardObjectStructureManager.cs" id="3_78dob"]
 [ext_resource type="Script" path="res://Scenes/Managers/UserControlManager/UserControlManager.cs" id="3_vlayq"]
-[ext_resource type="PackedScene" uid="uid://qt0s42cr5x5p" path="res://Scenes/Managers/SystemMessageManager/SystemMessageManager.tscn" id="3_y3mhj"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardNodeObjectManager/StoryboardNodeObjectManager.cs" id="4_b4f6p"]
+[ext_resource type="Script" path="res://Scenes/Managers/StoryboardProjectBuilder/ProjectBuilder.cs" id="4_xc06r"]
 [ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
 [ext_resource type="Script" path="res://Scenes/StoryboardAnimation/StoryboardAnimation.cs" id="7_vudn0"]
 [ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="9_s3qvu"]
@@ -31,6 +31,10 @@ Hud = NodePath("Hud")
 [node name="UserControlManager" type="Node" parent="."]
 script = ExtResource("3_vlayq")
 RotateSensivity = 0.001
+
+[node name="ProjectBuilder" type="Node" parent="." node_paths=PackedStringArray("_structureManager")]
+script = ExtResource("4_xc06r")
+_structureManager = NodePath("../StoryboardObjectStructureManager")
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
 script = ExtResource("3_78dob")
@@ -78,9 +82,6 @@ offset_bottom = 270.0
 
 [node name="Hud" parent="." instance=ExtResource("1_ly5mv")]
 layer = 3
-
-[node name="SystemMessage" parent="." instance=ExtResource("3_y3mhj")]
-layer = 5
 
 [node name="StoryboardAnimation" type="AnimationPlayer" parent="."]
 libraries = {

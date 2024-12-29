@@ -25,6 +25,7 @@ public partial class ExportToEditor : Node
 
 	private void TestStartExport()
 	{
+
         Godot.Timer time = new Godot.Timer()
         {
             Autostart = true,
@@ -39,24 +40,27 @@ public partial class ExportToEditor : Node
 
 	public void ExportFullFile()
 	{
-		StartImportJsonEvent.Invoke();
+        //will be move
+        if(Environment.Instance.FileProjectFullPath == null)
+            Environment.Instance.SetAllPath("DevProject", "MapsetPath");
+        
+        
+        StartImportJsonEvent.Invoke();
 
         Editor.Instance.StoryboardObjectList.Clear();
 
-        string jsonPath = "res://Project.json";
 		string jsonContent = "";
 
-
-        using (var file = FileAccess.Open(jsonPath, FileAccess.ModeFlags.Read))
+        using (var file = FileAccess.Open(Environment.Instance.FileProjectFullPath, FileAccess.ModeFlags.Read))
         {
         	jsonContent = file.GetAsText();
         }
 
-        StoryboardObjectStructureManager storyboardData = Editor.Instance.StoryboardObjectStructureManager;
-        storyboardData.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
+        ProjectBuilder.Instance.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
+        Console.WriteLine($"LOAD: {ProjectBuilder.Instance.StoryboardStructureData.Project.Editor.NameProject}");
 
-		//Collect all objects in buffer
-		foreach (KeyValuePair<string, DataObject> item in storyboardData.StoryboardStructureData.Storyboard.Group)
+        //Collect all objects in buffer
+        foreach (KeyValuePair<string, DataObject> item in ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group)
 		{
             CollectAllObjects(item.Value);
         }
@@ -73,7 +77,7 @@ public partial class ExportToEditor : Node
         //Create all tree object
         for (int i = 0; i < 5; i++)
         {
-            DataObject dataObject = Editor.Instance.StoryboardObjectStructureManager.FindObject((ulong)i, storyboardData.StoryboardStructureData.Storyboard.Group);
+            DataObject dataObject = Editor.Instance.StoryboardObjectStructureManager.FindObject((ulong)i, ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group);
             GroupImportEvent?.Invoke(dataObject);
         }
 

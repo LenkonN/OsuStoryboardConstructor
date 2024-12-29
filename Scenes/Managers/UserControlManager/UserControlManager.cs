@@ -17,20 +17,7 @@ public partial class UserControlManager : Node
 
 	public override void _Process(double delta)
 	{
-		CheckKeyForChangeControl();
 
-    }
-
-	private void CheckKeyForChangeControl()
-	{
-		if (Input.IsActionJustPressed("Move"))
-			SetControlToMove();
-
-		else if (Input.IsActionJustPressed("Rotate"))
-			SetControlToRotate();
-
-		else if (Input.IsActionJustPressed("Scale"))
-			SetControlToScale();
     }
 
 	public void SetControlToMove()
