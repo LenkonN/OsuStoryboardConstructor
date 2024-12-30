@@ -57,7 +57,6 @@ public partial class ExportToEditor : Node
         }
 
         ProjectBuilder.Instance.StoryboardStructureData = JsonSerializer.Deserialize<StoryboardData>(jsonContent);
-        Console.WriteLine($"LOAD: {ProjectBuilder.Instance.StoryboardStructureData.Project.Editor.NameProject}");
 
         //Collect all objects in buffer
         foreach (KeyValuePair<string, DataObject> item in ProjectBuilder.Instance.StoryboardStructureData.Storyboard.Group)

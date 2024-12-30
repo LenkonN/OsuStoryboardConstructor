@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkab57055f2m1"]
+
+[ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_8kdlr"]
+[ext_resource type="Script" path="res://Scenes/Timeline/Timeline.cs" id="1_ltapq"]
+[ext_resource type="PackedScene" uid="uid://cv45qwfjvu3lf" path="res://Scenes/Timeline/TimelineSegment/TimelineSegment.tscn" id="2_48umd"]
+[ext_resource type="Script" path="res://Scenes/Timeline/ScrollTimelineContainer/ScrollTimelineContainer.cs" id="4_qtsql"]
+
+[node name="Timeline" type="Control" node_paths=PackedStringArray("_scrollContainer", "_timelineContent")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_ltapq")
+_segmentScene = ExtResource("2_48umd")
+_scrollContainer = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer")
+_timelineContent = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer/TimelineContent")
+_timeForLoad = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Line" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Line"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_8kdlr")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Line/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollTimelineContainer" type="ScrollContainer" parent="VBoxContainer/Line/PanelContainer/MarginContainer" node_paths=PackedStringArray("_timeline")]
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("4_qtsql")
+_timeline = NodePath("../../../../..")
+
+[node name="TimelineContent" type="VFlowContainer" parent="VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScrollCheckTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="ScrollCheckTimer" to="VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer" method="OnScrollCheckTimeout"]

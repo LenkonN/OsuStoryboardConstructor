@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6hp4qpan4qm3"]
+[gd_scene load_steps=14 format=3 uid="uid://c6hp4qpan4qm3"]
 
 [ext_resource type="PackedScene" uid="uid://trgipxvjeumi" path="res://Scenes/Hud/Hud.tscn" id="1_ly5mv"]
 [ext_resource type="Script" path="res://Scenes/General/Editor/Editor.cs" id="1_rt8xu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardNodeObjectManager/StoryboardNodeObjectManager.cs" id="4_b4f6p"]
 [ext_resource type="Script" path="res://Scenes/Managers/StoryboardProjectBuilder/ProjectBuilder.cs" id="4_xc06r"]
 [ext_resource type="PackedScene" uid="uid://v1qj72qthe0p" path="res://Scenes/ObjectStoryboard/Sprite/SpriteStoryboard.tscn" id="5_a7q3b"]
+[ext_resource type="Script" path="res://Scenes/Managers/RhythmManager/RhythmManager.cs" id="5_txd7s"]
 [ext_resource type="Script" path="res://Scenes/StoryboardAnimation/StoryboardAnimation.cs" id="7_vudn0"]
 [ext_resource type="PackedScene" uid="uid://bqw5f0rh8a0v2" path="res://Scenes/StoryboardField/StoryboardField.tscn" id="9_s3qvu"]
 
@@ -35,6 +36,9 @@ RotateSensivity = 0.001
 [node name="ProjectBuilder" type="Node" parent="." node_paths=PackedStringArray("_structureManager")]
 script = ExtResource("4_xc06r")
 _structureManager = NodePath("../StoryboardObjectStructureManager")
+
+[node name="RhythmManager" type="Node" parent="."]
+script = ExtResource("5_txd7s")
 
 [node name="StoryboardObjectStructureManager" type="Node" parent="."]
 script = ExtResource("3_78dob")

@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public partial class Timeline : Control
+public partial class oldTimeline : Control
 {
 	[Export] private ScrollContainer _scrollContainer;
-	[Export] private VisualLine _visualLine;
+	[Export] private oldVisualLine _visualLine;
 	[Export] private Label _timeLabel;
 	public override void _Ready()
 	{

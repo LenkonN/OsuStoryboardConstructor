@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv45qwfjvu3lf"]
+
+[ext_resource type="Script" path="res://Scenes/Timeline/TimelineSegment/TimelineSegment.cs" id="1_ii3uv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2ftp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqkxt"]
+font_size = 12
+
+[sub_resource type="Animation" id="Animation_y1npr"]
+resource_name = "Select"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Index:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a7hkm"]
+resource_name = "NotSelect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Index:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5171"]
+_data = {
+"NotSelect": SubResource("Animation_a7hkm"),
+"Select": SubResource("Animation_y1npr")
+}
+
+[node name="TimelineSegment" type="Control" node_paths=PackedStringArray("_indexLabel", "_timeLabel", "_animation")]
+custom_minimum_size = Vector2(60, 70)
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_ii3uv")
+_indexLabel = NodePath("Index")
+_timeLabel = NodePath("Time")
+_animation = NodePath("AnimationPlayer")
+
+[node name="Index" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "[ S ]"
+label_settings = SubResource("LabelSettings_e2ftp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "[ms]"
+label_settings = SubResource("LabelSettings_tqkxt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c5171")
+}

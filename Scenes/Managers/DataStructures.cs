@@ -142,3 +142,10 @@ public partial class DataObjectTreeMetadata : GodotObject
     public DataObject DataObject { get; set; }
     public GroupType GroupType { get; set; }
 }
+
+public struct OsuDataTime
+{
+    public int Min { get; set; }
+    public int Sec { get; set; }
+    public int Mil { get; set; }
+}

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TimelinePoint : PanelContainer
+public partial class oldTimelinePoint : PanelContainer
 {
     [Export] private float _visualOffset = 0;
 

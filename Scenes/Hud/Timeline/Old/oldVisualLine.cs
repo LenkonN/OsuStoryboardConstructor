@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class VisualLine : ColorRect
+public partial class oldVisualLine : ColorRect
 {
     [Export] private ScrollContainer _scrollContainer;
     [Export] public float TotalDuration = 125f;
