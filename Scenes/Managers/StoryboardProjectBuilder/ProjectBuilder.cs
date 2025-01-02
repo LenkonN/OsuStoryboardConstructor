@@ -40,7 +40,7 @@ public partial class ProjectBuilder : Node
             {
                 NameProject = nameProject,
                 BPM = 120, //test value
-                Offset = -5, //test value
+                Offset = 0, //test value
                 ProjectPath = Environment.Instance.FolderProjectFullPath
 
             },

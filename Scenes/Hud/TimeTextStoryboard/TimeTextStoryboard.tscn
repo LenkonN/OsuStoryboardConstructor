@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj2ld2ew6fpg7"]
+
+[ext_resource type="Script" path="res://Scenes/Hud/TimeTextStoryboard/TimeTextStoryboard.cs" id="1_c7q18"]
+
+[node name="TimeTextStoryboard" type="Label"]
+text = "XX:XX:XXX (xxxxx)"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_c7q18")

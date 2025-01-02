@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://trgipxvjeumi"]
+[gd_scene load_steps=16 format=3 uid="uid://trgipxvjeumi"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
 [ext_resource type="Script" path="res://Scenes/Hud/Hud.cs" id="1_pv4ps"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Trees/Object/TreeObjects.cs" id="2_ojtbj"]
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="2_qcj25"]
 [ext_resource type="PackedScene" uid="uid://bkab57055f2m1" path="res://Scenes/Timeline/Timeline.tscn" id="3_3ysm1"]
+[ext_resource type="PackedScene" uid="uid://cj2ld2ew6fpg7" path="res://Scenes/Hud/TimeTextStoryboard/TimeTextStoryboard.tscn" id="6_2jke5"]
 [ext_resource type="PackedScene" uid="uid://8yh0uuhaq3t" path="res://Scenes/Buttons/Editor/ControlChangeButton/ControlChangeButton.tscn" id="9_qspof"]
 [ext_resource type="PackedScene" uid="uid://cg8m3laghnwcu" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.tscn" id="10_q3vvp"]
 [ext_resource type="PackedScene" uid="uid://cigvdoitm7abh" path="res://Scenes/Buttons/Editor/DeleteObjectMenuButton/DeleteObjectMenuButton.tscn" id="11_c6dtl"]
@@ -114,11 +115,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="Time" type="Label" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Time"]
+[node name="TimeTextStoryboard" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Time" instance=ExtResource("6_2jke5")]
 layout_mode = 2
-text = "XX:XX.XXX (xxxxx)"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Space" type="Label" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
 custom_minimum_size = Vector2(124, 0)

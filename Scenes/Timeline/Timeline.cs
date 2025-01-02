@@ -5,7 +5,10 @@ using System.Collections.Generic;
 public partial class Timeline : Control
 {
 	public static Timeline Instance { get; private set; }
-	public int CurrentSegmentSelected { get; private set; }
+	public event Action SelectedSegmentChangedEvent;
+
+	public int CurrentSegmentIndexSelected { get; private set; }
+	public TimelineSegment CurrentSegmentSelected { get; private set; }
 
 	[Export] private PackedScene _segmentScene;
 
@@ -19,7 +22,7 @@ public partial class Timeline : Control
 	private int _leftSegmentIndex = -300;
 	private int _rightSegmentIndex = 50;
 
-    private int _indexEdgeExpansion = 20;
+    private int _indexEdgeExpansion = 40;
 	[Export] private float _timeForLoad = 0.1f;
 
 	public bool IsLoadFinished;
@@ -71,10 +74,10 @@ public partial class Timeline : Control
 
 	private void NewSegmentByScroll()
 	{
-		if (_indexEdgeExpansion >= Math.Abs(CurrentSegmentSelected - _leftSegmentIndex))
+		if (_indexEdgeExpansion >= Math.Abs(CurrentSegmentIndexSelected - _leftSegmentIndex))
 			AddAdditionalSegment(_sideName.Left);
 
-		if (_indexEdgeExpansion >= Math.Abs(CurrentSegmentSelected - _rightSegmentIndex))
+		if (_indexEdgeExpansion >= Math.Abs(CurrentSegmentIndexSelected - _rightSegmentIndex))
 			AddAdditionalSegment(_sideName.Right);
 
 	}
@@ -84,28 +87,36 @@ public partial class Timeline : Control
 
 		if (Input.IsActionJustPressed("ScrollLeft"))
 		{
-			ScrollToSegment(CurrentSegmentSelected -= 1);
+			ScrollToSegment(CurrentSegmentIndexSelected -= 1);
 		}
 
         else if (Input.IsActionJustPressed("ScrollRight"))
         {
-            ScrollToSegment(CurrentSegmentSelected += 1);
+            ScrollToSegment(CurrentSegmentIndexSelected += 1);
         }
     }
 
 	private async void ScrollToSegment(int index)
 	{
+
         if (!IsLoadFinished)
             await ToSignal(GetTree().CreateTimer(_timeForLoad), "timeout");
 
-		if (index < _leftSegmentIndex)
+        if (index < _leftSegmentIndex)
 			return;
 
         int fixedIndex = Math.Abs(_leftSegmentIndex) + index;
 		int targetScroll = (int)((fixedIndex * (_segmentWidth + 4)) - _scrollContainer.Size.X / 2) ;
         _scrollContainer.ScrollHorizontal = targetScroll;
 
-        CurrentSegmentSelected = index;
+        CurrentSegmentIndexSelected = index;
+		CurrentSegmentSelected = _timelineContent.GetNode<TimelineSegment>(index.ToString());
+        SelectedSegmentChangedEvent?.Invoke();
+    }
+
+	private void SetLastSelectedSegment(int index)
+	{
+		
 	}
 
 	private void AddAdditionalSegment(_sideName sideName)
@@ -114,7 +125,7 @@ public partial class Timeline : Control
 		//{
 		//	_leftSegmentIndex--;
 		//	AddSegment(_leftSegmentIndex);
-		//	ScrollToSegment(CurrentSegmentSelected + 1);
+		//	ScrollToSegment(CurrentSegmentIndexSelected + 1);
 		//}
 
 		if (sideName is _sideName.Right)
