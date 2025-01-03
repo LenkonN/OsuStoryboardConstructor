@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://trgipxvjeumi"]
+[gd_scene load_steps=18 format=3 uid="uid://trgipxvjeumi"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xg6nfqfok2" path="res://Scenes/Buttons/Editor/AddObjectMenuButton/AddObjectMenuButton.tscn" id="1_5ahyf"]
 [ext_resource type="Script" path="res://Scenes/Hud/Hud.cs" id="1_pv4ps"]
@@ -8,6 +8,8 @@
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="2_qcj25"]
 [ext_resource type="PackedScene" uid="uid://bkab57055f2m1" path="res://Scenes/Timeline/Timeline.tscn" id="3_3ysm1"]
 [ext_resource type="PackedScene" uid="uid://cj2ld2ew6fpg7" path="res://Scenes/Hud/TimeTextStoryboard/TimeTextStoryboard.tscn" id="6_2jke5"]
+[ext_resource type="PackedScene" uid="uid://c4p3n7ov1535n" path="res://Scenes/Buttons/Editor/CreateKeyButton/CreateKey.tscn" id="7_27dcb"]
+[ext_resource type="PackedScene" uid="uid://cgfi4fqlei1hi" path="res://Scenes/Buttons/Editor/DeleteKeyButton/DeleteKey.tscn" id="8_ylfp8"]
 [ext_resource type="PackedScene" uid="uid://8yh0uuhaq3t" path="res://Scenes/Buttons/Editor/ControlChangeButton/ControlChangeButton.tscn" id="9_qspof"]
 [ext_resource type="PackedScene" uid="uid://cg8m3laghnwcu" path="res://Scenes/Buttons/Editor/AddGroupMenuButton/AddGroupMenuButton.tscn" id="10_q3vvp"]
 [ext_resource type="PackedScene" uid="uid://cigvdoitm7abh" path="res://Scenes/Buttons/Editor/DeleteObjectMenuButton/DeleteObjectMenuButton.tscn" id="11_c6dtl"]
@@ -25,8 +27,8 @@ bg_color = Color(1, 1, 1, 0)
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("TreeObjects", "TreeParametres")]
 layer = 2
 script = ExtResource("1_pv4ps")
-TreeObjects = NodePath("MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
-TreeParametres = NodePath("MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree")
+TreeObjects = NodePath("MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
+TreeParametres = NodePath("MainContainer/MarginMainContent/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree")
 
 [node name="Backgound" type="CanvasLayer" parent="."]
 
@@ -52,18 +54,23 @@ theme_override_constants/margin_bottom = -20
 [node name="Timeline" parent="MainContainer/Up/MarginContainer" instance=ExtResource("3_3ysm1")]
 layout_mode = 2
 
-[node name="MainContent" type="HBoxContainer" parent="MainContainer"]
+[node name="MarginMainContent" type="MarginContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 15
+
+[node name="MainContent" type="HBoxContainer" parent="MainContainer/MarginMainContent"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="Right" type="HBoxContainer" parent="MainContainer/MainContent"]
+[node name="Right" type="HBoxContainer" parent="MainContainer/MarginMainContent/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Right"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Right"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -72,16 +79,16 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 35
 
-[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Right/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MarginMainContent/MainContent/Right/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Tree" type="Tree" parent="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer"]
+[node name="Tree" type="Tree" parent="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -92,12 +99,12 @@ columns = 2
 select_mode = 1
 script = ExtResource("2_ojtbj")
 
-[node name="Center" type="VBoxContainer" parent="MainContainer/MainContent"]
+[node name="Center" type="VBoxContainer" parent="MainContainer/MarginMainContent/MainContent"]
 custom_minimum_size = Vector2(896, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Up" type="MarginContainer" parent="MainContainer/MainContent/Center"]
+[node name="Up" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Center"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 2
@@ -106,72 +113,78 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainContent/Center/Up"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Up"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Time" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+[node name="Time" type="PanelContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="TimeTextStoryboard" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Time" instance=ExtResource("6_2jke5")]
+[node name="TimeTextStoryboard" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Time" instance=ExtResource("6_2jke5")]
 layout_mode = 2
 
-[node name="Space" type="Label" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+[node name="Space" type="Label" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer"]
 custom_minimum_size = Vector2(124, 0)
 layout_mode = 2
 
-[node name="Buttons" type="PanelContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer"]
+[node name="Buttons" type="PanelContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="Buttons" type="HBoxContainer" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons"]
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons"]
 layout_mode = 2
 alignment = 1
 
-[node name="Move" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+[node name="CreateKey" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("7_27dcb")]
+layout_mode = 2
+
+[node name="DeleteKey" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("8_ylfp8")]
+layout_mode = 2
+
+[node name="Move" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
 layout_mode = 2
 _buttonType = 1
 
-[node name="Rotate" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+[node name="Rotate" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
 layout_mode = 2
 _buttonType = 2
 
-[node name="Scale" parent="MainContainer/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
+[node name="Scale" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Buttons/Buttons" instance=ExtResource("9_qspof")]
 layout_mode = 2
 _buttonType = 3
 
-[node name="Center" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
+[node name="Center" type="VBoxContainer" parent="MainContainer/MarginMainContent/MainContent/Center"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Down" type="VBoxContainer" parent="MainContainer/MainContent/Center"]
+[node name="Down" type="VBoxContainer" parent="MainContainer/MarginMainContent/MainContent/Center"]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="__Space" type="Label" parent="MainContainer/MainContent/Center/Down"]
+[node name="__Space" type="Label" parent="MainContainer/MarginMainContent/MainContent/Center/Down"]
 layout_mode = 2
 text = " "
 label_settings = ExtResource("1_y1is0")
 
-[node name="CollectionButtonPanel" type="PanelContainer" parent="MainContainer/MainContent/Center/Down"]
+[node name="CollectionButtonPanel" type="PanelContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Down"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="CollectionButton" type="HBoxContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel"]
+[node name="CollectionButton" type="HBoxContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -179,12 +192,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="AddButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer" instance=ExtResource("1_5ahyf")]
+[node name="AddButton" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer" instance=ExtResource("1_5ahyf")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 mouse_filter = 0
 
-[node name="MarginContainer_2" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
+[node name="MarginContainer_2" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -192,13 +205,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="AddGroupMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_2" node_paths=PackedStringArray("_storyboardTree") instance=ExtResource("10_q3vvp")]
+[node name="AddGroupMenuButton" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_2" node_paths=PackedStringArray("_storyboardTree") instance=ExtResource("10_q3vvp")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 mouse_filter = 0
 _storyboardTree = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
-[node name="MarginContainer_3" type="MarginContainer" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
+[node name="MarginContainer_3" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -206,23 +219,23 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="DeleteObjectMenuButton" parent="MainContainer/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_3" node_paths=PackedStringArray("_treeObjects") instance=ExtResource("11_c6dtl")]
+[node name="DeleteObjectMenuButton" parent="MainContainer/MarginMainContent/MainContent/Center/Down/CollectionButtonPanel/CollectionButton/MarginContainer_3" node_paths=PackedStringArray("_treeObjects") instance=ExtResource("11_c6dtl")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 mouse_filter = 0
 _treeObjects = NodePath("../../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
-[node name="__Space_2" type="Label" parent="MainContainer/MainContent/Center/Down"]
+[node name="__Space_2" type="Label" parent="MainContainer/MarginMainContent/MainContent/Center/Down"]
 layout_mode = 2
 text = " "
 label_settings = ExtResource("1_y1is0")
 
-[node name="Left" type="HBoxContainer" parent="MainContainer/MainContent"]
+[node name="Left" type="HBoxContainer" parent="MainContainer/MarginMainContent/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainContent/Left"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginMainContent/MainContent/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -231,16 +244,16 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 35
 
-[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MainContent/Left/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/MarginMainContent/MainContent/Left/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_qcj25")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/MarginMainContent/MainContent/Left/MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="ParametresTree" type="Tree" parent="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer" node_paths=PackedStringArray("_treeObjects")]
+[node name="ParametresTree" type="Tree" parent="MainContainer/MarginMainContent/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer" node_paths=PackedStringArray("_treeObjects")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -251,7 +264,7 @@ columns = 2
 script = ExtResource("11_vyvvu")
 _treeObjects = NodePath("../../../../../Right/MarginContainer/PanelContainer/ScrollContainer/Tree")
 
-[connection signal="gui_input" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemDrag"]
-[connection signal="item_collapsed" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemCollapsed"]
-[connection signal="item_selected" from="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]
-[connection signal="item_edited" from="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" to="MainContainer/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" method="OnItemEdit"]
+[connection signal="gui_input" from="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemDrag"]
+[connection signal="item_collapsed" from="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnItemCollapsed"]
+[connection signal="item_selected" from="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" to="MainContainer/MarginMainContent/MainContent/Right/MarginContainer/PanelContainer/ScrollContainer/Tree" method="OnSelectItem"]
+[connection signal="item_edited" from="MainContainer/MarginMainContent/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" to="MainContainer/MarginMainContent/MainContent/Left/MarginContainer/PanelContainer/ScrollContainer/ParametresTree" method="OnItemEdit"]

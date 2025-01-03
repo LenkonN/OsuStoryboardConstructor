@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqe4l35fa23m3"]
+
+[ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_6hw1b"]
+[ext_resource type="Script" path="res://Scenes/Timeline/TimelineFast/TimelineFastPreviewPoint/TimelineFastPreviewPoint.cs" id="2_qwa88"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_al6xv"]
+
+[node name="TimelineFastPreviewPoint" type="Panel" node_paths=PackedStringArray("_indexLabel", "_timeLabel", "_percentLabel", "_keyLabel")]
+z_index = 1
+custom_minimum_size = Vector2(300, 110)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("1_6hw1b")
+script = ExtResource("2_qwa88")
+_indexLabel = NodePath("MarginContainer/VBoxContainer/SegmentIndex")
+_timeLabel = NodePath("MarginContainer/VBoxContainer/Time")
+_percentLabel = NodePath("")
+_keyLabel = NodePath("MarginContainer/VBoxContainer/Key")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SegmentIndex" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Index: [SI]
+"
+label_settings = SubResource("LabelSettings_al6xv")
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Time: XX:XX:XXX (ms)"
+label_settings = SubResource("LabelSettings_al6xv")
+vertical_alignment = 1
+
+[node name="Key" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Key Animation: Yes/No"
+label_settings = SubResource("LabelSettings_al6xv")
+vertical_alignment = 1

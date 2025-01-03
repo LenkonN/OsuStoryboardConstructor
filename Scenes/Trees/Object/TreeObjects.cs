@@ -11,6 +11,7 @@ public partial class TreeObjects : Tree
 
 	public ulong? LastSelectedItemUid;
 	public TreeItem LastSelectedItem;
+	public DataObject LastSelectedDataObject;
 	private TreeItem _mainRoot;
 	
 
@@ -49,12 +50,14 @@ public partial class TreeObjects : Tree
 		{
 			LastSelectedItemUid = metadata.DataObject.UID;
 			LastSelectedItem = selectedItem;
+			LastSelectedDataObject = metadata.DataObject;
         }
 		else if (metadata == null)
 		{
 			LastSelectedItemUid = null;
 			LastSelectedItem = null;
-		}
+			LastSelectedDataObject = null;
+        }
 
         SelectedItemEvent?.Invoke(metadata);
 	}

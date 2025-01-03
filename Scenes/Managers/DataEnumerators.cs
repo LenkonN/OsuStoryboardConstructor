@@ -41,3 +41,8 @@ public enum Vector2Json
     X, Y
 }
 
+public enum TimelineSideName
+{
+    Left, Right
+}
+

@@ -18,16 +18,15 @@ public partial class TimeTextStoryboard : Label
 	{
 		TimelineSegment time = Timeline.Instance.CurrentSegmentSelected;
 
-		if (time.OsuDataTime.Mil < 0)
+		if (time.DataSegment.OsuDataTime.Mil < 0)
 			this.Text = "-";
-
 		else
 			this.Text = "";
 
 		this.Text +=
-		$"{Math.Abs(time.OsuDataTime.Min).ToString("D2")}:" +
-        $"{Math.Abs(time.OsuDataTime.Sec % 60).ToString("D2")}:" +
-        $"{Math.Abs(time.OsuDataTime.Mil % 1000).ToString("D3")} " +
-		$"({time.OsuDataTime.Mil})";
+		$"{Math.Abs(time.DataSegment.OsuDataTime.Min).ToString("D2")}:" +
+        $"{Math.Abs(time.DataSegment.OsuDataTime.Sec % 60).ToString("D2")}:" +
+        $"{Math.Abs(time.DataSegment.OsuDataTime.Mil % 1000).ToString("D3")} " +
+		$"({time.DataSegment.OsuDataTime.Mil})";
 	}
 }

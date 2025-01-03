@@ -1,9 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkab57055f2m1"]
+[gd_scene load_steps=8 format=3 uid="uid://bkab57055f2m1"]
 
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_8kdlr"]
 [ext_resource type="Script" path="res://Scenes/Timeline/Timeline.cs" id="1_ltapq"]
 [ext_resource type="PackedScene" uid="uid://cv45qwfjvu3lf" path="res://Scenes/Timeline/TimelineSegment/TimelineSegment.tscn" id="2_48umd"]
+[ext_resource type="PackedScene" uid="uid://ci2xobicq0lhr" path="res://Scenes/Timeline/TimelineFast/TimelineFast.tscn" id="4_7x74m"]
 [ext_resource type="Script" path="res://Scenes/Timeline/ScrollTimelineContainer/ScrollTimelineContainer.cs" id="4_qtsql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g75pd"]
+bg_color = Color(0, 0, 0, 0.8)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_xc24o"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Timeline" type="Control" node_paths=PackedStringArray("_scrollContainer", "_timelineContent")]
 custom_minimum_size = Vector2(0, 128)
@@ -15,52 +28,61 @@ size_flags_horizontal = 3
 mouse_filter = 2
 script = ExtResource("1_ltapq")
 _segmentScene = ExtResource("2_48umd")
-_scrollContainer = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer")
-_timelineContent = NodePath("VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer/TimelineContent")
+_scrollContainer = NodePath("Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer")
+_timelineContent = NodePath("Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer/TimelineContent")
 _timeForLoad = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Line" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 135.0
 grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Line" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Line"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Line"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TimelineFastMargin" type="MarginContainer" parent="Line/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+
+[node name="TimelineFast" parent="Line/VBoxContainer/TimelineFastMargin" node_paths=PackedStringArray("_sorryPanel") instance=ExtResource("4_7x74m")]
+layout_mode = 2
+_sorryPanel = NodePath("../../../SorryPanel")
+
+[node name="PanelContainer" type="PanelContainer" parent="Line/VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_8kdlr")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Line/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Line/VBoxContainer/PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Line/PanelContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 8
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Line/PanelContainer/MarginContainer/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="Line/VBoxContainer/PanelContainer/MarginContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ScrollTimelineContainer" type="ScrollContainer" parent="VBoxContainer/Line/PanelContainer/MarginContainer" node_paths=PackedStringArray("_timeline")]
+[node name="ScrollTimelineContainer" type="ScrollContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer" node_paths=PackedStringArray("_timeline")]
 layout_mode = 2
 mouse_filter = 2
 horizontal_scroll_mode = 3
@@ -68,17 +90,34 @@ vertical_scroll_mode = 3
 script = ExtResource("4_qtsql")
 _timeline = NodePath("../../../../..")
 
-[node name="TimelineContent" type="VFlowContainer" parent="VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer"]
+[node name="TimelineContent" type="VFlowContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="Line/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="SorryPanel" type="Panel" parent="Line"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g75pd")
+
+[node name="Label" type="Label" parent="Line/SorryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Please, wait..."
+label_settings = SubResource("LabelSettings_xc24o")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScrollCheckTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[connection signal="timeout" from="ScrollCheckTimer" to="VBoxContainer/Line/PanelContainer/MarginContainer/ScrollTimelineContainer" method="OnScrollCheckTimeout"]
+[connection signal="timeout" from="ScrollCheckTimer" to="Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer" method="OnScrollCheckTimeout"]

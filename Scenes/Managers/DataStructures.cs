@@ -29,6 +29,33 @@ public class DataObject
 
 }
 
+public class DataKey
+{
+    public DataObject DataObject { get; set; }
+    public int SegmentIndex { get; set; }
+}
+
+public class DataTimelineSegment
+{
+    public OsuDataTime OsuDataTime { get; private set; }
+    public int SegmentIndex { get; set; }
+    public DataKey DataKey { get; set; }
+
+    public event Action TimeCountedEvent;
+
+    public void CountTime()
+    {
+        OsuDataTime = new OsuDataTime()
+        {
+            Mil = (int)(RhythmManager.Instance.OneTickTime * SegmentIndex) + RhythmManager.Instance.Offset,
+            Sec = ((int)(RhythmManager.Instance.OneTickTime * SegmentIndex) + RhythmManager.Instance.Offset) / 1000,
+            Min = (((int)(RhythmManager.Instance.OneTickTime * SegmentIndex) + RhythmManager.Instance.Offset) / 1000) / 60
+        };
+
+        TimeCountedEvent?.Invoke();
+    }
+}
+
 public struct PreParamObject
 {
     public string Name { get; set; }
