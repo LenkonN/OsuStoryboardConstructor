@@ -1,26 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\",
+  "WorkspaceRootPath": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\timeline\\timeline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\gamedev\\engine\\godot\\in proccess\\osustoryboardconstructor\\scenes\\objectstoryboard\\sprite\\spritestoryboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\objectstoryboard\\sprite\\spritestoryboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\gamedev\\engine\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\storyboardnodeobjectmanager\\storyboardnodeobjectmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\storyboardnodeobjectmanager\\storyboardnodeobjectmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\gamedev\\engine\\godot\\in proccess\\osustoryboardconstructor\\scenes\\timeline\\timeline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\timeline\\timeline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\timeline\\timelinefast\\timelinefast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\timeline\\timelinefast\\timelinefast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\timeline\\timelinesegment\\timelinesegment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\timeline\\timelinesegment\\timelinesegment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\managers\\datastructures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|d:\\personal files\\godot\\godot\\in proccess\\osustoryboardconstructor\\scenes\\timeline\\timelinefast\\timelinefastpreviewpoint\\timelinefastpreviewpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61E58E0D-7624-45B1-8C9D-4AD5E913292B}|StoryboardingOsu.csproj|solutionrelative:scenes\\timeline\\timelinefast\\timelinefastpreviewpoint\\timelinefastpreviewpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DataStructures.cs",
-              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataStructures.cs",
-              "RelativeDocumentMoniker": "Scenes\\Managers\\DataStructures.cs",
-              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\DataStructures.cs",
-              "RelativeToolTip": "Scenes\\Managers\\DataStructures.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAIwGAAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T20:48:19.17Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TimelineSegment.cs",
-              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineSegment\\TimelineSegment.cs",
-              "RelativeDocumentMoniker": "Scenes\\Timeline\\TimelineSegment\\TimelineSegment.cs",
-              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineSegment\\TimelineSegment.cs",
-              "RelativeToolTip": "Scenes\\Timeline\\TimelineSegment\\TimelineSegment.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T06:52:51.039Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TimelineFastPreviewPoint.cs",
-              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineFast\\TimelineFastPreviewPoint\\TimelineFastPreviewPoint.cs",
-              "RelativeDocumentMoniker": "Scenes\\Timeline\\TimelineFast\\TimelineFastPreviewPoint\\TimelineFastPreviewPoint.cs",
-              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineFast\\TimelineFastPreviewPoint\\TimelineFastPreviewPoint.cs",
-              "RelativeToolTip": "Scenes\\Timeline\\TimelineFast\\TimelineFastPreviewPoint\\TimelineFastPreviewPoint.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAwwD4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T15:28:26.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TimelineFast.cs",
-              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineFast\\TimelineFast.cs",
-              "RelativeDocumentMoniker": "Scenes\\Timeline\\TimelineFast\\TimelineFast.cs",
-              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\TimelineFast\\TimelineFast.cs",
-              "RelativeToolTip": "Scenes\\Timeline\\TimelineFast\\TimelineFast.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwGoAAAAWAAAAAAAAAA==",
+              "Title": "StoryboardNodeObjectManager.cs",
+              "DocumentMoniker": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\StoryboardNodeObjectManager\\StoryboardNodeObjectManager.cs",
+              "RelativeDocumentMoniker": "Scenes\\Managers\\StoryboardNodeObjectManager\\StoryboardNodeObjectManager.cs",
+              "ToolTip": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Managers\\StoryboardNodeObjectManager\\StoryboardNodeObjectManager.cs",
+              "RelativeToolTip": "Scenes\\Managers\\StoryboardNodeObjectManager\\StoryboardNodeObjectManager.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAADgvzgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T06:41:10.21Z",
+              "WhenOpened": "2025-02-24T20:44:47.768Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Timeline.cs",
-              "DocumentMoniker": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\Timeline.cs",
-              "RelativeDocumentMoniker": "Scenes\\Timeline\\Timeline.cs",
-              "ToolTip": "D:\\Personal Files\\Godot\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\Timeline.cs",
-              "RelativeToolTip": "Scenes\\Timeline\\Timeline.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAIA5wBYAAAAjAAAAAAAAAA==",
+              "Title": "SpriteStoryboard.cs",
+              "DocumentMoniker": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\ObjectStoryboard\\Sprite\\SpriteStoryboard.cs",
+              "RelativeDocumentMoniker": "Scenes\\ObjectStoryboard\\Sprite\\SpriteStoryboard.cs",
+              "ToolTip": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\ObjectStoryboard\\Sprite\\SpriteStoryboard.cs",
+              "RelativeToolTip": "Scenes\\ObjectStoryboard\\Sprite\\SpriteStoryboard.cs",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAkwKkAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T06:49:56.195Z",
+              "WhenOpened": "2025-02-24T20:42:47.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Timeline.cs",
+              "DocumentMoniker": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\Timeline.cs",
+              "RelativeDocumentMoniker": "Scenes\\Timeline\\Timeline.cs",
+              "ToolTip": "D:\\Personal Files\\GameDev\\Engine\\Godot\\In proccess\\OsuStoryboardConstructor\\Scenes\\Timeline\\Timeline.cs",
+              "RelativeToolTip": "Scenes\\Timeline\\Timeline.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T20:39:43.534Z",
               "EditorCaption": ""
             }
           ]

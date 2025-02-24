@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_al6xv"]
 
-[node name="TimelineFastPreviewPoint" type="Panel" node_paths=PackedStringArray("_indexLabel", "_timeLabel", "_percentLabel", "_keyLabel")]
+[node name="TimelineFastPreviewPoint" type="Panel" node_paths=PackedStringArray("_indexLabel", "_timeLabel", "_keyLabel")]
 z_index = 1
 custom_minimum_size = Vector2(300, 110)
 offset_right = 40.0
@@ -14,7 +14,6 @@ theme_override_styles/panel = ExtResource("1_6hw1b")
 script = ExtResource("2_qwa88")
 _indexLabel = NodePath("MarginContainer/VBoxContainer/SegmentIndex")
 _timeLabel = NodePath("MarginContainer/VBoxContainer/Time")
-_percentLabel = NodePath("")
 _keyLabel = NodePath("MarginContainer/VBoxContainer/Key")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

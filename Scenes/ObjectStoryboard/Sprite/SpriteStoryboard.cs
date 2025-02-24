@@ -120,8 +120,6 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
 				_buffOldScale = this.ScaleStoryboard;
             }
 
-
-
             _isDrag = true;
             _buffUserControl = UserControlManager.Instance.UserControl;
 
