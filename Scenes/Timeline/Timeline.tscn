@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkab57055f2m1"]
+[gd_scene load_steps=7 format=3 uid="uid://bkab57055f2m1"]
 
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_8kdlr"]
-[ext_resource type="Script" path="res://Scenes/Timeline/Timeline.cs" id="1_ltapq"]
+[ext_resource type="Script" path="res://Scenes/Timeline/TimelineCore.cs" id="1_s2myf"]
 [ext_resource type="PackedScene" uid="uid://cv45qwfjvu3lf" path="res://Scenes/Timeline/TimelineSegment/TimelineSegment.tscn" id="2_48umd"]
 [ext_resource type="PackedScene" uid="uid://ci2xobicq0lhr" path="res://Scenes/Timeline/TimelineFast/TimelineFast.tscn" id="4_7x74m"]
-[ext_resource type="Script" path="res://Scenes/Timeline/ScrollTimelineContainer/ScrollTimelineContainer.cs" id="4_qtsql"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g75pd"]
 bg_color = Color(0, 0, 0, 0.8)
@@ -26,11 +25,10 @@ anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-script = ExtResource("1_ltapq")
+script = ExtResource("1_s2myf")
 _segmentScene = ExtResource("2_48umd")
 _scrollContainer = NodePath("Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer")
 _timelineContent = NodePath("Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer/TimelineContent")
-_timeForLoad = 1.0
 
 [node name="Line" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,9 +53,8 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 5
 
-[node name="TimelineFast" parent="Line/VBoxContainer/TimelineFastMargin" node_paths=PackedStringArray("_sorryPanel") instance=ExtResource("4_7x74m")]
+[node name="TimelineFast" parent="Line/VBoxContainer/TimelineFastMargin" instance=ExtResource("4_7x74m")]
 layout_mode = 2
-_sorryPanel = NodePath("../../../SorryPanel")
 
 [node name="PanelContainer" type="PanelContainer" parent="Line/VBoxContainer"]
 custom_minimum_size = Vector2(0, 96)
@@ -82,13 +79,11 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ScrollTimelineContainer" type="ScrollContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer" node_paths=PackedStringArray("_timeline")]
+[node name="ScrollTimelineContainer" type="ScrollContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
-script = ExtResource("4_qtsql")
-_timeline = NodePath("../../../../..")
 
 [node name="TimelineContent" type="VFlowContainer" parent="Line/VBoxContainer/PanelContainer/MarginContainer/ScrollTimelineContainer"]
 layout_mode = 2

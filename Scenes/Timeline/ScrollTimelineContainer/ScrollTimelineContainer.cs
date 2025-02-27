@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
+[Obsolete("Useless class", false)]
 public partial class ScrollTimelineContainer : ScrollContainer
 {
-    [Export] private Timeline _timeline;
     //[Export] private CollisionShape2D _collision;
 
     public event Action ScrollStartedEvent;
@@ -23,7 +23,7 @@ public partial class ScrollTimelineContainer : ScrollContainer
 
 	public override void _Process(double delta)
 	{
-        CheckScrollUser();
+        //CheckScrollUser();
 	}
 
 
@@ -47,9 +47,9 @@ public partial class ScrollTimelineContainer : ScrollContainer
         }
     }
 
-    private void OnScrollCheckTimeout()
-    {
-        if (!_isSliderMode && _timeline.IsLoadFinished)
-            _scrollOldBuffer = this.ScrollHorizontal;
-    }
+    //private void OnScrollCheckTimeout()
+    //{
+    //    if (!_isSliderMode && _timeline.IsLoadFinished)
+    //        _scrollOldBuffer = this.ScrollHorizontal;
+    //}
 }

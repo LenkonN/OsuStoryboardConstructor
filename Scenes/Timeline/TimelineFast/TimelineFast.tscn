@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci2xobicq0lhr"]
+[gd_scene load_steps=2 format=3 uid="uid://ci2xobicq0lhr"]
 
 [ext_resource type="StyleBox" uid="uid://u0663ksov1r1" path="res://Resources/Panels/MainPanelBox.tres" id="1_8dcka"]
-[ext_resource type="Script" path="res://Scenes/Timeline/TimelineFast/TimelineFast.cs" id="2_g3vx6"]
-[ext_resource type="PackedScene" uid="uid://dqe4l35fa23m3" path="res://Scenes/Timeline/TimelineFast/TimelineFastPreviewPoint/TimelineFastPreviewPoint.tscn" id="3_b0a6c"]
 
 [node name="TimelineFast" type="Panel"]
 custom_minimum_size = Vector2(0, 14)
@@ -12,8 +10,6 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("1_8dcka")
-script = ExtResource("2_g3vx6")
-_previewPointScene = ExtResource("3_b0a6c")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

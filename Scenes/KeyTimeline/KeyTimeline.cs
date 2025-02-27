@@ -5,16 +5,16 @@ public partial class KeyTimeline : TextureRect
 {
 	public DataKey DataKey { get; private set; }
 	public int SegmentIndex { get; private set; }
-	private TimelineSegment _timelineSegment { get; set; }
+	[Export] private TimelineSegment _timelineSegment { get; set; }
 
 	public override void _Ready()
 	{
-		_timelineSegment = GetNode<TimelineSegment>("../../");
+
 	}
 
 	public override void _Process(double delta)
 	{
-		VisibleChange();
+		//VisibleChange();
 	}
 
 	public void CreateNewDataKey()

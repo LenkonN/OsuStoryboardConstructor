@@ -153,7 +153,6 @@ public partial class SpriteStoryboard : ObjectNodeStoryboard
         }
 			
 	}
-
     public override void QueueFreeObject()
     {
         Editor.Instance.StoryboardNodeObjectManager.SelectNodeObjectEvent -= OnAnySelectObject;

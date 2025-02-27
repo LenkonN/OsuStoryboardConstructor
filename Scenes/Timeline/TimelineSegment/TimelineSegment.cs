@@ -19,28 +19,12 @@ public partial class TimelineSegment : Control
 
 	public override void _Ready()
 	{
-		Timeline.Instance.SelectedSegmentChangedEvent += VisualSelect;
+		TimelineCore.Instance.SelectedSegmentChangedEvent += VisualSelect;
     }
 
 	public override void _Process(double delta)
 	{
-		if (Timeline.Instance.IsLoadFinished)
-		{
-			CheckIfNeedOptimization();
-        }
-    }
 
-    private void CheckIfNeedOptimization()
-    {
-		if (DataSegment.SegmentIndex > (Timeline.Instance.CurrentSegmentIndexSelected + Timeline.Instance.OptimizationEdgeCount))
-		{
-			Timeline.Instance.RemoveSegmentForOptimization(TimelineSideName.Right);
-		}
-
-		if ((Timeline.Instance.CurrentSegmentIndexSelected - Timeline.Instance.OptimizationEdgeCount) > DataSegment.SegmentIndex)
-		{
-            Timeline.Instance.RemoveSegmentForOptimization(TimelineSideName.Left);
-		}
     }
 
     public void SetSegment(int index)
@@ -64,45 +48,51 @@ public partial class TimelineSegment : Control
 
 	private void VisualSelect()
 	{
-		if (Timeline.Instance.CurrentSegmentIndexSelected == DataSegment.SegmentIndex)
+		if (TimelineCore.Instance.CurrentSelectSegmentNumber == DataSegment.SegmentIndex)
 		{
 			_isAnimationLock = false;
-			_animationSelect.Play("Select");
+			//_animationSelect.Play("Select");
 		}
 
-		else if (Timeline.Instance.CurrentSegmentIndexSelected != DataSegment.SegmentIndex && !_isAnimationLock)
+		else if (TimelineCore.Instance.CurrentSelectSegmentNumber != DataSegment.SegmentIndex && !_isAnimationLock)
 		{
 			_isAnimationLock = true;	
-			_animationSelect.Play("NotSelect");
+			//_animationSelect.Play("NotSelect");
 		}
 	}
 
 	private void TickColor()
 	{
+
 		if (DataSegment.SegmentIndex % 16 == 0)
 		{
 			_animationColor.Play("White_Main");
-		}
+            Console.WriteLine("w_m");
+        }
 
 		else if (DataSegment.SegmentIndex % 8 == 0)
 		{
 			_animationColor.Play("White");
-		}
+            Console.WriteLine("w");
+        }
 
 		else if (DataSegment.SegmentIndex % 4 == 0)
 		{
 			_animationColor.Play("Red");
-		}
+            Console.WriteLine("r");
+        }
 
 		else if (DataSegment.SegmentIndex % 2 == 0)
 		{
 			_animationColor.Play("Blue");
-		}
+            Console.WriteLine("b");
+        }
 
 		else
 		{
 			_animationColor.Play("Yellow");
-		}
+            Console.WriteLine("y");
+        }
     }
 
 	public void ReqCreateKey()
@@ -117,8 +107,8 @@ public partial class TimelineSegment : Control
 
 	public void ReqQueueFree()
 	{
-        Timeline.Instance.SelectedSegmentChangedEvent -= VisualSelect;
-		DataSegment.TimeCountedEvent -= UpdateTimeText;
+        TimelineCore.Instance.SelectedSegmentChangedEvent -= VisualSelect;
+        DataSegment.TimeCountedEvent -= UpdateTimeText;
         QueueFree();
 	}
 }

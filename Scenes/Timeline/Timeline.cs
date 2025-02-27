@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+[Obsolete("Did not meet quality requirements and was rewritten to 'TimelineCore'", false)]
 public partial class Timeline : Control
 {
 	public static Timeline Instance { get; private set; }

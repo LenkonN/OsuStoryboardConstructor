@@ -125,6 +125,7 @@ theme_override_styles/panel = ExtResource("2_qcj25")
 
 [node name="TimeTextStoryboard" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer/Time" instance=ExtResource("6_2jke5")]
 layout_mode = 2
+script = null
 
 [node name="Space" type="Label" parent="MainContainer/MarginMainContent/MainContent/Center/Up/HBoxContainer"]
 custom_minimum_size = Vector2(124, 0)

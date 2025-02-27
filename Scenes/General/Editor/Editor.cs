@@ -16,6 +16,7 @@ public partial class Editor : Node2D
 
 	public List<DataObject> StoryboardObjectList = new List<DataObject>();
 	public List<ObjectNodeStoryboard> StoryboardNodeList = new List<ObjectNodeStoryboard>();
+	public List<KeyTimeline> StoryboardKeyList = new List<KeyTimeline>();
 
 	public bool IsFirstLoad { get; private set; } = true;
 
