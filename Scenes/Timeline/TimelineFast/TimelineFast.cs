@@ -5,13 +5,11 @@ public partial class TimelineFast : Panel
 {
 	public static TimelineFast Instance { get; private set; }
 
-	[Export] private PackedScene _previewPointScene;
-	[Export] private Panel _sorryPanel;
+    [Export] private PackedScene _previewPointScene;
 	[Export] private int _safeAreaMouse = 25;
 	private double _speedFastScroll = 0.1;
     private Vector2 _mousePosInMomentCheck;
 	private int _marginSizeX;
-	public bool FastScrollLock;
 	private TimelineFastPreviewPoint _previewPoint { get; set; }
 	
 
@@ -41,7 +39,6 @@ public partial class TimelineFast : Panel
 	{
 		int targetPoint = PutPoint();
 
-
         if (Input.IsActionPressed("SubActive"))
 		{
 			RemovePreviewPoint();
@@ -50,75 +47,18 @@ public partial class TimelineFast : Panel
 
 		else
 		{
-            _sorryPanel.Visible = true;
             FastScroll(targetPoint);
         }
     }
 
 	private void FastScroll(int targetPoint)
 	{
-		if (FastScrollLock)
-			return;
+        int segmentIndexTarget = ConvertTargetPointToSegment(targetPoint);
 
-        FastScrollLock = true;
-
-        int segmentTarget = ConvertTargetPointToSegment(targetPoint);
-		DataTimelineSegment dataSegment = Timeline.Instance.DataSegmentList[segmentTarget];
-
-        FastScrollProcess(dataSegment);
+		TimelineCore.Instance.SwitchToSegment(segmentIndexTarget);
     }
 
-	async private void FastScrollProcess(DataTimelineSegment dataSegment)
-	{
-		int targetPoint = dataSegment.SegmentIndex;
-
-        while (Timeline.Instance.CurrentSegmentIndexSelected != targetPoint)
-		{
-			int stepCount = SpeedStepChange(Timeline.Instance.CurrentSegmentIndexSelected, targetPoint);
-
-            await ToSignal(GetTree().CreateTimer(0.001), "timeout");
-
-            for (int i = 0; i < stepCount; i++)
-			{
-				if (targetPoint > Timeline.Instance.CurrentSegmentIndexSelected)
-				{
-					Timeline.Instance.ScrollToSegment(Timeline.Instance.CurrentSegmentIndexSelected + 1);
-				}
-
-				if (targetPoint < Timeline.Instance.CurrentSegmentIndexSelected)
-				{
-					Timeline.Instance.ScrollToSegment(Timeline.Instance.CurrentSegmentIndexSelected - 1);
-				}
-			}
-        }
-
-        _sorryPanel.Visible = false;
-        FastScrollLock = false;
-    }
-
-	private int SpeedStepChange(int currentPoint, int targetPoint)
-	{
-		int distance = Math.Abs(targetPoint - currentPoint);
-
-        //if (distance >= 1000)
-        //    return 1000;
-		//
-        if (distance >= 250)
-           return 250;
-
-        else if (distance >= 10)
-            return 10;
-
-        else if (distance >= 1)
-			return 1;
-
-		else
-			return 0;
-
-	}
-
-
-	private void CheckForRemovePreviewPoint()
+    private void CheckForRemovePreviewPoint()
 	{
         if (_previewPoint == null)
 			return;
@@ -127,6 +67,10 @@ public partial class TimelineFast : Panel
 			Math.Abs(_mousePosInMomentCheck.Y - GetGlobalMousePosition().Y));
 
 		if (different.Y > _safeAreaMouse)
+			RemovePreviewPoint();
+
+		else if (GetGlobalMousePosition().X > DisplayServer.WindowGetSize().X - _marginSizeX ||
+			GetGlobalMousePosition().X < _marginSizeX)
 			RemovePreviewPoint();
 
 	}
@@ -161,7 +105,7 @@ public partial class TimelineFast : Panel
 
 	private int ConvertTargetPointToSegment(int targetPoint)
 	{
-        float timelineSizeOneDivisions = this.Size.X / Timeline.Instance.DataSegmentList.Count;
+        float timelineSizeOneDivisions = this.Size.X / TimelineCore.Instance.GetCountVirtualSegmentsRight();
         float segmentTargetPoint = targetPoint / timelineSizeOneDivisions;
         int roundSegmentTargetPoint = (int)Math.Round(segmentTargetPoint);
 

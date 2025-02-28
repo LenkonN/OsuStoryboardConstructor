@@ -9,9 +9,9 @@ public partial class TreeParametres : Tree
 {
     private static string
         TITLE_PARAM_NONE = "Object parameters",
-        TITLE_PARAM_GROUP = "Group parameters",
-        TITLE_PARAM_SPRITE = "Sprite parameters",
-        TITLE_PARAM_SYSTEM_PARTICLES = "System particles parameters";
+        TITLE_PARAM_GROUP = "Group parameters";
+        //TITLE_PARAM_SPRITE = "Sprite parameters",
+        //TITLE_PARAM_SYSTEM_PARTICLES = "System particles parameters";
 
     [Export] private TreeObjects _treeObjects;
 

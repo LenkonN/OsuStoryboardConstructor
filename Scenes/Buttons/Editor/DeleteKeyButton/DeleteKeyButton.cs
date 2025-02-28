@@ -16,7 +16,7 @@ public partial class DeleteKeyButton : TextureRect
 
     private void OnButton()
     {
-        TimelineSegment timelineSegment = Timeline.Instance.CurrentSegmentSelected;
+        TimelineSegment timelineSegment = TimelineCore.Instance.CurrentSegmentSelected;
 		timelineSegment.ReqDeleteKey();
     }
 }

@@ -5,8 +5,9 @@ public partial class TimelineFastPreviewPoint : Panel
 {
 	[Export] private Label _indexLabel;
     [Export] private Label _timeLabel;
-    [Export] private Label _percentLabel;
     [Export] private Label _keyLabel;
+
+    [Export] private PackedScene _segmentScene { get; set; }
 
     public override void _Ready()
 	{
@@ -17,16 +18,18 @@ public partial class TimelineFastPreviewPoint : Panel
 	{
 
 	}
+    private TimelineSegment CreateTheoreticalSegment(int index)
+    {
+        TimelineSegment segment = _segmentScene.Instantiate<TimelineSegment>();
+        segment.SetSegment(index);
+        return segment;
+    }
 
-	public void ReqSetText(int targetIndex)
+    public void ReqSetText(int targetIndex)
 	{
-        if (targetIndex > Timeline.Instance.DataSegmentList.Count - 1)
-            targetIndex = Timeline.Instance.DataSegmentList.Count - 1;
 
-        if (targetIndex < 0)
-            targetIndex = 0;
-
-        DataTimelineSegment dataSegment = Timeline.Instance.DataSegmentList[targetIndex];
+        TimelineSegment segment = CreateTheoreticalSegment(targetIndex);
+        DataTimelineSegment dataSegment = segment.DataSegment;
 
         string time = null;
 
@@ -41,14 +44,7 @@ public partial class TimelineFastPreviewPoint : Panel
             $"{Math.Abs(dataSegment.OsuDataTime.Mil % 1000).ToString("D3")} " +
             $"({dataSegment.OsuDataTime.Mil})";
 
-
-        string percent = null;
-
-        if (targetIndex == Timeline.Instance.DataSegmentList.Count - 1)
-            percent = "100";
-        else
-            percent = Math.Round((Convert.ToSingle(targetIndex) / Convert.ToSingle(Timeline.Instance.DataSegmentList.Count) * 100)).ToString();
-
+        string percent = Math.Round((Convert.ToSingle(targetIndex) / Convert.ToSingle(TimelineCore.Instance.GetCountVirtualSegmentsRight()) * 100)).ToString();
 
         string animKey = null;
 

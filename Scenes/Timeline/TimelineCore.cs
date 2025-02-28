@@ -3,7 +3,9 @@ using Godot.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 public partial class TimelineCore : Control
@@ -12,15 +14,18 @@ public partial class TimelineCore : Control
 
     public event Action SelectedSegmentChangedEvent;
 
-    private int _virtualTickCountRight = 0;
-    private int _virtualTickCountLeft = 0;
+    //The leftmost and rightmost ticks that have ever been visible (necessary for fast timeline)
+    private int _virtualTickSegmentRight = 0;
+    private int _virtualTickSegmentLeft = 0;
 
+    //The leftmost and rightmost ticks that are currently created and visible
     private int _visualTickSegmentRight = 0;
     private int _visualTickSegmentLeft = 0;
 
     [Export] private int _generateTickRadius = 50;
     [Export] private float _segmentWidth = 30;
     public int CurrentSelectSegmentNumber { get; private set; } = 0 ;
+    public TimelineSegment CurrentSegmentSelected { get; private set; } = null;
 
     [Export] private PackedScene _segmentScene;
 
@@ -28,6 +33,7 @@ public partial class TimelineCore : Control
     [Export] private VFlowContainer _timelineContent;
 
     private List<TimelineSegment> _visibleSegments = new List<TimelineSegment>();
+    //private List<TimelineSegment> _allExistSegments = new List<TimelineSegment>();
 
     private bool _isSwitchSegment;
 
@@ -35,6 +41,8 @@ public partial class TimelineCore : Control
     private bool _isSwitchPartRight;
 
     private bool _isLoadFinished;
+
+    private int _debugValue;
 
     public override void _Ready()
     {
@@ -54,12 +62,17 @@ public partial class TimelineCore : Control
 
     async private void Init()
     {
+        
         await Task.Delay(1000);
         _isLoadFinished = true;
         SwitchFlagManager();
         SwitchToSegment(100);
 
     }
+
+    public int GetCountVirtualSegments() => Mathf.Abs(_virtualTickSegmentLeft - _virtualTickSegmentRight);
+    public int GetCountVirtualSegmentsRight() => Mathf.Abs(_virtualTickSegmentRight);
+    public int GetCountVirtualSegmentsLeft() => Mathf.Abs(_virtualTickSegmentLeft);
 
     private void SwitchFlagManager()
     {
@@ -89,22 +102,32 @@ public partial class TimelineCore : Control
         }
     }
 
-    private void SwitchToSegment(int index)
+    public void SwitchToSegment(int index)
     {
         SetSwitchFlag(true);
-        Scroll(index);
         _visualTickSegmentLeft = index;
         _visualTickSegmentRight = index;
+        ClearAllSegments();
+        Scroll(index);
     }
 
     private void Scroll(int index)
     {
         CurrentSelectSegmentNumber = index;
 
-        int countSegments = Mathf.Abs(_visualTickSegmentLeft - _visualTickSegmentRight - 1);
+        int targetVisualScroll = (int)((index * (_segmentWidth + 4)) - _scrollContainer.Size.X / 2);
+        _scrollContainer.ScrollHorizontal = targetVisualScroll;
 
-        //int targetVisualScroll = (int)((countSegments * (_segmentWidth + 4)) - _scrollContainer.Size.X / 2);
-        //_scrollContainer.ScrollHorizontal = targetVisualScroll;
+        if (!_isSwitchSegment) //else... check GenerateSegmentsForSide func
+        {
+            foreach (TimelineSegment segment in _visibleSegments)
+            {
+                if (CurrentSelectSegmentNumber == segment.DataSegment.SegmentIndex)
+                {
+                    CurrentSegmentSelected = segment;
+                }
+            }
+        }
 
         SelectedSegmentChangedEvent?.Invoke();
     }
@@ -113,6 +136,9 @@ public partial class TimelineCore : Control
     {
         int bothSideRadius = _generateTickRadius / 2;
 
+        Console.WriteLine("vtsr: " + _visualTickSegmentRight);
+
+        //Create for right
         if (Mathf.Abs(CurrentSelectSegmentNumber - _visualTickSegmentRight) < bothSideRadius)
         {
             int needGenerateToRight = CurrentSelectSegmentNumber - _visualTickSegmentRight + bothSideRadius;
@@ -125,8 +151,12 @@ public partial class TimelineCore : Control
 
             GenerateSegmentsForSide(TimelineSideName.Right, Math.Abs(needGenerateToRight));
             _visualTickSegmentRight = CurrentSelectSegmentNumber + bothSideRadius;
+
+            if (_virtualTickSegmentRight < _visualTickSegmentRight)
+                _virtualTickSegmentRight = _visualTickSegmentRight;
         }
 
+        //Delete for right
         if (Mathf.Abs(CurrentSelectSegmentNumber - _visualTickSegmentRight) > bothSideRadius)
         {
             int needDeleteToRight = _visualTickSegmentRight - (bothSideRadius + CurrentSelectSegmentNumber);
@@ -134,13 +164,18 @@ public partial class TimelineCore : Control
             _visualTickSegmentRight = CurrentSelectSegmentNumber + bothSideRadius;
         }
 
+        //Create for left
         if (Mathf.Abs(CurrentSelectSegmentNumber - _visualTickSegmentLeft) < bothSideRadius)
         {
             int needGenerateToLeft = _visualTickSegmentLeft - CurrentSelectSegmentNumber + bothSideRadius;
             GenerateSegmentsForSide(TimelineSideName.Left, Math.Abs(needGenerateToLeft));
             _visualTickSegmentLeft = CurrentSelectSegmentNumber - bothSideRadius;
+
+            if (_virtualTickSegmentLeft > _visualTickSegmentLeft)
+                _virtualTickSegmentLeft = _visualTickSegmentLeft;
         }
 
+        //Delete for left
         if (Mathf.Abs(CurrentSelectSegmentNumber - _visualTickSegmentLeft) > bothSideRadius)
         {
             int needDeleteToLeft = CurrentSelectSegmentNumber - (_visualTickSegmentLeft + bothSideRadius);
@@ -148,6 +183,18 @@ public partial class TimelineCore : Control
             _visualTickSegmentLeft = CurrentSelectSegmentNumber - bothSideRadius;
         }
 
+    }
+
+    private void ClearAllSegments()
+    {
+        for (int i = _timelineContent.GetChildCount() - 1; i >= 0; i--)
+        {
+            Node node = _timelineContent.GetChild(i);
+            _debugValue = _timelineContent.GetChildCount();
+            node.Free();
+        }
+
+        _visibleSegments.Clear();
     }
 
     private void GenerateSegmentsForSide(TimelineSideName side, int currentInsufficientCount)
@@ -169,14 +216,18 @@ public partial class TimelineCore : Control
 
         while (needGenerate > 0)
         {
-
             if (side == TimelineSideName.Right)
             {
                 //fix for first line
                 if (_isSwitchSegment)
-                    CreateSegment(newIndex, side);
+                {
+                    TimelineSegment segment = CreateSegment(newIndex, side);
+                    CurrentSegmentSelected = segment;
+                }
                 else if (!_isSwitchSegment)
+                {
                     CreateSegment(newIndex + 1, side);
+                }
                 
                 newIndex++;
             }
@@ -184,9 +235,13 @@ public partial class TimelineCore : Control
             else if (side == TimelineSideName.Left)
             {
                 if (_isSwitchSegment)
+                {
                     CreateSegment(newIndex, side);
+                }
                 else if (!_isSwitchSegment)
+                {
                     CreateSegment(newIndex - 1, side);
+                }
 
                 newIndex--;
             }

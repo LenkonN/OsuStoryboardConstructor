@@ -111,8 +111,8 @@ public partial class Timeline : Control
 	private void ScrollByWheel()
 	{
 
-		if (TimelineFast.Instance.FastScrollLock)
-			return;
+		//if (TimelineFast.Instance.FastScrollLock)
+		//	return;
 
 		if (Input.IsActionJustPressed("ScrollLeft"))
 		{

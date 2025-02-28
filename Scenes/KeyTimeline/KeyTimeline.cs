@@ -14,7 +14,7 @@ public partial class KeyTimeline : TextureRect
 
 	public override void _Process(double delta)
 	{
-		//VisibleChange();
+		VisibleChange();
 	}
 
 	public void CreateNewDataKey()

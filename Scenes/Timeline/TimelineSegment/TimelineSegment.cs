@@ -15,11 +15,12 @@ public partial class TimelineSegment : Control
     [Export] private AnimationPlayer _animationSelect;
 	[Export] private AnimationPlayer _animationColor;
 
-	private bool _isAnimationLock;
+	private bool _isAnimationLock = true;
 
 	public override void _Ready()
 	{
 		TimelineCore.Instance.SelectedSegmentChangedEvent += VisualSelect;
+		VisualSelect();
     }
 
 	public override void _Process(double delta)
@@ -48,16 +49,19 @@ public partial class TimelineSegment : Control
 
 	private void VisualSelect()
 	{
+		if (!IsInstanceValid(this))
+			return;
+
 		if (TimelineCore.Instance.CurrentSelectSegmentNumber == DataSegment.SegmentIndex)
 		{
 			_isAnimationLock = false;
-			//_animationSelect.Play("Select");
+			_animationSelect.Play("Select");
 		}
 
 		else if (TimelineCore.Instance.CurrentSelectSegmentNumber != DataSegment.SegmentIndex && !_isAnimationLock)
 		{
 			_isAnimationLock = true;	
-			//_animationSelect.Play("NotSelect");
+			_animationSelect.Play("NotSelect");
 		}
 	}
 
@@ -67,31 +71,26 @@ public partial class TimelineSegment : Control
 		if (DataSegment.SegmentIndex % 16 == 0)
 		{
 			_animationColor.Play("White_Main");
-            Console.WriteLine("w_m");
         }
 
 		else if (DataSegment.SegmentIndex % 8 == 0)
 		{
 			_animationColor.Play("White");
-            Console.WriteLine("w");
         }
 
 		else if (DataSegment.SegmentIndex % 4 == 0)
 		{
 			_animationColor.Play("Red");
-            Console.WriteLine("r");
         }
 
 		else if (DataSegment.SegmentIndex % 2 == 0)
 		{
 			_animationColor.Play("Blue");
-            Console.WriteLine("b");
         }
 
 		else
 		{
 			_animationColor.Play("Yellow");
-            Console.WriteLine("y");
         }
     }
 

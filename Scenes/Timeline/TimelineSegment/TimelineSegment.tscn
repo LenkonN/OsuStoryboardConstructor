@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cv45qwfjvu3lf"]
+[gd_scene load_steps=15 format=3 uid="uid://cv45qwfjvu3lf"]
 
 [ext_resource type="Script" path="res://Scenes/Timeline/TimelineSegment/TimelineSegment.cs" id="1_ii3uv"]
 [ext_resource type="Texture2D" uid="uid://c7g8wxd8m0guy" path="res://Sprites/Png/Circle.png" id="2_bgdeh"]
@@ -117,34 +117,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_2ymb4"]
-resource_name = "Blue_2"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TickMargin/Bar:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.528244, 0.674335, 0.977351, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TickMargin/Bar:custom_minimum_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(4, 16)]
-}
-
-[sub_resource type="Animation" id="Animation_wbrnb"]
 resource_name = "Blue"
 length = 0.001
 tracks/0/type = "value"
@@ -174,17 +146,32 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q3qot"]
 _data = {
-"Blue": SubResource("Animation_wbrnb"),
-"Blue_2": SubResource("Animation_2ymb4"),
+"Blue": SubResource("Animation_2ymb4"),
 "Red": SubResource("Animation_hp5xg"),
 "White": SubResource("Animation_vdowy"),
 "White_Main": SubResource("Animation_ncl2o"),
 "Yellow": SubResource("Animation_ocjtw")
 }
 
+[sub_resource type="Animation" id="Animation_a7hkm"]
+resource_name = "NotSelect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Content/TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.0784314)]
+}
+
 [sub_resource type="Animation" id="Animation_y1npr"]
 resource_name = "Select"
-length = 0.4
+length = 0.1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -193,47 +180,15 @@ tracks/0/path = NodePath("Content/TextureRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_a7hkm"]
-resource_name = "NotSelect"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Content/TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.0784314)]
-}
-
-[sub_resource type="Animation" id="Animation_s8d0r"]
-resource_name = "OnCreate"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Content/TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.078)]
+"values": [Color(1, 1, 1, 0.0784314), Color(1, 1, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c5171"]
 _data = {
 "NotSelect": SubResource("Animation_a7hkm"),
-"OnCreate": SubResource("Animation_s8d0r"),
 "Select": SubResource("Animation_y1npr")
 }
 
@@ -284,7 +239,6 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_q3qot")
 }
-autoplay = "Blue"
 
 [node name="KeyMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -297,8 +251,9 @@ offset_bottom = 28.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 45
 
-[node name="KeyTimeline" parent="KeyMargin" instance=ExtResource("3_mryfs")]
+[node name="KeyTimeline" parent="KeyMargin" node_paths=PackedStringArray("_timelineSegment") instance=ExtResource("3_mryfs")]
 layout_mode = 2
+_timelineSegment = NodePath("../..")
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -321,7 +276,6 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_c5171")
 }
-autoplay = "OnCreate"
 
 [node name="Index" type="Label" parent="Content"]
 modulate = Color(1, 1, 1, 0.392157)

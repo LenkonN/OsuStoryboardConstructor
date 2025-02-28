@@ -1,11 +1,12 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class TimeTextStoryboard : Label
 {
 	public override void _Ready()
 	{
-		Timeline.Instance.SelectedSegmentChangedEvent += SetTime;
+		Init();
 	}
 
 
@@ -14,9 +15,16 @@ public partial class TimeTextStoryboard : Label
 
 	}
 
+	async private void Init()
+	{
+		await Task.Delay(2500);
+        TimelineCore.Instance.SelectedSegmentChangedEvent += SetTime;
+		SetTime();
+    }
+
 	private void SetTime()
 	{
-		TimelineSegment time = Timeline.Instance.CurrentSegmentSelected;
+		TimelineSegment time = TimelineCore.Instance.CurrentSegmentSelected;
 
 		if (time.DataSegment.OsuDataTime.Mil < 0)
 			this.Text = "-";
